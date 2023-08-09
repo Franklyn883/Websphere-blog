@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --accent-color: #45A5F5;
+    --accent-color2:#4CAF50;
+    --border-color:#333333;
+    --background-color: #192734;
+    --background-color2:#111722;
+    --link-color:#45A5F5;
+
+    --header-font: 'Montserrat', sans-serif;
+    --font:'Roboto', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+   
+    background-color:var(--background-color)   ; /* Dark mode background color */
+    color: #FFFFFF; /* Text color for dark mode */
+font-family: var(--font);
+}
+
+header ul{
+    list-style: none;
+}
+header{
+    background:var(--background-color2);
+    padding:1em 0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: var(--header-font);
+    
+}
+
+.d-flex--r{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.d-flex--c{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+.container {
+    max-width: 1200px;
+    width: 90vw;
+    margin: 0 auto;
+  }
+.search-container{
+    display: inline-flex;
+    flex: 1 1 300px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+   
+}
+
+.icon{
+    padding:0.5rem
+}
+.search-bar{
+    border: 0;
+    flex: 1;
+    background-color: #111722;
+    color: white;
+    text-align: center;
+
+}
+
+.search-btn{
+    color: white;
+    background-color: var(--accent-color2);
+    border: 0;
+    padding: 0.5rem;
+    border-left: 8px;
+}
+
+.nav-search{
+    display: flex;
+    flex:0.75;
+}
+  /*logo design*/
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #27AE60;
+    text-align: center;
+    
+}
+
+.logo-first{
+    color: #3498DB ;
+    font-size: 2rem;
+
+}
+.post{
+    padding: 1em 1em;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.post:hover{
+    background-color: rgba(17, 23, 34, 0.74);
+    cursor: pointer;
+}
+.profile-pic{
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    padding: 0.25em;
+    
+}
+img{
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color:inherit
+}
