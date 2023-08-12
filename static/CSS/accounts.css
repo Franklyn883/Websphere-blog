@@ -1,45 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
   }
-  html{
-    height: 100%;
-  }
+  
   body{
     background-color: rgb(14, 13, 13);
-    height:100%;
+    min-height: 100vh;
     color: white;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    }
+
+    :root {
+
+        --accent-color: #45A5F5;
+        --accent-color2:#4CAF50;
+        --border-color:#333333;
+        --background-color: #192734;
+        --background-color2:#111722;
+        --link-color:#45A5F5;
+    
+        --header-font: 'Montserrat', sans-serif;
+        --font:'Roboto', sans-serif;
     }
   @font-face {
     font-family:Norse-bold;
     src: url("resources/Norse-Bold.otf") format("opentype")
   }
   .right-side{
-    height: 100%;
+   flex:1;
     text-align: center;
+    display: flex;
+    flex-direction: column; 
   }
   .logo{
-    display: flex;
-    background-color: rgba(18, 17, 17, 0.698);
-    position:absolute;
-    top: 110px;
-    width: 40%;
-    align-items: center;
-    justify-content: center;
+    display: block;
     font-family: Norse-Bold;
-    font-size: 60px;
+    font-size: 3.75rem;
   }
+
+  .intro{
+   
+    border: 1 red solid;
+    padding: 3rem 0;
+   
+   
+  }
+.intro-text{
+    width: 80%;
+    margin: auto;
+    text-align: start;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+}
+
+.intro-text .intro-heading{
+    font-size: 6.5vmin;
+    color: #45A5F5;
+    margin-bottom: 0.4em;
+}
+ .intro-text span{
+    color: #4CAF50;
+}
   .photo-credit{
-    position: absolute;
-    bottom: 5px;
-    left: 150px;
-  
+    padding-bottom: 1rem    ;
+    margin-top: auto;
   }
+
   .photo-credit a{
     text-decoration: none;
     color: white;
@@ -49,11 +78,23 @@
   }
  
   form{
-    height: 100%;
     display: flex;
     flex-direction: column ;
     padding: 2rem 1rem;
+    flex: 1;
   }
+
+  fieldset{
+    border:none;
+    border-radius: 8px;
+    padding: 1.25em;
+  }
+  legend{
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #4CAF50;    
+}
   input{
     outline: none;
   }
@@ -72,20 +113,7 @@
     font-size: 22px;
    
   }
-  .user-details{
   
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    
-  
-    
-  }
-  .user-details label{
-    display: block;
-  }
   .user-details input{
     width:100%;
     height: 30px;
@@ -130,10 +158,7 @@
   .log-in a:hover{
     color: rgba(21, 95, 21, 0.747);
   }
-  span{
-    font-size: 16px;
-    color:rgba(15, 228, 15, 0.747);
-  }
+
   #error-message{
     display: none;
   }

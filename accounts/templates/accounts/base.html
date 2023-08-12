@@ -13,38 +13,52 @@
             onload="this.rel='stylesheet'"
         />
         <style>
-            .right-side .img-container {
-                height: 100vh;
-                width: 40vw;
+            .right-side {
                 background-image: url("{% static 'assets/images/registration-bg.jpg' %}"); /* The image used */
-                background-color: #cccccc; /* Used if the image is unavailable */
-                height: 100%; /* You must set a specified height */
+                background-color: #111722; /* Used if the image is unavailable */ /* You must set a specified height */
                 background-position: center; /* Center the image */
                 background-repeat: no-repeat; /* Do not repeat the image */
                 background-size: cover;
+                background-blend-mode: overlay;
             }
         </style>
     </head>
     <body>
         <div class="right-side">
             <div class="logo">WS-BLOG</div>
-            <div class="img-container">
-                <div class="photo-credit">
-                    photo by Christina Morillo on
-                    <a
-                        href="https://www.pexels.com/photo/woman-programming-on-a-notebook-1181359/"
-                        >Pexels</a
-                    >
+
+            <div class="intro">
+                <div class="intro-text">
+                    <h1 class="intro-heading">
+                        Welcome to <strong>WebSphere!</strong>
+                    </h1>
+                    <h2>
+                        Embark on a journey of web development mastery with us.
+                        Join our community and explore tutorials, trends, and
+                        insights in the dynamic world of coding.
+                        <span>Sign up now</span> and dive into the realm of web
+                        development excellence
+                    </h2>
                 </div>
+            </div>
+
+            <div class="photo-credit">
+                photo by Christina Morillo on
+                <a
+                    href="https://www.pexels.com/photo/woman-programming-on-a-notebook-1181359/"
+                    >Pexels</a
+                >
             </div>
         </div>
         <form action="#" method="post">
-            <div class="form">
-                <p class="form-title">Let's do this!</p>
-                <div class="user-details">
-                    {% block form%} {% endblock form %}
-                </div>
-            </div>
+            
+                <fieldset class="form">
+                    <legend>SIGN UP NOW</legend>
+                    <div class="user-details">
+                        {% block form%} {% endblock form %}
+                    </div>
+                </fieldset>
+            
 
             <div class="form-btn">
                 <input
