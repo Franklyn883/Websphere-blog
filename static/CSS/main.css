@@ -37,7 +37,9 @@ header{
     font-family: var(--header-font);
     
 }
-
+img{
+    width:100%;
+}
 .d-flex--r{
     display: flex;
     justify-content: space-between;
@@ -89,19 +91,10 @@ header{
     flex:0.75;
 }
   /*logo design*/
-.logo-text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #27AE60;
-    text-align: center;
-    
-}
-
-.logo-first{
-    color: #3498DB ;
-    font-size: 2rem;
-
+.logo{
+    height: 80px;
+    width:80px;
+ 
 }
 .post{
     padding: 1em 1em;

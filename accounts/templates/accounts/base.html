@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>{% block title %} Accounts {% endblock %}</title>
+        <link
+            rel="preload"
+            as="style"
+            href="{% static 'CSS/accounts.css' %}"
+            onload="this.rel='stylesheet'"
+        />
+        <style>
+            .right-side .img-container {
+                height: 100vh;
+                width: 40vw;
+                background-image: url("{% static 'assets/images/registration-bg.jpg' %}"); /* The image used */
+                background-color: #cccccc; /* Used if the image is unavailable */
+                height: 100%; /* You must set a specified height */
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Do not repeat the image */
+                background-size: cover;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="right-side">
+            <div class="logo">WS-BLOG</div>
+            <div class="img-container">
+                <div class="photo-credit">
+                    photo by Christina Morillo on
+                    <a
+                        href="https://www.pexels.com/photo/woman-programming-on-a-notebook-1181359/"
+                        >Pexels</a
+                    >
+                </div>
+            </div>
+        </div>
+        <form action="#" method="post">
+            <div class="form">
+                <p class="form-title">Let's do this!</p>
+                <div class="user-details">
+                    {% block form%} {% endblock form %}
+                </div>
+            </div>
+
+            <div class="form-btn">
+                <input
+                    type="submit"
+                    class="submit-btn"
+                    value="Create Account"
+                />
+            </div>
+            <div class="log-in">
+                <p>Already have an account? <a href="#">Log in</a></p>
+            </div>
+        </form>
+    </body>
+</html>
