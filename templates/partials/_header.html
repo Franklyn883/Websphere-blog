@@ -2,30 +2,104 @@
 
 <header>
     <nav>
-        <ul class="nav__list container d-flex--r">
-            <li class="nav__item"><a class="nav__link">
-                <div class="logo">
-                    <img src="{% static 'assets/images/logo.png' %}"/>
-                </div>
-            </a></li>
+        <ul class="nav__list d-flex--r">
+            <li class="nav__item">
+                <a class="logo-link">
+                    <div class="nav__link--x logo">
+                        <img src="{% static 'assets/images/WebSphere.png' %}" />
+                    </div>
+                </a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link">My Feed</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link">Eplore</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link">Bookmarks</a>
+            </li>
             <li class="nav__item nav-search ">
                 <div class="search-container">
-                <div class="icon">
-                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#8c8787"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#33333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <div class="icon">
+                        <svg
+                            width="30px"
+                            height="30px"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            stroke="#8c8787"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g
+                                id="SVGRepo_tracerCarrier"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                                    stroke="#33333"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <input
+                        type="search"
+                        class="search-bar"
+                        placeholder="Enter your search here"
+                        name="search"
+                    />
+                    <input type="submit" value="search" class="search-btn" />
                 </div>
-                    <input type="search" class="search-bar" placeholder="Enter your search here" name="search">
-                <input type="submit" value="search" class="search-btn">
-            </div>
             </li>
-            <li><a class="post" href="#"> + New Post</a></li>
-            <li class="d-flex--c">
+            <li class="nav__item post ">
+                <a class="nav__link--x " href="#">
+                    <svg
+                        width="15px"
+                        height="15px"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        stroke="#FFFFFF"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M1 22C1 21.4477 1.44772 21 2 21H22C22.5523 21 23 21.4477 23 22C23 22.5523 22.5523 23 22 23H2C1.44772 23 1 22.5523 1 22Z"
+                                fill="#FFFFFF"
+                            ></path>
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M18.3056 1.87868C17.1341 0.707107 15.2346 0.707107 14.063 1.87868L3.38904 12.5526C2.9856 12.9561 2.70557 13.4662 2.5818 14.0232L2.04903 16.4206C1.73147 17.8496 3.00627 19.1244 4.43526 18.8069L6.83272 18.2741C7.38969 18.1503 7.89981 17.8703 8.30325 17.4669L18.9772 6.79289C20.1488 5.62132 20.1488 3.72183 18.9772 2.55025L18.3056 1.87868ZM15.4772 3.29289C15.8677 2.90237 16.5009 2.90237 16.8914 3.29289L17.563 3.96447C17.9535 4.35499 17.9535 4.98816 17.563 5.37868L15.6414 7.30026L13.5556 5.21448L15.4772 3.29289ZM12.1414 6.62869L4.80325 13.9669C4.66877 14.1013 4.57543 14.2714 4.53417 14.457L4.0014 16.8545L6.39886 16.3217C6.58452 16.2805 6.75456 16.1871 6.88904 16.0526L14.2272 8.71448L12.1414 6.62869Z"
+                                fill="#FFFFFF"
+                            ></path>
+                        </g>
+                    </svg>
+                    <p>Post</p></a
+                >
+            </li>
+            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#a)" fill="#ffff"> <path d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"></path> </g> <defs> <clipPath id="a"> <path fill="#ffff" d="M0 0h24v24H0z"></path> </clipPath> </defs> </g></svg>
+
+            <svg fill="#FFFFFF" height="25px" width="25px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" stroke="#FFFFFF"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M429.227,363.395l-45.434-64.286V173.516c0-64.102-47.444-117.325-109.06-126.415V18.732 C274.733,8.387,266.346,0,256.001,0c-10.345,0-18.732,8.387-18.732,18.732V47.1c-61.616,9.09-109.061,62.313-109.061,126.415 v125.594l-45.433,64.286c-8.763,12.397,0.141,29.542,15.296,29.542h315.86C429.117,392.938,437.973,375.768,429.227,363.395z M134.247,355.474l27.989-39.603c2.235-3.162,3.435-6.939,3.435-10.811V173.516c0-49.808,40.522-90.328,90.329-90.328 c49.808,0,90.328,40.52,90.328,90.328v131.545c0,3.872,1.2,7.649,3.435,10.811l27.989,39.603H134.247z"></path> <path d="M256.002,406.313c-29.138,0-52.843,23.704-52.843,52.842c0,29.138,23.706,52.845,52.843,52.845 c29.138,0,52.842-23.706,52.842-52.843C308.844,430.019,285.14,406.313,256.002,406.313z M256.002,474.537 c-8.48,0-15.38-6.899-15.38-15.38s6.9-15.379,15.38-15.379s15.379,6.898,15.379,15.379 C271.381,467.637,264.483,474.537,256.002,474.537z"></path> </g> </g> </g> </g></svg>
+            <li class="nav__item d-flex--c ">
                 <div class="profile-pic">
-                    <img src="{% static 'assets/images/profile-pic.svg' %}" width="50px" height="50px">  
+                    <img
+                        src="{% static 'assets/images/profile-pic.png' %}"
+                        width="50px"
+                        height="50px"
+                    />
                 </div>
-                <a>user profile</a>
             </li>
         </ul>
     </nav>
-
-
 </header>

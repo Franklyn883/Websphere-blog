@@ -32,7 +32,7 @@ header ul{
 }
 header{
     background:var(--background-color2);
-    padding:1em 0;
+    padding: 0 1.5em;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     font-family: var(--header-font);
     
@@ -52,9 +52,12 @@ img{
     align-items: center;
     gap: 5px;
 }
+.--push-right{
+    margin-left: auto;
+  }
 .container {
     max-width: 1200px;
-    width: 90vw;
+    width: 85vw;
     margin: 0 auto;
   }
 .search-container{
@@ -65,7 +68,9 @@ img{
     overflow: hidden;
    
 }
-
+.nav-search{
+    max-width: 25%;
+}
 .icon{
     padding:0.5rem
 }
@@ -82,35 +87,47 @@ img{
     color: white;
     background-color: var(--accent-color2);
     border: 0;
-    padding: 0.5rem;
+    padding: 0.5em;
     border-left: 8px;
 }
 
 .nav-search{
     display: flex;
-    flex:0.75;
 }
   /*logo design*/
-.logo{
+.logo img{
+    min-width: 100px;
     height: 80px;
-    width:80px;
- 
 }
-.post{
-    padding: 1em 1em;
+.post a {
+    padding: 0.85em 1.5em;
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 150px;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5px;
 }
 
-.post:hover{
-    background-color: rgba(17, 23, 34, 0.74);
+ .nav__link{
+    padding:  0.85em 1.5em;
+ }
+header .nav__link:hover{
+     border: 1px solid var(--border-color);
+     border-radius: 1rem;  
+}
+
+.nav__link active{
+    color: var(--accent-color);
+}
+.post a:hover{
+    background-color: #45a6f5e7;
     cursor: pointer;
 }
 .profile-pic{
     border-radius: 50%;
-    background-color: var(--accent-color);
-    padding: 0.25em;
-    
+    background-color: rgb(17, 35, 63);
 }
 img{
     width: 100%;

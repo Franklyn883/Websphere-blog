@@ -107,6 +107,7 @@
     flex-wrap: wrap;
     padding:16px;
     margin: 12px 0;
+    font-size: 16px;
   
   }
   .form-title{
@@ -114,24 +115,6 @@
    
   }
   
-  .user-details input{
-    width:100%;
-    height: 30px;
-    border-radius: 6px;
-    padding-left:4px;
-    margin-top: 8px;
-    font-size: 14px;
-    outline: none;
-    background-color: rgb(34, 33, 33);
-    color: white;
-    border: none;
-    border: 1px grey solid;
-  }
-  .user-details input:hover{
-    background-color: white;
-    color: rgb(34, 33, 33);
-    border: 1px rgb(243, 235, 235) solid;
-  }
   .form-btn .submit-btn{
     outline: none;
     border: none;
