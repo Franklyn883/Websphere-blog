@@ -2,9 +2,37 @@
 {% block title%} User registration {% endblock %}
 
 {% block form %}
-{% for field in form %}
-{{field.label}}
-{{field}}
-{% endfor %}
+<legend>SIGN UP NOW</legend>
 
+<div class="form__fields">
+<div class="form__field first_name">
+    <p>{{ form.first_name.label }}:</p>
+    <p>{{form.first_name}}</p>
+</div>
+<div class="form__field last_name">
+    <p>{{ form.last_name.label }}:</p>
+    <p>{{form.last_name}}</p>
+</div>
+
+<div class="form__field username">
+    <p>{{ form.email.label }}:</p>
+    <p>{{form.email}}</p>
+</div>
+<div class="form__field pw1">
+    <p>{{ form.password1.label }}:</p>
+    <p>{{form.password1}}</p>
+</div>
+<div class="form__field pw2">
+    <p>{{ form.password2.label }}</p>
+    <p>{{form.password2}}</p>
+</div>
+<div>
+    {% if form.is_bound and field.errors %}
+    <div class="text-danger">
+        {{ field.errors|join:", " }}
+    </div>
+{% endif %}
+</div>
+
+</div>
 {% endblock form %}

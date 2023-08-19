@@ -1,15 +1,6 @@
 'USE STRICT'
 console.log("javascript here!")
 
-// to 
-document.addEventListener("DOMContentLoaded", function(){
-    const pathName = window.location.pathname;
-    const navItems = document.querySelectorAll('.nav__link');
-
-    navItems.forEach(item =>{
-        if (item.getAttribute('href')=== pathName){
-            item.classList.add('active')
-        };
-    });
-
-});
+// Get all input and placeholder values
+let form_fields = document.getElementsByTagName('input');
+form_fields[1].placeholder ="First Name...";

@@ -50,10 +50,10 @@
                 >
             </div>
         </div>
-        <form action="#" method="post">
-            
+        <form action="#" method="POST">
+            {% csrf_token %}
                 <fieldset class="form">
-                    <legend>SIGN UP NOW</legend>
+                    
                    
                         {% block form%} {% endblock form %}
                 
@@ -61,15 +61,20 @@
             
 
             <div class="form-btn">
+                {% block submit %}
                 <input
                     type="submit"
                     class="submit-btn"
                     value="Create Account"
                 />
+                {% endblock submit %}
             </div>
             <div class="log-in">
-                <p>Already have an account? <a href="#">Log in</a></p>
+                {% block signup-login %}<p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>{% endblock %}
             </div>
         </form>
+        {% block javascript %}
+<script src="{% static 'Javascript/accounts.js' %}" defer ></script>
+        {% endblock javascript %}
     </body>
 </html>

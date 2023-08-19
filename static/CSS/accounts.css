@@ -80,7 +80,6 @@
   form{
     display: flex;
     flex-direction: column ;
-    padding: 2rem 1rem;
     flex: 1;
   }
 
@@ -88,6 +87,7 @@
     border:none;
     border-radius: 8px;
     padding: 1.25em;
+
   }
   legend{
     font-size: 2rem;
@@ -105,35 +105,15 @@
     background-color: rgb(6, 6, 6);
     box-shadow: 0 10px 20px -2px rgb(22, 22, 22);
     flex-wrap: wrap;
-    padding:16px;
-    margin: 12px 0;
+    padding:1rem 3rem;
+    margin: 1em;
     font-size: 16px;
-  
-  }
-  .form-title{
-    font-size: 22px;
-   
-  }
-  
-  .form-btn .submit-btn{
-    outline: none;
-    border: none;
-    padding:12px 20px;
-    margin: 12px 0;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: rgba(15, 228, 15, 0.747);
-    color: white;
-    border: 1px solid white;
-    border: none;
-  
+    justify-content: center;
+    align-items: center;
     
+  
   }
-  .form-btn .submit-btn:hover{
-   
-    background:rgba(21, 95, 21, 0.747) ;
-    border: 1px solid grey;
-  }
+
   .log-in a{
     text-decoration: none;
     color: rgba(15, 228, 15, 0.747);
@@ -141,7 +121,47 @@
   .log-in a:hover{
     color: rgba(21, 95, 21, 0.747);
   }
+form p{
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 2px 0;
 
-  #error-message{
-    display: none;
+}
+.form__field{
+    margin: 0.25em 0;
+}
+.form__field input{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} 
+.form__field input:focus {
+  border-color: #111722;
+  outline: none;
+}
+.form-btn .submit-btn{
+    outline: none;
+    border: none;
+    padding:12px 20px;
+    margin: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: rgba(15, 228, 15, 0.747);
+    color: white;
+    border: 1px solid white;
+    border: none;
+  }
+  .form-btn .submit-btn:hover{
+   
+    background:rgba(21, 95, 21, 0.747) ;
+
+  }
+  .form__fields{
+    width: 70%;
+  }
+  .log-in{
+    margin: 0 12px;
   }

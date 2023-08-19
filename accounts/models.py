@@ -6,8 +6,8 @@ from django.utils import timezone
 #creating current user
 
 class CustomUser(AbstractUser):
-    first_name = models.CharField(max_length=30,blank=True, null=True)
-    last_name = models.CharField(max_length=30, blank=True, null=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=254, unique=True)
    
     def __str__(self):
