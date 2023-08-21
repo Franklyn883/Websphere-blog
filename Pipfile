@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 mysqlclient = "*"
 python-dotenv = "*"
+pillow = "*"
+django-allauth = "*"
 
 [dev-packages]
 

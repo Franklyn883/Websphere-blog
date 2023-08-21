@@ -41,13 +41,7 @@
     font-size: 3.75rem;
   }
 
-  .intro{
-   
-    border: 1 red solid;
-    padding: 3rem 0;
-   
-   
-  }
+ 
 .intro-text{
     width: 80%;
     margin: auto;
@@ -76,42 +70,17 @@
   .photo-credit a:hover{
     color: green;
   }
- 
-  form{
+
+  .user-reg{
     display: flex;
-    flex-direction: column ;
-    flex: 1;
-  }
-
-  fieldset{
-    border:none;
-    border-radius: 8px;
-    padding: 1.25em;
-
-  }
-  legend{
-    font-size: 2rem;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    color: #4CAF50;    
-}
-  input{
-    outline: none;
-  }
-  .form{
-    display:flex;
-    flex: 1;
-    flex-direction: column;
-    background-color: rgb(6, 6, 6);
-    box-shadow: 0 10px 20px -2px rgb(22, 22, 22);
-    flex-wrap: wrap;
-    padding:1rem 3rem;
-    margin: 1em;
-    font-size: 16px;
     justify-content: center;
     align-items: center;
-    
-  
+    flex:0.75;
+    padding: 3rem;
+  }
+
+  input{
+    outline: none;
   }
 
   .log-in a{
@@ -128,25 +97,24 @@ form p{
     padding: 2px 0;
 
 }
-.form__field{
-    margin: 0.25em 0;
-}
-.form__field input{
+
+form input{
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
 } 
-.form__field input:focus {
+form input:focus {
   border-color: #111722;
   outline: none;
 }
+
 .form-btn .submit-btn{
     outline: none;
     border: none;
     padding:12px 20px;
-    margin: 12px;
+    margin: 12px 0;
     border-radius: 8px;
     font-size: 16px;
     background-color: rgba(15, 228, 15, 0.747);
@@ -159,9 +127,10 @@ form p{
     background:rgba(21, 95, 21, 0.747) ;
 
   }
-  .form__fields{
-    width: 70%;
+  .errorlist{
+    list-style: none;
+    color: red;
   }
-  .log-in{
-    margin: 0 12px;
-  }
+ 
+
+  

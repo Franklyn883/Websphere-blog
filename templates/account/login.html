@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>{% block title %} Accounts/login {% endblock %}</title>
+        <link
+            rel="preload"
+            as="style"
+            href="{% static 'CSS/accounts.css' %}"
+            onload="this.rel='stylesheet'"
+        />
+        <style>
+            .right-side {
+                background-image: url("{% static 'assets/images/registration-bg.jpg' %}"); /* The image used */
+                background-color: #111722; /* Used if the image is unavailable */ /* You must set a specified height */
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Do not repeat the image */
+                background-size: cover;
+                background-blend-mode: overlay;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="right-side">
+            <div class="logo">WS-BLOG   </div>
+
+            <div class="intro">
+                <div class="intro-text">
+                    <h1 class="intro-heading">
+                        Welcome to <strong>WebSphere!</strong>
+                    </h1>
+                    <h2>
+                        Embark on a journey of web development mastery with us.
+                        Join our community and explore tutorials, trends, and
+                        insights in the dynamic world of coding.
+                        <span>Sign up now</span> and dive into the realm of web
+                        development excellence
+                    </h2>
+                </div>
+            </div>
+
+            <div class="photo-credit">
+                photo by Christina Morillo on
+                <a
+                    href="https://www.pexels.com/photo/woman-programming-on-a-notebook-1181359/"
+                    >Pexels</a
+                >
+            </div>
+        </div>
+        <div class="user-reg">
+        <form action="#" method="POST">
+            {% csrf_token %}
+                {{ form.as_div }}
+            
+
+            <div class="form-btn">
+             
+                <input
+                    type="submit"
+                    class="submit-btn"
+                    value="Log in"
+                />
+             
+            </div>            <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+        {% block javascript %}
+<script src="{% static 'Javascript/accounts.js' %}" defer ></script>
+        {% endblock javascript %}
+    </body>
+</html>
