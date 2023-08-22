@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     #third party
     "allauth", 
     "allauth.account",
+    'django_select2',
 ]
 
 MIDDLEWARE = [

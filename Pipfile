@@ -9,6 +9,7 @@ mysqlclient = "*"
 python-dotenv = "*"
 pillow = "*"
 django-allauth = "*"
+django-select2 = "*"
 
 [dev-packages]
 

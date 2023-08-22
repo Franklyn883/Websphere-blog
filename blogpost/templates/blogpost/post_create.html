@@ -1,0 +1,51 @@
+{% extends 'blogpost/base.html'%}{% load static %} {% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#id_tags").on("input", function () {
+            var input = $(this);
+            var container = $("#tag-suggestions");
+
+            // Clear previous suggestions
+            container.empty();
+
+            // Get the current input value
+            var inputValue = input.val().trim();
+
+            // Fetch tag suggestions using Ajax
+            $.ajax({
+                type: "GET",
+                url: "/get_tag_suggestions/", // URL to your server-side view to fetch suggestions
+                data: { input: inputValue },
+                success: function (data) {
+                    if (data.length > 0) {
+                        data.forEach(function (tag) {
+                            container.append(
+                                '<div class="suggestion">' + tag.name + "</div>"
+                            );
+                        });
+                    }
+                },
+            });
+        });
+    });
+</script>
+<script src="{% static 'Javascript/main.js' %}"></script>
+{% endblock script %} {% block content %}
+<form method="post" class="blogpost-form">
+    {% csrf_token %}
+    <h2>Create a New Blog Post</h2>
+    <div class="addimg-subtitle">
+        <div class="add-coverimg"></div>
+        <div class="add-subtitle"></div>
+    </div>
+    <div class="form-group">{{ form.title }}</div>
+    <div class="form-group">
+        {{ form.subtitle }}
+    </div>
+    <div class="form-group">
+         {{ form.content }}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Post</button>
+</form>
+{% endblock content %}
