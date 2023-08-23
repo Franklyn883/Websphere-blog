@@ -1,10 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;1,400&family=Roboto&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    font-family:'Plus Jakarta Sans', sans-serif;
 }
 .container {
     max-width: 1200px;
     width: 80vw;
     margin: 0 auto;
   }
+.d-flex{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.d-flex--c{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+ 
+}
+
+.cover-subtitle button{
+    border: none;
+    background-color: white;
+    padding: 0.25em 1em;
+}
+.cover-subtitle button:hover{
+    background-color: rgba(220, 232, 245, 0.795);
+    border-radius: 16px;
+}
+#id_title{
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 2rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.cover-subtitle p{
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.726);
+    font-weight: 700;
+}
+#id_subtitle{
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.5rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 1rem;
+}
+.post-subtitle{
+    position: relative;
+    display: none;
+}
+#close-btn{
+   position: absolute;
+   top: 1rem;
+    color:rgba(0, 0, 0, 0.726); ;
+    font-size: 1.5rem;
+    padding: 4px 8px;
+    border-radius: 50%;
+}
+#close-btn:hover{
+    background-color:rgba(220, 232, 245, 0.795);
+}
+
+#id_content{
+    width: 100%;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  box-sizing: border-box;
+  border:none;
+  outline: none;
+}
