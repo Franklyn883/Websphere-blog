@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     #third party
     "allauth", 
     "allauth.account",
-    'django_select2',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +122,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #user authentication backend
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+#CKeDITOR configuration
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Link', 'Unlink'],
+            ['Format', 'Styles'],
+            ['RemoveFormat'],
+            # Other tools you want to keep
+        ],
+    },
+}
+
+
 
 
 # Internationalization

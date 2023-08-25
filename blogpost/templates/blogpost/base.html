@@ -19,5 +19,11 @@
 
         {% include "blogpost/partials/_nav.html" %}
         <main class="container">{% block content %} {% endblock content %}</main>
+        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('content');
+        </script>
+        
+
 </body>
 </html>

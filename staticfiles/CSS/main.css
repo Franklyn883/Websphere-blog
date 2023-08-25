@@ -1,0 +1,141 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --accent-color: #45A5F5;
+    --accent-color2:#4CAF50;
+    --border-color:#333333;
+    --background-color: #192734;
+    --background-color2:#111722;
+    --link-color:#45A5F5;
+
+    --header-font: 'Montserrat', sans-serif;
+    --font:'Roboto', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+   
+    background-color:var(--background-color)   ; /* Dark mode background color */
+    color: #FFFFFF; /* Text color for dark mode */
+font-family: var(--font);
+}
+
+header ul{
+    list-style: none;
+}
+header{
+    background:var(--background-color2);
+    padding: 0 1.5em;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: var(--header-font);
+    
+}
+img{
+    width:100%;
+}
+.d-flex--r{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.d-flex--c{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+.--push-right{
+    margin-left: auto;
+  }
+.container {
+    max-width: 1200px;
+    width: 85vw;
+    margin: 0 auto;
+  }
+.search-container{
+    display: inline-flex;
+    flex: 1 1 300px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+   
+}
+.nav-search{
+    max-width: 25%;
+}
+.icon{
+    padding:0.5rem
+}
+.search-bar{
+    border: 0;
+    flex: 1;
+    background-color: #111722;
+    color: white;
+    text-align: center;
+
+}
+
+.search-btn{
+    color: white;
+    background-color: var(--accent-color2);
+    border: 0;
+    padding: 0.5em;
+    border-left: 8px;
+}
+
+.nav-search{
+    display: flex;
+}
+  /*logo design*/
+.logo img{
+    min-width: 100px;
+    height: 80px;
+}
+.post a {
+    padding: 0.85em 1.5em;
+    border: 1px solid var(--border-color);
+    border-radius: 150px;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+ .nav__link{
+    padding:  0.85em 1.5em;
+ }
+header .nav__link:hover{
+     border: 1px solid var(--border-color);
+     border-radius: 1rem;  
+}
+
+.nav__link active{
+    color: var(--accent-color);
+}
+.post a:hover{
+    background-color: #45a6f5e7;
+    cursor: pointer;
+}
+.profile-pic{
+    border-radius: 50%;
+    background-color: rgb(17, 35, 63);
+}
+img{
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color:inherit
+}
+.intro{
+    margin-top: 5em;
+}
