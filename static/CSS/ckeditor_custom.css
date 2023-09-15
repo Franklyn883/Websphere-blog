@@ -1,0 +1,7 @@
+/* Remove borders from CKEditor textarea */
+#cke_content {
+    border: none
+}
+#cke_1_bottom{
+    display: none;
+}
