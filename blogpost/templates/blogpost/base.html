@@ -18,17 +18,56 @@
             href="{% static 'CSS/main.css' %}"
             onload="this.rel='stylesheet'"
         />
-
+        <link
+            rel="preload"
+            as="style"
+            href="{% static 'CSS/blogpost.css' %}"
+            onload="this.rel='stylesheet'"
+        />
         {% block script %} {% endblock script %}
     </head>
     <body>
-        {% include "blogpost/partials/_nav.html" %}
         <main class="container">
             {% block content %} {% endblock content %}
         </main>
         <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
         <script>
-            CKEDITOR.replace("content");
+            CKEDITOR.replace("content", {
+                height: "95vh",
+                width: "100%",
+
+                toolbarGroups: [
+                    {
+                        name: "basicstyles",
+                        groups: ["basicstyles"],
+                    },
+                    {
+                        name: "links",
+                        groups: ["links"],
+                    },
+                    {
+                        name: "paragraph",
+                        groups: ["list", "blocks"],
+                    },
+                    {
+                        name: "document",
+                        groups: ["mode"],
+                    },
+                    {
+                        name: "insert",
+                        groups: ["insert"],
+                    },
+                    {
+                        name: "styles",
+                        groups: ["styles"],
+                    },
+                    {
+                        name: "about",
+                        groups: ["about"],
+                    },
+                ],
+
+            });
         </script>
     </body>
 </html>
