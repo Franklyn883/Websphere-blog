@@ -6,4 +6,4 @@ from blogpost.models import Post
 
 class HomePageView(ListView):
     model = Post
-    template_name = "main/index.html"
+    template_name = "main/index.html"  

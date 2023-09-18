@@ -1,26 +1,25 @@
-'USE STRICT'
+"USE STRICT";
 console.log("Javascript here!!!");
-const postTitle = document.getElementById('id_title');
-const PostSubtitle = document.getElementById('id_subtitle');
-postTitle.placeholder = 'Article Title...';
+const postTitle = document.getElementById("id_title");
+const PostSubtitle = document.getElementById("id_subtitle");
+postTitle.placeholder = "Article Title...";
 PostSubtitle.placeholder = "Article Subtile...";
-const subtitle = document.getElementsByClassName('post-subtitle')[0]
+const subtitle = document.getElementsByClassName("post-subtitle")[0];
 
-const addSubtitle = document.getElementsByClassName('add-subtitle')[0]
-addSubtitle.addEventListener('click',()=>{
- 
- subtitle.style.display='block'
+const addSubtitle = document.getElementsByClassName("add-subtitle")[0];
+addSubtitle.addEventListener("click", () => {
+    subtitle.style.display = "block";
 
- addSubtitle.style.visibility="hidden"
-})
+    addSubtitle.style.visibility = "hidden";
+});
 
-const closeBtn = document.getElementById('close-btn')
+const closeBtn = document.getElementById("close-btn");
 
-closeBtn.addEventListener('click',()=>{
-    PostSubtitle.value=""
-    subtitle.style.display="none"
-    addSubtitle.style.visibility="visible"
-   
-  
-   
-})
+closeBtn.addEventListener("click", () => {
+    PostSubtitle.value = "";
+    subtitle.style.display = "none";
+    addSubtitle.style.visibility = "visible";
+});
+
+let editor = CKEDITOR.replace('content');
+editor.container.$.style.backgroundColor = '#192734'

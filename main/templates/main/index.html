@@ -1,10 +1,11 @@
-{% extends 'base.html' %} {% load static %} 
-{% block title %} Home {% endblock title %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %} Home {% endblock %} {% block content %}
 
-    <section class="intro container">
-        <h1>Welcome to the WebSphere Homepage, where we write about everything web and self-development</h1>
-    </section>
+<section class="intro container">
+    <h1>
+        Welcome to the WebSphere Homepage, where we write about everything web
+        and self-development
+    </h1>
+</section>
 
-{{Post.title}}    
 {% endblock content %}
+ 
