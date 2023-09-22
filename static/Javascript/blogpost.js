@@ -21,5 +21,3 @@ closeBtn.addEventListener("click", () => {
     addSubtitle.style.visibility = "visible";
 });
 
-let editor = CKEDITOR.replace('content');
-editor.container.$.style.backgroundColor = '#192734'

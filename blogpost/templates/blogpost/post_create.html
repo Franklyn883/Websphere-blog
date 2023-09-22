@@ -1,6 +1,9 @@
 {% extends 'blogpost/base.html'%}{% load static %} {% block script %}
 
 <script src="{% static 'Javascript/blogpost.js' %}" defer></script>
+<script src="{% static 'django_ckeditor_5/dist/bundle.js' %}" defer></script>
+
+
 {% endblock script %} {% block content %}
 <h2>Create a New Blog Post</h2>
 <form method="post" class="form">
@@ -98,10 +101,11 @@
     <div class="post-title">{{ form.title }}</div>
     <div class="post-subtitle"><p>{{ form.subtitle }}<span id="close-btn">&#10006</span></p></div>
     <div class="post-content">
-        <textarea id="content" name="content">
-{{ form.content.value }}</textarea
-        >
+    </div>
+    <div class="ck ck-content" id="content">
+        {{ form.content|safe}}
     </div>
     <button type="submit" class="btn btn-primary">Create Post</button>
 </form>
+
 {% endblock content %}

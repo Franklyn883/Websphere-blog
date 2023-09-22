@@ -7,10 +7,10 @@ name = "pypi"
 django = "*"
 mysqlclient = "*"
 python-dotenv = "*"
-pillow = "*"
 django-allauth = "*"
 django-select2 = "*"
-django-ckeditor = "*"
+pillow = "*"
+django-ckeditor-5 = "*"
 
 [dev-packages]
 
