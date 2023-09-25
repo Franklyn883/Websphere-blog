@@ -1,4 +1,4 @@
-from .models import Post,Category, Tag
+from .models import Post,Category
 from django import forms
 from taggit.forms import TagWidget
 from ckeditor.widgets import CKEditorWidget

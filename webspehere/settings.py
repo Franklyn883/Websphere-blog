@@ -91,7 +91,6 @@ WSGI_APPLICATION = 'webspehere.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -101,7 +100,9 @@ DATABASES = {
         'HOST': os.environ.get('HOST'),
         'PORT': os.environ.get('PORT'),
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
-    }
+        'CHARSET': 'utf8mb4',
+        'COLLATION': 'utf8mb4_general_ci',
+    },
 }
 
 
