@@ -2,17 +2,12 @@
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
-    color:white
-   
+    color: white;
 }
-main{
+main {
     background-color: var(--background-color2);
-    
 }
-form{
-  
-}
-input{
+input {
     background-color: var(--background-color2);
     color: white;
 }
@@ -26,16 +21,42 @@ input{
     align-items: center;
     gap: 2rem;
 }
-
-.cover-subtitle button {
+.form {
+    background-color: var(--background-color2);
+}
+/*Post options*/
+.post-options{
+    height: 100px;
+}
+.post-options button {
     border: none;
-    background-color:inherit;
+    background-color: inherit;
     padding: 0.25em 1em;
     color: white;
 }
-.cover-subtitle button:hover {
-    background-color: rgba(220, 232, 245, 0.795);
+.post-options button:hover {
+    background-color: #55647379;
     border-radius: 16px;
+}
+
+.post-options p,
+button,
+span {
+    font-size: 1rem;
+    color: white;
+    font-weight: 700;
+}
+
+.post-category__options {
+    height: 125px;
+    width: 275px;
+    position: absolute;
+    z-index: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--background-color);
+    padding: 1rem;
+
 }
 #id_title {
     border: none;
@@ -46,12 +67,6 @@ input{
     font-weight: bold;
     padding: 1rem;
 }
-
-.cover-subtitle p {
-    font-size: 1rem;
-    color: white;
-    font-weight: 700;
-}
 #id_subtitle {
     border: none;
     outline: none;
@@ -60,17 +75,16 @@ input{
     font-family: "Plus Jakarta Sans", sans-serif;
     padding: 1rem;
 }
-.post-subtitle  {
+.post-subtitle {
     position: relative;
-    display: none;
     background-color: var(--background-color2);
     color: white;
 }
 .post-title {
-    color:white;  
+    color: white;
     background-color: var(--background-color2);
 }
-#close-btn {
+#btn--close-subtitle{
     position: absolute;
     top: 1rem;
     color: rgba(0, 0, 0, 0.726);
@@ -78,11 +92,69 @@ input{
     padding: 4px 8px;
     border-radius: 50%;
 }
-#close-btn:hover {
-    background-color: rgba(220, 232, 245, 0.795);
+#btn--close-subtitle:hover {
+    background-color: rgba(20, 53, 88, 0.795);
 }
 
 
-.form{
-    background-color: var(--background-color2)
+.hidden {
+    display: none;
+    opacity: 0;
+}
+.btn--close-modal{
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    color:white;
+    padding: 4px 8px;
+    border-radius: 50%;
+    margin: 4px;
+}
+
+.btn--close-modal:hover,
+.btn--close-modal:active{
+background-color: #55647379;
+cursor: pointer;
+}
+
+#id_categories div{
+    padding: 0.25rem;
+}
+
+.post-cover{
+    position: absolute;
+
+}   
+
+.post-options .btn-primary{
+    border: none;
+    outline: none;
+    background-color: var(--darker-primary-color);
+    padding: 0.5em 1em;
+    border-radius: 2rem;
+    justify-self: flex-end;
+}
+.post-options .btn-primary:hover,
+.post-options .btn-primary:active{
+    background-color: var(--primary-color);
+    color: inherit;
+}
+#id_tags{
+    background-color: var(--background-color);
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    font: 1rem;
+}
+.ck-content textarea{
+    color: black;
+}
+
+.django-ckeditor-widget{
+    width: 100%;
+}
+.ck-editor__editable {
+    background-color: black;  /* Set the background color you want */
 }

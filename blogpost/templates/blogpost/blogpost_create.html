@@ -1,16 +1,18 @@
 {% extends 'blogpost/base.html'%}{% load static %} {% block script %}
 
 <script src="{% static 'Javascript/blogpost.js' %}" defer></script>
-<script src="{% static 'django_ckeditor_5/dist/bundle.js' %}" defer></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}" defer></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}" defer></script>
 
 
 {% endblock script %} {% block content %}
-<h2>Create a New Blog Post</h2>
+
 <form method="post" class="form">
     {% csrf_token %}
    
-    <div class="cover-subtitle d-flex--c">
-        <button type="button" class="add-coverimg d-flex">
+    <div class="post-options d-flex--c">
+        <div>
+        <button type="button" class="btn btn--cover d-flex">
             <svg
                 width="24px"
                 height="24px"
@@ -42,8 +44,11 @@
             </svg>
             <p>Add Cover</p>
         </button>
-
-        <button type="button" class="add-subtitle d-flex">
+        <div class="post-cover hidden">
+            {{form.cover_img}}
+        </div>
+    </div>
+        <button type="button" class="btn btn--add-subtitle d-flex">
             <svg
                 width="24px"
                 height="24px"
@@ -95,17 +100,29 @@
                     ></path>
                 </g>
             </svg>
-            <p>Add subtitle</p>
+            <p>Add Subtitle</p>
         </button>
+       
+        <div class="post-category">
+            <button type="button" class="btn btn--show-categories">Add Categories</button>
+            <div class="post-category__options hidden">{{form.categories }}<span class="btn--close-modal">&#10006</span></div>
+              </div>
+        <div class="tags"><p>Add Tags: {{ form.tags }} </p></div>
+        <button type="submit" class="btn btn-primary">Publish</button>
     </div>
     <div class="post-title">{{ form.title }}</div>
-    <div class="post-subtitle"><p>{{ form.subtitle }}<span id="close-btn">&#10006</span></p></div>
-    <div class="post-content">
-    </div>
-    <div class="ck ck-content" id="content">
-        {{ form.content|safe}}
-    </div>
-    <button type="submit" class="btn btn-primary">Create Post</button>
-</form>
+    <div class="post-subtitle hidden"><p>{{ form.subtitle }}<span id="btn--close-subtitle" class="btn--close-modal">&#10006</span></p></div>
 
+    <div class="content" id="content">
+        {{ form.content }}
+    </div>
+    
+</form>
+<script>
+    CKEDITOR.replace('content', {
+      width: '100%',
+      height: '100%',
+      removeButtons: 'PasteFromWord'
+    });
+  </script>
 {% endblock content %}

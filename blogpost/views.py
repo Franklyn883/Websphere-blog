@@ -1,13 +1,20 @@
 from django.shortcuts import render
 from .forms import PostForm
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Tag
+from .models import Post,Tag
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
+
+
+class BlogPostListView(ListView):
+    model = Post
+    template_name ='blogpost/blogpost_list.html'
+    
 def get_tag_suggestions(request):
     input_value = request.GET.get('input', '')
     tags = Tag.objects.filter(name__icontains=input_value)[:10]
@@ -16,7 +23,8 @@ def get_tag_suggestions(request):
 
 class BlogPostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostForm
-    template_name = 'blogpost/post_create.html'  # Replace with your template path
+    model= Post
+    template_name = 'blogpost/blogpost_create.html'  # Replace with your template path
     success_url = reverse_lazy('home')  # Replace with the appropriate URL
 
     def form_valid(self, form):
@@ -28,4 +36,6 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
         for tag_name in tags_list:
             tag, created = Tag.objects.get_or_create(name=tag_name)
             form.instance.tags.add(tag)
+            
+
 

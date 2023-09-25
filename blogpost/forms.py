@@ -1,11 +1,12 @@
 from .models import Post,Category, Tag
 from django import forms
-
-
+from taggit.forms import TagWidget
+from ckeditor.widgets import CKEditorWidget
 
 class PostForm(forms.ModelForm):
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple)
-    tags = forms.CharField(max_length=100, help_text="Enter comma-separated tags")
+    content = forms.CharField(widget=CKEditorWidget())
+    tags = forms.CharField(widget=TagWidget())
   
     class Meta:
         model = Post

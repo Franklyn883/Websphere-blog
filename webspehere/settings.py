@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-#environment variables
+# environment variables
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -41,17 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django.contrib.sites",
-    
-    #local apps
+
+    # local apps
     'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'blogpost.apps.BlogpostConfig',
-    
-    #third party
-    "allauth", 
-    "allauth.account",
-    'django_ckeditor_5',
 
+    # third party
+    "allauth",
+    "allauth.account",
+   'ckeditor' ,
+    'taggit',
+'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-      'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'webspehere.urls'
@@ -72,7 +73,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates'
-            ],
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,23 +123,68 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#user authentication backend
+# user authentication backend
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-#CKeDITOR configuration
+# CKeDITOR configuration
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': [
-            ['Bold', 'Italic', 'Underline'],
-            ['Link', 'Unlink'],
-            ['Format', 'Styles'],
-            ['RemoveFormat'],
-            # Other tools you want to keep
+        'height':'100%',
+        'skin': 'moono',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
         ],
-    },
+        'toolbar_YourCustomToolbarConfig': [
+            
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['About']},  # put this to force next toolbar on new line
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+             
+
+            ]},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'height': 291,
+        # 'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        # 'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
 }
-
-
 
 
 # Internationalization
@@ -158,10 +204,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-#static files setup
-STATIC_URL = '/static/' 
+# static files setup
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_FINDERS = [
@@ -170,9 +216,9 @@ STATICFILES_FINDERS = [
 ]
 
 # media files
-MEDIA_URL = "/media/" 
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
+CKEDITOR_UPLOAD_PATH = "uploads/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -184,175 +230,13 @@ LOGOUT_REDIRECT_URL = "home"
 # django-allauth config
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
-"django.contrib.auth.backends.ModelBackend",
-"allauth.account.auth_backends.AuthenticationBackend",
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-ACCOUNT_USERNAME_REQUIRED = False # new
-ACCOUNT_AUTHENTICATION_METHOD = "email" # new
-ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_USERNAME_REQUIRED = False  # new
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # new
+ACCOUNT_EMAIL_REQUIRED = True  # new
 ACCOUNT_UNIQUE_EMAIL = True
 
-#CKEditor settings
-customColorPalette = [
-    {"color": "hsl(4, 90%, 58%)", "label": "Red"},
-    {"color": "hsl(340, 82%, 52%)", "label": "Pink"},
-    {"color": "hsl(291, 64%, 42%)", "label": "Purple"},
-    {"color": "hsl(262, 52%, 47%)", "label": "Deep Purple"},
-    {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
-    {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
-]
-
-CKEDITOR_5_CONFIGS = {
-    "default": {
-         "height": "500px", 
-        "toolbar": [
-            "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "bulletedList",
-            "numberedList",
-            "blockQuote",
-            "imageUpload"
-        ],
-    },
-    "comment": {
-        "language": {"ui": "en", "content": "en"},
-        "toolbar": [
-            "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "bulletedList",
-            "numberedList",
-            "blockQuote",
-        ],
-    },
-    "extends": {
-        "language": "en",
-        "blockToolbar": [
-            "paragraph",
-            "heading1",
-            "heading2",
-            "heading3",
-            "|",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "blockQuote",
-        ],
-        "toolbar": [
-            "heading",
-            "codeBlock",
-            "|",
-            "outdent",
-            "indent",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "underline",
-            "strikethrough",
-            "code",
-            "subscript",
-            "superscript",
-            "highlight",
-            "|",
-            "bulletedList",
-            "numberedList",
-            "todoList",
-            "|",
-            "blockQuote",
-            "insertImage",
-            "|",
-            "fontSize",
-            "fontFamily",
-            "fontColor",
-            "fontBackgroundColor",
-            "mediaEmbed",
-            "removeFormat",
-            "insertTable",
-            "sourceEditing",
-        ],
-        "image": {
-            "toolbar": [
-                "imageTextAlternative",
-                "|",
-                "imageStyle:alignLeft",
-                "imageStyle:alignRight",
-                "imageStyle:alignCenter",
-                "imageStyle:side",
-                "|",
-                "toggleImageCaption",
-                "|"
-            ],
-            "styles": [
-                "full",
-                "side",
-                "alignLeft",
-                "alignRight",
-                "alignCenter",
-            ],
-        },
-        "table": {
-            "contentToolbar": [
-                "tableColumn",
-                "tableRow",
-                "mergeTableCells",
-                "tableProperties",
-                "tableCellProperties",
-            ],
-            "tableProperties": {
-                "borderColors": customColorPalette,
-                "backgroundColors": customColorPalette,
-            },
-            "tableCellProperties": {
-                "borderColors": customColorPalette,
-                "backgroundColors": customColorPalette,
-            },
-        },
-        "heading": {
-            "options": [
-                {
-                    "model": "paragraph",
-                    "title": "Paragraph",
-                    "class": "ck-heading_paragraph",
-                },
-                {
-                    "model": "heading1",
-                    "view": "h1",
-                    "title": "Heading 1",
-                    "class": "ck-heading_heading1",
-                },
-                {
-                    "model": "heading2",
-                    "view": "h2",
-                    "title": "Heading 2",
-                    "class": "ck-heading_heading2",
-                },
-                {
-                    "model": "heading3",
-                    "view": "h3",
-                    "title": "Heading 3",
-                    "class": "ck-heading_heading3",
-                },
-            ]
-        },
-        "list": {
-            "properties": {
-                "styles": True,
-                "startIndex": True,
-                "reversed": True,
-            }
-        },
-        "htmlSupport": {
-            "allow": [
-                {"name": "/.*/", "attributes": True, "classes": True, "styles": True}
-            ]
-        },
-    },
-}

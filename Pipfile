@@ -10,7 +10,8 @@ python-dotenv = "*"
 django-allauth = "*"
 django-select2 = "*"
 pillow = "*"
-django-ckeditor-5 = "*"
+django-taggit = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 
