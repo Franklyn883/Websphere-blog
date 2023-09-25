@@ -3,16 +3,6 @@
 <script src="{% static 'Javascript/blogpost.js' %}" defer></script>
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}" defer></script>
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}" defer></script>
-<script defer>
-    $(document).ready(function() {
-        $('#id_tags').select2({
-            tags: true,
-            tokenSeparators: [','],
-            minimumInputLength: 1,
-            maximumInputLength: 50
-        });
-    });
-    </script>
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js" defer></script>
 
@@ -118,7 +108,7 @@
             <button type="button" class="btn btn--show-categories">Add Categories</button>
             <div class="post-category__options hidden">{{form.categories }}<span class="btn--close-modal">&#10006</span></div>
               </div>
-        <div class="tags"><p>Add Tags: {{ form.tags }} </p></div>
+       
         <button type="submit" class="btn btn-primary">Publish</button>
     </div>
     <div class="post-title">{{ form.title }}</div>

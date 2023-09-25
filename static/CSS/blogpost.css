@@ -19,7 +19,7 @@ input {
 .d-flex--c {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: space-between;
 }
 .form {
     background-color: var(--background-color2);
