@@ -1,8 +1,8 @@
-{% load static %}
-{% block extrahead %}
-<script de>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
-{{ block.super }}
-{% endblock %}
+{% load static %} {% block extrahead %}
+<script de>
+    window.CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/";
+</script>
+{{ block.super }} {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,8 +22,8 @@
             href="{% static 'CSS/blogpost.css' %}"
             onload="this.rel='stylesheet'"
         />
-        <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
-    
+
+       
         {% block script %} {% endblock script %}
     </head>
     <body>

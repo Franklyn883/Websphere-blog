@@ -10,6 +10,15 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.generic import ListView
+from blogpost.models import Post
+# Create your views here.
+
+class HomePageView(ListView):
+    model = Post
+    template_name = "blogpost/index.html"  
 
 class BlogPostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostForm

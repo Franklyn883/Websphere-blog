@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Home {% endblock %} {% block content %}
+
+<section class="intro container">
+    <h1>
+        Welcome to the WebSphere Homepage, where we write about everything web
+        and self-development
+    </h1>
+</section>
+
+<section class="blogpost-items container">
+    {% for post in object_list %}
+    <div class="blogpost-item">
+        <div class="author-details">
+            <span class="author-username"> {{post.author}} </span>
+            <span class="publish-date"> {{post.created_at|date:"M d, Y"}} </span>
+        </div>
+   <h3 class="blogpost-item__title"> {{ post.title }} </h3>
+   
+    <p>{{ post.content|truncatewords:50|safe }}</p>
+<small>{{post.categories.name}} </small>
+   
+</div>
+{% endfor %}
+</section>
+
+{% endblock content %}
+ 

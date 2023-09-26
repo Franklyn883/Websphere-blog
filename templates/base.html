@@ -12,6 +12,13 @@
             href="{% static 'CSS/main.css' %}"
             onload="this.rel='stylesheet'"
         />
+        <link
+        rel="preload"
+        as="style"
+        href="{% static 'CSS/ckeditor_styles.css' %}"
+        onload="this.rel='stylesheet'"
+    />
+
     </head>
     <body>
         {% include "partials/_header.html" %}
