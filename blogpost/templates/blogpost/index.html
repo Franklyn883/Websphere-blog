@@ -15,8 +15,8 @@
             <span class="publish-date"> {{post.created_at|date:"M d, Y"}} </span>
         </div>
    <h3 class="blogpost-item__title"> {{ post.title }} </h3>
-   
-    <p>{{ post.content|truncatewords:50|safe }}</p>
+  <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
+    <div class="post__content">{{ post.content|safe }}</div>
 <small>{{post.categories.name}} </small>
    
 </div>

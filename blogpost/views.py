@@ -29,4 +29,6 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         response = super().form_valid(form)
+        form.save_m2m()  # Make sure to save the many-to-many relationships
         return response
+

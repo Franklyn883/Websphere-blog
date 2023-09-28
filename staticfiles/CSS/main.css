@@ -143,3 +143,27 @@ img {
    cursor: pointer;
    background-color: var(--primary-color);
 }
+.blogpost_content{
+    color:white;
+    padding: 2rem   ;
+}
+
+.post_content span{
+    color:white !important
+}
+.post__content{
+    color:white;
+   
+}
+.post__content p,span{
+    font-size: 1rem;
+    color: #ffffff !important;
+}
+.white-text {
+    color: white !important;
+  }
+
+.post__content span{
+    
+   
+}

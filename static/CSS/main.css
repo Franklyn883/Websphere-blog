@@ -148,6 +148,22 @@ img {
     padding: 2rem   ;
 }
 
-.blogpost_content span{
+.post_content span{
     color:white !important
+}
+.post__content{
+    color:white;
+   
+}
+.post__content p,span{
+    font-size: 1rem;
+    color: #ffffff !important;
+}
+.white-text {
+    color: white !important;
+  }
+
+.post__content span{
+    
+   
 }

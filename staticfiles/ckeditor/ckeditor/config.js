@@ -6,6 +6,6 @@
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
-    config.contentsCss = '/static/CSS/ckeditor_styles.css'; // Path to your custom CSS file
+	 config.uiColor = '#AADC6E';
+     config.contentsCss = '/css/mysitestyles.css';
 };

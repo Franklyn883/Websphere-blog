@@ -53,6 +53,7 @@ INSTALLED_APPS = [
    'ckeditor' ,
     'taggit',
 'ckeditor_uploader',
+
 ]
 
 MIDDLEWARE = [
@@ -129,10 +130,11 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 # CKeDITOR configuration
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
 CKEDITOR_CONFIGS = {
+  
     'default': {
-        'height':'100%',
-        'skin': 'moono',
+        'skin':'moono',
         # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
