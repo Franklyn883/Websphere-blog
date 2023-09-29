@@ -19,6 +19,7 @@
     --background-color2: #111722;
     --header-font: "Montserrat", sans-serif;
     --font: "Roboto", sans-serif;
+    --border:1px solid  white;
 }
 
 body {
@@ -39,7 +40,7 @@ img {
 
 .container {
     max-width: 1000px;
-    width: 90vw;
+    width: 95vw;
     margin: 0 auto;
 }
 
@@ -145,25 +146,23 @@ img {
 }
 .blogpost_content{
     color:white;
-    padding: 2rem   ;
+    padding: 2.5rem   ;
 }
 
-.post_content span{
-    color:white !important
-}
+
+/*post__content styles*/
 .post__content{
-    color:white;
-   
+    color: rgb(212, 209, 209)!important;
+    line-height: 1.2!important;
 }
-.post__content p,span{
-    font-size: 1rem;
-    color: #ffffff !important;
-}
-.white-text {
-    color: white !important;
-  }
+.post__content table,th, td{
+    border: 1px solid white!important;
 
-.post__content span{
-    
-   
 }
+
+.post__content table{
+    margin: 0 auto;
+ 
+}
+
+/* Post content styles:*/

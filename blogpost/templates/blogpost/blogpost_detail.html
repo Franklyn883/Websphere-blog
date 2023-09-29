@@ -1,0 +1,26 @@
+{% extends 'blogpost/base.html' %} {% load static %} 
+
+{% block nav %}
+<nav class="nav">
+    <ul class="nav__items">
+        <li class="nav__item"><a class="nav__link"><div class="user">
+            <div class="user__pic"></div>
+            <div class="user__name"></div>
+        </div></a></li>
+
+        <li class="nav__item"><button type="button" class="btn--light-dark-mode-toggle"></button></li>
+        <li class="nav__item"> <button type="button" class="btn--follow">follow</button></li>
+        <li class="nav__item"><a class="nav__link">profile pics </a></li>
+    </ul>
+
+</nav>
+
+{% endblock nav %}
+
+{% block content%}
+<img src=" {{ post.cover_img.url }}" alt="{{ post.title }}"/>
+{{ post.title}}
+{{ post.subtitle }}
+{{post.content|safe}}
+
+{% endblock content %}

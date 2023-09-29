@@ -1,27 +1,53 @@
-{% extends 'base.html' %} {% load static %} {% block title %} Home {% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %} Home {% endblock%}
+{% block custom_css %}
 
-<section class="intro container">
-    <h1>
-        Welcome to the WebSphere Homepage, where we write about everything web
-        and self-development
-    </h1>
-</section>
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/blog_home.css' %}"
+    onload="this.rel='stylesheet'"
+/>
 
-<section class="blogpost-items container">
-    {% for post in object_list %}
-    <div class="blogpost-item">
-        <div class="author-details">
-            <span class="author-username"> {{post.author}} </span>
-            <span class="publish-date"> {{post.created_at|date:"M d, Y"}} </span>
+{% endblock custom_css %} {% block content %}
+<section class="container container-grid">
+    <article class="blogposts">
+        {% for post in object_list %}
+        <div class="post-card">
+        <div class="post-author">
+            <span class="post-author__profile-pic">profile-pic</span>
+            <span class="post-author__username"> {{post.author}} </span>
         </div>
-   <h3 class="blogpost-item__title"> {{ post.title }} </h3>
-  <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
-    <div class="post__content">{{ post.content|safe }}</div>
-<small>{{post.categories.name}} </small>
-   
-</div>
-{% endfor %}
+        <p class="publish-date">{{post.created_at|date:"M d, Y"}}</p>
+
+        <div class="blogpost__content">
+            <div class="post-content">
+                <h3 class="post-title">{{ post.title }}</h3>
+                {{ post.content|truncatewords:40 | safe }}
+            </div>
+            <div class="post-image">
+                <img
+                    src=" {{ post.cover_img.url }}"
+                    alt="{{ post.title }}"
+                    class="blogpost__cover-img"
+                />
+            </div>
+           
+        
+        </div>
+       <div class="bottom">
+        <a href="{% url 'blogpost_detail' pk=post.pk %}">Read More</a>
+
+        <small class="categories"> {% for category in post.categories.all %}
+            {{ category.name }}
+        {% endfor %}</small>
+    </div>
+    </div>
+    {% endfor %}
+    </article>
+
+    <aside class="sidebar">
+        <div>categories</div>
+    </aside>
 </section>
 
 {% endblock content %}
- 

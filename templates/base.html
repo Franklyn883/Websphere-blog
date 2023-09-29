@@ -6,18 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>{% block title %} WebSphere {% endblock title %}</title>
-       
-        <link
-        rel="preload"
-        as="style"
-        href="{% static 'CSS/ckeditor_styles.css' %}"
-        onload="this.rel='stylesheet'"
-    /> <link
+    <link
     rel="preload"
     as="style"
     href="{% static 'CSS/main.css' %}"
     onload="this.rel='stylesheet'"
 />
+{% block custom_css %}
+
+{% endblock custom_css %}
 
     </head>
     <body>
