@@ -16,13 +16,9 @@
             href="{% static 'CSS/main.css' %}"
             onload="this.rel='stylesheet'"
         />
-        <link
-            rel="preload"
-            as="style"
-            href="{% static 'CSS/blogpost.css' %}"
-            onload="this.rel='stylesheet'"
-        />
-
+       
+{% block custom-css %}
+{% endblock custom-css %}
        
         {% block script %} {% endblock script %}
     </head>

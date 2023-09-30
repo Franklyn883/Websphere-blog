@@ -58,16 +58,30 @@ flex-wrap: wrap;
     margin: 3rem 0;
 }
 
-.categories{
+.category{
     padding: 0.75rem;
     border-radius: 2rem;
     background-color:#192734;
 }
-
+.category:hover, .category:active{
+background-color: #192734b6;
+cursor: pointer;
+}
 .bottom{
     display: flex;
     justify-content: space-between;
     align-content: center;
-    margin-top: 0.5rem;
+    margin-top: 0.85rem;
 }
-.categories{}
+.link--post-details{
+    color: #1c6bbf;
+    text-decoration: none;
+}
+.link--post-details:hover,.link--post-details:active{
+    color: rgba(69, 165, 245, 0.5);
+}
+.link--category{
+    color: inherit;
+    text-decoration: none;
+
+}

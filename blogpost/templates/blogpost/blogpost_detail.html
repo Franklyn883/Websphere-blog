@@ -1,4 +1,12 @@
 {% extends 'blogpost/base.html' %} {% load static %} 
+{% block custom-css %}
+<link
+rel="preload"
+as="style"
+href="{% static 'CSS/blogcontent.css' %}"
+onload="this.rel='stylesheet'"
+/>
+{% endblock custom-css %}
 
 {% block nav %}
 <nav class="nav">
@@ -19,8 +27,8 @@
 
 {% block content%}
 <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}"/>
-{{ post.title}}
-{{ post.subtitle }}
-{{post.content|safe}}
+<h1 class="post-title">{{ post.title}}</h1>
+<h2 class="post-subtitle">{{ post.subtitle }}</h2>
+<div class="post-content">{{post.content|safe}}</div>
 
 {% endblock content %}

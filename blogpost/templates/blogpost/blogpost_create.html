@@ -1,4 +1,14 @@
-{% extends 'blogpost/base.html'%}{% load static %} {% block script %}
+{% extends 'blogpost/base.html'%}{% load static %}
+{% block custom-css %}
+<link
+rel="preload"
+as="style"
+href="{% static 'CSS/blogpost.css' %}"
+onload="this.rel='stylesheet'"
+/>
+{% endblock custom-css %}
+
+{% block script %}
 
 <script src="{% static 'Javascript/blogpost.js' %}" defer></script>
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}" defer></script>
@@ -123,7 +133,8 @@
     CKEDITOR.replace('content', {
       width: '100%',
       height: '100%',
-      removeButtons: 'PasteFromWord'
+      removeButtons: 'PasteFromWord',
+      extraPlugins :'codesnippet',
     });
   </script>
 {% endblock content %}

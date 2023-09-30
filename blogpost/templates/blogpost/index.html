@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block title %} Home {% endblock%}
-{% block custom_css %}
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
 
 <link
     rel="preload"
@@ -11,42 +10,57 @@
 {% endblock custom_css %} {% block content %}
 <section class="container container-grid">
     <article class="blogposts">
-        {% for post in object_list %}
+        {% for post in posts %}
         <div class="post-card">
-        <div class="post-author">
-            <span class="post-author__profile-pic">profile-pic</span>
-            <span class="post-author__username"> {{post.author}} </span>
-        </div>
-        <p class="publish-date">{{post.created_at|date:"M d, Y"}}</p>
-
-        <div class="blogpost__content">
-            <div class="post-content">
-                <h3 class="post-title">{{ post.title }}</h3>
-                {{ post.content|truncatewords:40 | safe }}
+            <div class="post-author">
+                <span class="post-author__profile-pic">profile-pic</span>
+                <span class="post-author__username"> {{post.author}} </span>
             </div>
-            <div class="post-image">
-                <img
-                    src=" {{ post.cover_img.url }}"
-                    alt="{{ post.title }}"
-                    class="blogpost__cover-img"
-                />
-            </div>
-           
-        
-        </div>
-       <div class="bottom">
-        <a href="{% url 'blogpost_detail' pk=post.pk %}">Read More</a>
+            <p id="publish-date">{{post.created_at|timesince }} ago</p>
 
-        <small class="categories"> {% for category in post.categories.all %}
-            {{ category.name }}
-        {% endfor %}</small>
-    </div>
-    </div>
-    {% endfor %}
+            <div class="blogpost__content">
+                <div class="post-content">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    {{ post.content|truncatewords:40 | safe }}
+                </div>
+                <div class="post-image">
+                    <img
+                        src=" {{ post.cover_img.url }}"
+                        alt="{{ post.title }}"
+                        class="blogpost__cover-img"
+                    />
+                </div>
+            </div>
+            <div class="bottom">
+                <a
+                    href="{% url 'blogpost_detail' pk=post.pk %}"
+                    class="link--post-details"
+                    >Read More</a
+                >
+
+                <div class="categories">
+                    {% for category in post.categories.all %}
+                    <a href="{% url 'category_filter' pk=category.pk %}" class="link--category"> <small class="category">{{ category.name }}</small></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </article>
 
     <aside class="sidebar">
-        <div>categories</div>
+        <div class="category-list">
+            <h2>Categories</h2>
+            <ul>
+                {% for category in categories %}
+                <li>
+                    <a href="{% url 'category_filter' category.id %}"
+                        >{{ category.name }}</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </aside>
 </section>
 

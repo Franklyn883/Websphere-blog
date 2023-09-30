@@ -150,19 +150,6 @@ img {
 }
 
 
-/*post__content styles*/
-.post__content{
-    color: rgb(212, 209, 209)!important;
-    line-height: 1.2!important;
-}
-.post__content table,th, td{
-    border: 1px solid white!important;
 
-}
-
-.post__content table{
-    margin: 0 auto;
- 
-}
 
 /* Post content styles:*/

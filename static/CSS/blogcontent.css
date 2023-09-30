@@ -1,0 +1,30 @@
+.post-title, .post-subtitle{
+    margin: 1rem 0;
+}
+.post-title{
+    font-size: 3rem;
+    text-align: center;
+    
+}
+.post-subtitle{
+    font-size: 2rem;
+    text-align: center;
+    color: rgb(159, 163, 167);
+    font-weight: 200;
+}
+/*post__content styles*/
+.post-content span,p{
+    color: rgb(212, 209, 209)!important;
+    line-height: 2!important;
+    font-size: 1.425rem;
+
+}
+.post-content table,th, td{
+    border: 1px solid white!important;
+
+}
+
+.post-content table{
+    margin: 0 auto;
+ 
+}
