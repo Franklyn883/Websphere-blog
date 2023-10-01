@@ -1,34 +1,99 @@
-{% extends 'blogpost/base.html' %} {% load static %} 
-{% block custom-css %}
+{% extends 'blogpost/base.html' %} {% load static %} {% block custom-css %}
 <link
-rel="preload"
-as="style"
-href="{% static 'CSS/blogcontent.css' %}"
-onload="this.rel='stylesheet'"
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/blogcontent.css' %}"
+    onload="this.rel='stylesheet'"
 />
-{% endblock custom-css %}
-
-{% block nav %}
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/blogdetails.css' %}"
+    onload="this.rel='stylesheet'"
+/>
+{% endblock custom-css %} {% block nav %}
 <nav class="nav">
     <ul class="nav__items">
-        <li class="nav__item"><a class="nav__link"><div class="user">
-            <div class="user__pic"></div>
-            <div class="user__name"></div>
-        </div></a></li>
+        <li class="nav__item">
+            <a class="nav__link"
+                ><div class="author">
+                    <div class="author__profile-pic"></div>
+                    <div class="author__name">{{ post.author }}</div>
+                </div></a
+            >
+        </li>
+        <li class="nav__item nav__search-bar">
+            <div class="nav__container--search-bar">
+                <input
+                    type="search"
+                    class="search-bar"
+                    placeholder="Enter your search here"
+                    name="search"
+                />
+                <input type="submit" value="search" class="btn--search" />
+            </div>
+        </li>
 
-        <li class="nav__item"><button type="button" class="btn--light-dark-mode-toggle"></button></li>
-        <li class="nav__item"> <button type="button" class="btn--follow">follow</button></li>
-        <li class="nav__item"><a class="nav__link">profile pics </a></li>
+        <li class="nav__item second-sec">
+            <div class="nav__item icon btn--light-dark-mode">
+                <img
+                    src="{% static 'assets/images/light-mode.svg' %}"
+                    alt="light-mode icon"
+                    title="toggle light-dark mode"
+                />
+            </div>
+            <div class="nav__item follow">
+                <button type="button" class="btn__follow">
+                    <svg
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        stroke="#000000"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <circle
+                                cx="10"
+                                cy="6"
+                                r="4"
+                                stroke="#ffffff"
+                                stroke-width="1.5"
+                            ></circle>
+                            <path
+                                d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12"
+                                stroke="#ffffff"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            ></path>
+                            <path
+                                d="M17.9975 18C18 17.8358 18 17.669 18 17.5C18 15.0147 14.4183 13 10 13C5.58172 13 2 15.0147 2 17.5C2 19.9853 2 22 10 22C12.231 22 13.8398 21.8433 15 21.5634"
+                                stroke="#ffffff"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            ></path>
+                        </g></svg>
+                        <span>follow</span>
+                </button>
+            </div>
+            <div class="nav__item">
+                <a class="nav__link user__profile-pic">profile pics </a>
+            </div>
+        </li>
     </ul>
-
 </nav>
 
-{% endblock nav %}
-
-{% block content%}
-<img src=" {{ post.cover_img.url }}" alt="{{ post.title }}"/>
-<h1 class="post-title">{{ post.title}}</h1>
-<h2 class="post-subtitle">{{ post.subtitle }}</h2>
-<div class="post-content">{{post.content|safe}}</div>
-
+{% endblock nav %} {% block content%}
+<section class="post-details">
+    <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
+    <h1 class="post-title">{{ post.title}}</h1>
+    <h2 class="post-subtitle">{{ post.subtitle }}</h2>
+    <div class="post-content">{{post.content|safe}}</div>
+</section>
 {% endblock content %}

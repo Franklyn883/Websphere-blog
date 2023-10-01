@@ -1,0 +1,66 @@
+:root {
+    --primary-color: #45a5f5;
+    --darker-primary-color: #1c6bbf;
+    --primary-opacity: rgba(69, 165, 245, 0.5);
+    --secondary-color: #4caf50;
+    --darker-secondary-color: #357a35;
+    --secondary-opacity: rgba(76, 175, 80, 0.5);
+    --tertiary-color: #e91e63;
+    --darker-tertiary-color: #ad1457;
+    --tertiary-opacity: rgba(233, 30, 99, 0.5);
+    --background-color: #192734;
+    --background-color2: #111722;
+    --header-font: "Montserrat", sans-serif;
+    --font: "Roboto", sans-serif;
+    --border:1px solid  white;
+}
+.nav{
+padding: 1.25rem 3rem;
+}
+.nav__items{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    width: 100%;
+    align-items: center;
+    
+}
+
+.search-bar{
+    border: 0;
+    height: 2.75rem;
+    outline: none;
+    text-align: center;
+    font-size: 1rem;
+    width:30rem;
+}
+.post-details{
+   margin-top: 4px;
+}
+
+.second-sec{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.2rem;
+    align-items: center;
+}
+.btn__follow{
+    padding:  0.5em 1em;
+    border: none;
+    border-radius: 2rem;
+    background-color:var(--darker-primary-color) ;
+    display: flex;
+    align-content: center;
+    gap: 4px;    
+}
+
+.btn__follow:hover, .btn__follow:active{
+    background-color: var(--primary-color);
+}
+.btn__follow span{
+    color: white;
+    font: 1.2rem;
+    margin-top: 4px;
+    font-weight: bolder;
+}
+x

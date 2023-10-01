@@ -1,7 +1,7 @@
 /* */
 .container-grid{
 display: grid;
-grid-template-columns: 4fr 1fr;
+grid-template-columns: 3fr 1fr;
 gap: 2rem;
 }
 
@@ -55,7 +55,7 @@ flex-wrap: wrap;
     
 }
 .blogposts .post-card{
-    margin: 3rem 0;
+    margin-bottom: 3rem;
 }
 
 .category{
@@ -84,4 +84,31 @@ cursor: pointer;
     color: inherit;
     text-decoration: none;
 
+}
+
+.category-section{
+    border: 1.5px solid rgba(152, 152, 152, 0.502);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+.category-list li{
+    list-style: none;
+    border-bottom: 1px solid rgba(152, 152, 152, 0.502);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.category-list a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.category-list a:hover, .category-list a:active{
+color:rgb(212, 209, 209);
+}
+
+.category-list a:checked{
+    color: blue;
+}
+.category-section h2{
+    text-align: center;
 }

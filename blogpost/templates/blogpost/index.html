@@ -49,9 +49,9 @@
     </article>
 
     <aside class="sidebar">
-        <div class="category-list">
+        <div class="category-section">
             <h2>Categories</h2>
-            <ul>
+            <ul class=" category-list">
                 {% for category in categories %}
                 <li>
                     <a href="{% url 'category_filter' category.id %}"

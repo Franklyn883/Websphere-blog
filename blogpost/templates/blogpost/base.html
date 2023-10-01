@@ -28,5 +28,21 @@
         <main class="container">
             {% block content %} {% endblock content %}
         </main>
+        <script>
+        CKEDITOR.replace( 'post-content', {
+            on: {
+                instanceReady: function( ev ) {
+                    // Output paragraphs as <p>Text</p>.
+                    this.dataProcessor.writer.setRules( 'p', {
+                        indent: false,
+                        breakBeforeOpen: true,
+                        breakAfterOpen: false,
+                        breakBeforeClose: false,
+                        breakAfterClose: true
+                    });
+                }
+            }
+        } );
+    </script>
     </body>
 </html>

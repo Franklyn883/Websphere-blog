@@ -1,30 +1,136 @@
-.post-title, .post-subtitle{
+.post-title,
+.post-subtitle {
     margin: 1rem 0;
 }
-.post-title{
+.post-title {
     font-size: 3rem;
     text-align: center;
-    
 }
-.post-subtitle{
+.post-subtitle {
     font-size: 2rem;
     text-align: center;
     color: rgb(159, 163, 167);
     font-weight: 200;
 }
 /*post__content styles*/
-.post-content span,p{
-    color: rgb(212, 209, 209)!important;
-    line-height: 2!important;
-    font-size: 1.425rem;
-
-}
-.post-content table,th, td{
-    border: 1px solid white!important;
-
+/* Apply styles to all paragraphs inside the content */
+.post-content p span,
+.post-content span {
+    font-size: 1.2rem !important ;
+    line-height: 1.6;
+    color: #f0f0f0 !important; /* Slightly off-white */
 }
 
-.post-content table{
-    margin: 0 auto;
- 
+/* Apply styles to headings inside the content */
+.post-content h1 span,
+.post-content h2 span,
+.post-content h3 span {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #f0f0f0; /* Slightly off-white */
+}
+
+/* Apply styles to links inside the content */
+.post-content a span{
+    color: #007bff!important;
+    text-decoration: none;
+}
+
+/* Apply styles to images inside the content */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Apply styles to lists inside the content */
+.post-content ul,
+.post-content ol {
+    margin-bottom: 1em;
+}
+
+/* Apply styles to list items inside the content */
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+/* Apply styles to blockquotes inside the content */
+.post-content blockquote {
+    border-left: 2px solid #007bff;
+    padding-left: 1em;
+    margin: 0;
+}
+
+/* Apply styles to code blocks inside the content */
+.post-content pre {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1em;
+    overflow: auto;
+}
+
+/* Apply styles to inline code elements inside the content */
+.post-content code {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.2em 0.4em;
+    font-family: "Courier New", monospace;
+}
+/* Apply styles to tables inside the content */
+.post-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+    border-color: #f0f0f0;
+}
+
+/* Apply styles to table headers */
+.post-content th {
+    background-color: #007bff;
+    color: #f0f0f0; /* Slightly off-white */
+    font-weight: bold;
+    padding: 8px;
+}
+
+/* Apply styles to table cells */
+.post-content td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.post-content table tr,
+.post-content table th,
+.post-content table td {
+    border: 1px solid #f0f0f0 !important; /* Adjust as needed */
+}
+/* Apply alternate background color to table rows */
+.post-content tr:nth-child(even) {
+    background-color: var(--background-color);
+}
+.post-content tr:nth-child(even) span {
+    color: #ccc !important;
+}
+
+/* Custom font size for headings */
+.post-content h1 span {
+font-size: 2.5rem!important; /* Adjust as needed */
+}
+
+.post-content h2 span {
+    font-size: 2rem!important; /* Adjust as needed */
+}
+
+.post-content h3 {
+    font-size: 1.8rem!important; /* Adjust as needed */
+}
+
+.post-content h4 span {
+    font-size: 1.6rem!important; /* Adjust as needed */
+}
+
+/* Custom font size for paragraphs */
+.post-content p {
+    font-size: 1.2rem; /* Standard font size */
 }

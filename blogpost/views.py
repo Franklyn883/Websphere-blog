@@ -54,3 +54,4 @@ class PostCategoryFilterView(ListView):
     def get_queryset(self):
         category = get_object_or_404(Category, id=self.kwargs['pk'])
         return Post.objects.filter(categories=category)
+  
