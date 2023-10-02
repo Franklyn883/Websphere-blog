@@ -96,4 +96,12 @@
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
     <div class="post-content">{{post.content|safe}}</div>
 </section>
+{% if post.author == user %}
+<div> <a href="{% url 'update_blogpost' pk=post.pk %}">Edit Post</a></div>
+<div><a href=""> Delete Post</a></div>
+<div class="delete-confirmation"> Are you sure you want to delete post?
+    <a href="{% url 'delete_blogpost' pk=post.pk %}">Yes</a>
+   <a>No</a> 
+</div>
+{% endif %}
 {% endblock content %}

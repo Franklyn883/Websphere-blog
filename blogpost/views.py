@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import PostForm
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
@@ -17,22 +17,26 @@ from blogpost.models import Post
 # Create your views here.
 
 class HomePageView(ListView):
+    '''Render all the blogpost in the database'''
     model = Post
     template_name = "blogpost/index.html"  
     context_object_name = 'posts'
 
     def get_context_data(self, **kwargs):
+        '''Get the related fields, categories, so it can be rendered in the template'''
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
 
 class BlogPostCreateView(LoginRequiredMixin, CreateView):
+    '''Creates Blog post'''
     form_class = PostForm
     model = Post
     template_name = 'blogpost/blogpost_create.html'
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
+        '''validates form and ensure proper saving of the many to many fields'''
         form.instance.author = self.request.user
         form.instance.cover_img = self.request.FILES.get('cover_img') 
         response = super().form_valid(form)
@@ -41,17 +45,31 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
 
 
 class BlogPostDetailView(LoginRequiredMixin, DetailView):
+    '''Renders the full details of a blogpost'''
     model = Post
     template_name = 'blogpost/blogpost_detail.html'
     context_object_name = 'post'
 
 
 class PostCategoryFilterView(ListView):
+    '''Renders all post related to a selected category'''
     model = Post
     template_name = 'blogpost/category_filtered_posts.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
+        ''' Get a category and all it related posts '''
         category = get_object_or_404(Category, id=self.kwargs['pk'])
         return Post.objects.filter(categories=category)
   
+
+class BlogpostUpdateView(LoginRequiredMixin, UpdateView):
+    ''' Update blogpost'''
+    model = Post
+    fields=['title','subtitle','cover_img','content','categories']
+    template_name = 'blogpost/blogpost_update.html'
+    
+class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
+    '''Delete blogpost'''
+    model = Post
+    success_url = reverse_lazy('home')
