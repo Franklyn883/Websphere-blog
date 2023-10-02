@@ -27,16 +27,22 @@
                 </div></a
             >
         </li>
-        <li class="nav__item nav__search-bar">
-            <div class="nav__container--search-bar">
+        <li class="nav__item nav__search">
+            <form
+                action="{% url 'search_results' %}"
+                method="get"
+                class="nav__container--search-bar"
+            >
                 <input
                     type="search"
-                    class="search-bar"
+                    class="nav__search-bar"
                     placeholder="Enter your search here"
-                    name="search"
+                    name="q"
+                    aria-\
+                    label="Search"
                 />
-                <input type="submit" value="search" class="btn--search" />
-            </div>
+                <button type="submit" value="search" class="btn--search"> search</button>
+            </form>
         </li>
 
         <li class="nav__item second-sec">

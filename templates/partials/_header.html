@@ -10,24 +10,27 @@
         />
         <ul class="nav__links">
             <li class="nav__item">
-                <a class="nav__link" href="#">My Feed</a>
-            </li>
-            <li class="nav__item">
                 <a class="nav__link" href="#">Eplore</a>
             </li>
             <li class="nav__item">
                 <a class="nav__link" href="#">Bookmarks</a>
             </li>
             <li class="nav__item nav__search">
-                <div class="nav__container--search-bar">
+                <form
+                    action="{% url 'search_results' %}"
+                    method="get"
+                    class="nav__container--search-bar"
+                >
                     <input
                         type="search"
                         class="nav__search-bar"
                         placeholder="Enter your search here"
-                        name="search"
+                        name="q"
+                        aria-\
+                        label="Search"
                     />
-                    <input type="submit" value="search" class="btn--search" />
-                </div>
+                    <button type="submit" value="search" class="btn--search"> search</button>
+                </form>
             </li>
             <li class="nav__item write-post">
                 <a class="nav__link" href="{% url 'create_blogpost'%}">
@@ -57,6 +60,7 @@
 
             {% if user.is_authenticated %}
             <p class="user">{{user}}</p>
+            <a href="{% url 'account_logout' %}"> logout </a>
             {% else %}
 
             <li class="nav__item d-flex--c">

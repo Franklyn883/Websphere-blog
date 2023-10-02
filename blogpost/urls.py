@@ -8,4 +8,5 @@ urlpatterns = [
     path('category/<uuid:pk>/', views.PostCategoryFilterView.as_view(), name='category_filter'),
     path('update/<uuid:pk>/', views.BlogpostUpdateView.as_view(), name="update_blogpost"),
     path('delete/<uuid:pk>/', views.BlogpostDeleteView.as_view(), name='delete_blogpost'),
+    path('search/', views.SearchResultsListView.as_view(), name="search_results"),
 ]

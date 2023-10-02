@@ -26,17 +26,6 @@ padding: 1.25rem 3rem;
     
 }
 
-.search-bar{
-    border: 0;
-    height: 2.75rem;
-    outline: none;
-    text-align: center;
-    font-size: 1rem;
-    width:30vw;
-    background-color: var(--background-color);
-    color: #ccc;
-}
-
 .post-details{
    margin-top: 4px;
 }

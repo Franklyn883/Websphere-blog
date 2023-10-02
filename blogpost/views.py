@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView
 from .models import Post,Category
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -73,6 +75,21 @@ class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
     '''Delete blogpost'''
     model = Post
     success_url = reverse_lazy('home')
-
+    
+class SearchResultsListView(ListView):
+    '''Implement search functionality'''
+    
+    model = Post
+    context_object_name = 'post_list'
+    template_name = 'blogpost/search_results.html'
+    
+    def get_queryset(self): # new
+    
+        query = self.request.GET.get("q")
+        if (query !=""):
+            return Post.objects.filter(
+            Q(title__icontains=query) | Q(subtitle__icontains=query)
+            )
+    
 class AuthorBlogpostList(LoginRequiredMixin, ListView):
     '''Render all blogpost related to a user'''

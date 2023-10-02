@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
+
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/blog_home.css' %}"
+    onload="this.rel='stylesheet'"
+/>
+
+{% endblock custom_css %} {% block content %}
+<section class="search container">
+<h1>Search Results</h1>
+{% for post in post_list %}
+{% if post %}
+<div>
+<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+<p>Author: {{ post.author }}</p>
+<p>{{ post.content|safe|truncatewords:30 }}</p>
+</div>
+{% endif %}
+{% endfor %}
+
+<p>No results</p>
+</section>
+{% endblock content %}

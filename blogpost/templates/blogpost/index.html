@@ -23,6 +23,7 @@
                     <h3 class="post-title">{{ post.title }}</h3>
                     {{ post.content|truncatewords:40 | safe }}
                 </div>
+                {% if post.cover_img %}
                 <div class="post-image">
                     <img
                         src=" {{ post.cover_img.url }}"
@@ -30,6 +31,7 @@
                         class="blogpost__cover-img"
                     />
                 </div>
+                {% endif %}
             </div>
             <div class="bottom">
                 <a

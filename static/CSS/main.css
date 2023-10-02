@@ -20,11 +20,12 @@
     --header-font: "Montserrat", sans-serif;
     --font: "Roboto", sans-serif;
     --border:1px solid  white;
+    --font-color:#ffffff;
 }
 
 body {
-    background-color: var(--background-color2); /* Dark mode background color */
-    color: #ffffff; /* Text color for dark mode */
+    background-color: var(--background-color2);
+    color: var(--font-color); 
     font-family: var(--font);
 }
 header {
@@ -90,6 +91,9 @@ img {
     outline: none;
     text-align: center;
     font-size: 1rem;
+    width: 28.25vw;
+    background-color: var(--background-color);
+    color: var(--font-color);
 }
 .btn--search {
     color: white;
@@ -120,7 +124,7 @@ img {
 .write-post .nav__link:hover,
 .write-post .nav__link:active{
     background-color: var(--primary-color);
-    color: inherit;
+
 }
 
 .icon img{
@@ -144,12 +148,3 @@ img {
    cursor: pointer;
    background-color: var(--primary-color);
 }
-.blogpost_content{
-    color:white;
-    padding: 2.5rem   ;
-}
-
-
-
-
-/* Post content styles:*/
