@@ -1,3 +1,20 @@
+:root {
+    --primary-color: #45a5f5;
+    --darker-primary-color: #1c6bbf;
+    --primary-opacity: rgba(69, 165, 245, 0.5);
+    --secondary-color: #4caf50;
+    --darker-secondary-color: #357a35;
+    --secondary-opacity: rgba(76, 175, 80, 0.5);
+    --tertiary-color: #e91e63;
+    --darker-tertiary-color: #ad1457;
+    --tertiary-opacity: rgba(233, 30, 99, 0.5);
+    --background-color: #192734;
+    --background-color2: #111722;
+    --header-font: "Montserrat", sans-serif;
+    --font: "Roboto", sans-serif;
+    --border:1px solid  white;
+}
+
 .post-title,
 .post-subtitle {
     margin: 1rem 0;
@@ -33,7 +50,7 @@
 
 /* Apply styles to links inside the content */
 .post-content a span{
-    color: #007bff!important;
+    color:var(--darker-primary-color)!important;
     text-decoration: none;
 }
 
@@ -56,7 +73,7 @@
 
 /* Apply styles to blockquotes inside the content */
 .post-content blockquote {
-    border-left: 2px solid #007bff;
+    border-left: 2px solid var(--darker-primary-color);
     padding-left: 1em;
     margin: 0;
 }

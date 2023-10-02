@@ -11,9 +11,14 @@
     href="{% static 'CSS/blogdetails.css' %}"
     onload="this.rel='stylesheet'"
 />
-{% endblock custom-css %} {% block nav %}
+{% endblock custom-css %}
+{% block script %}
+<script src="{% static 'Javascript/blogpostdetails.js' %}" defer></script>
+{% endblock script %}
+{% block nav %}
 <nav class="nav">
     <ul class="nav__items">
+        <li class="nav__item"> <a href="{%  url 'home' %}">Home</a></li>
         <li class="nav__item">
             <a class="nav__link"
                 ><div class="author">
@@ -96,12 +101,15 @@
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
     <div class="post-content">{{post.content|safe}}</div>
 </section>
-{% if post.author == user %}
+
+
+<div class="update-delete">
+    {% if post.author == user %}
 <div> <a href="{% url 'update_blogpost' pk=post.pk %}">Edit Post</a></div>
-<div><a href=""> Delete Post</a></div>
-<div class="delete-confirmation"> Are you sure you want to delete post?
-    <a href="{% url 'delete_blogpost' pk=post.pk %}">Yes</a>
-   <a>No</a> 
-</div>
+
+    <a href="{% url 'delete_blogpost' pk=post.pk %}">Delete Post</a>
+
 {% endif %}
+</div>
+
 {% endblock content %}

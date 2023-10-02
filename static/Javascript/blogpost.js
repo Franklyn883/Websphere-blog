@@ -41,6 +41,3 @@ const coverImg = document.querySelector('.post-cover')
 addCoverBtn.addEventListener('click', ()=>{
     coverImg.classList.remove('hidden')
 })
-
-const tags = document.getElementById('id_tags')
-tags.placeholder ='enter comma separated tags'

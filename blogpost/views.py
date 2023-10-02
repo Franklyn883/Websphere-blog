@@ -65,11 +65,14 @@ class PostCategoryFilterView(ListView):
 
 class BlogpostUpdateView(LoginRequiredMixin, UpdateView):
     ''' Update blogpost'''
-    model = Post
-    fields=['title','subtitle','cover_img','content','categories']
+    form_class = PostForm
+    queryset = Post.objects.all()
     template_name = 'blogpost/blogpost_update.html'
     
 class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
     '''Delete blogpost'''
     model = Post
     success_url = reverse_lazy('home')
+
+class AuthorBlogpostList(LoginRequiredMixin, ListView):
+    '''Render all blogpost related to a user'''
