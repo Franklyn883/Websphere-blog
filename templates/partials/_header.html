@@ -2,18 +2,25 @@
 
 <header>
     <nav class="nav">
+        <a href="{% url 'home' %}">
         <img
             src="{% static 'assets/images/WebSphere.png' %}"
             alt="WebSphere logo"
             class="nav__logo"
             id="logo"
         />
+    </a>
         <ul class="nav__links">
             <li class="nav__item">
-                <a class="nav__link" href="#">Eplore</a>
-            </li>
-            <li class="nav__item">
-                <a class="nav__link" href="#">Bookmarks</a>
+                <div class="dropdown">
+                    <span>Explore</span>
+                    <div class="dropdown-content">
+                        {% for category in categories %}
+                        
+                            <a href="{% url 'category_filter' category.id %}"
+                                >{{ category.name }}</a>
+
+                        {% endfor %}
             </li>
             <li class="nav__item nav__search">
                 <form

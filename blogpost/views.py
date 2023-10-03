@@ -63,6 +63,11 @@ class PostCategoryFilterView(ListView):
         ''' Get a category and all it related posts '''
         category = get_object_or_404(Category, id=self.kwargs['pk'])
         return Post.objects.filter(categories=category)
+    def get_context_data(self, **kwargs):
+        '''Get the related fields, categories, so it can be rendered in the template'''
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
   
 
 class BlogpostUpdateView(LoginRequiredMixin, UpdateView):
@@ -84,12 +89,14 @@ class SearchResultsListView(ListView):
     template_name = 'blogpost/search_results.html'
     
     def get_queryset(self): # new
-    
         query = self.request.GET.get("q")
-        if (query !=""):
+        if query:
             return Post.objects.filter(
             Q(title__icontains=query) | Q(subtitle__icontains=query)
-            )
+           |Q(author__username__icontains=query) | Q(categories__name__icontains=query) ) 
+            
+        else:
+            return Post.objects.all()
     
 class AuthorBlogpostList(LoginRequiredMixin, ListView):
     '''Render all blogpost related to a user'''

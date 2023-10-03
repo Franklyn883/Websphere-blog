@@ -1,4 +1,4 @@
-{% extends 'blogpost/base.html' %} {% load static %} {% block custom-css %}
+{% extends 'blogpost/base.html' %} {% load static %}{% block title %} {{ post.title }} {% endblock %}{% block custom-css %}
 <link
     rel="preload"
     as="style"
@@ -102,7 +102,9 @@
 
 {% endblock nav %} {% block content%}
 <section class="post-details">
+    {% if post.cover_img%}
     <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
+    {% endif %}
     <h1 class="post-title">{{ post.title}}</h1>
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
     <div class="post-content">{{post.content|safe}}</div>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Filtered Category {% endblock %} {% block custom_css %}
 
 <link
     rel="preload"
@@ -29,6 +29,7 @@
                     <h3 class="post-title">{{ post.title }}</h3>
                     {{ post.content|truncatewords:40 | safe }}
                 </div>
+                {% if post.cover_img %}
                 <div class="post-image">
                     <img
                         src=" {{ post.cover_img.url }}"
@@ -36,6 +37,7 @@
                         class="blogpost__cover-img"
                     />
                 </div>
+                {% endif %}
             </div>
             <div class="bottom">
                 <a
@@ -51,7 +53,13 @@
                 </div>
             </div>
         </div>
+      {% empty %}
+        <div>
+            <h1>Sorry there are no Post, explore other Categories</h1>
+        </div>
+    
         {% endfor %}
+       
     </article>
 
 
