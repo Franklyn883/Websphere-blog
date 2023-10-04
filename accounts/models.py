@@ -4,6 +4,7 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from PIL import Image
 import uuid
 # Create your models here.
 
@@ -30,7 +31,7 @@ class Technology(models.Model):
 class UserProfile(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True, default=None)
-    profile_pic = models.ImageField(upload_to='profile_pic/', blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pic/', default='default.jpg')
     phone_number = PhoneNumberField(blank=True, null=True)
     country = models.ForeignKey('cities_light.Country', on_delete=models.SET_NULL, null=True, blank=True)
     bio = models.TextField(null=True,blank=True)
@@ -46,8 +47,22 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
     
+    # Override the save method of the model
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path) # Open image
+
+        # resize image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.image.path) # Save it again and override the larger image
+    
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'pk': self.pk})
+    
+    
     
 class SocialMedia(models.Model):
     twitter = models.URLField(blank=True, null=True)
