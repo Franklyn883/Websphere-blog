@@ -9,8 +9,6 @@ from ckeditor.fields import RichTextField
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    posts = models.ManyToManyField('Post',null=True, blank=True)
-
     
     class Meta:
         verbose_name_plural = "categories"
@@ -32,7 +30,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     cover_img = models.ImageField(upload_to='post_covers/', blank=True, null=True)
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, related_name='posts')
    
     
     def __str__(self):

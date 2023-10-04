@@ -14,6 +14,22 @@ class CustomUsercreationForm(UserCreationForm):
         
         
 class CustomUserChangeForm(UserChangeForm):
-    class meta:
+    class Meta:
         model = get_user_model()
-        fields = ("email", "username")
+        fields = '__all__'
+        
+# forms.py
+from django import forms
+from .models import UserProfile, Technology
+
+class UserProfileUpdateForm(forms.ModelForm):
+    tech_stack = forms.ModelMultipleChoiceField(
+        queryset=Technology.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = UserProfile
+        fields = ['sex', 'tech_stack', 'bio', 'country','social_media_links','phone_number','profile_pic']
+ 

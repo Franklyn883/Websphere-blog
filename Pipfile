@@ -11,6 +11,8 @@ django-allauth = "*"
 pillow = "*"
 django-taggit = "*"
 django-ckeditor = "*"
+django-cities-light = "*"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 
 [dev-packages]
 

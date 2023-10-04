@@ -54,6 +54,8 @@ INSTALLED_APPS = [
    'ckeditor' ,
     'taggit',
 'ckeditor_uploader',
+'phonenumber_field',
+'cities_light',
 
 ]
 

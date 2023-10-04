@@ -25,12 +25,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #local url
-  
+    path('accounts/profile/', include('accounts.urls')),
     path('blogpost/', include("blogpost.urls")),
     
-    #user management.
+    #user management
     path("accounts/", include("allauth.urls")),
-   path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+   
 
     #thirdparty
   
