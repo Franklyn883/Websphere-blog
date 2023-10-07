@@ -4,10 +4,7 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from PIL import Image
-from io import StringIO
-import uuid
-# Create your models here.
+from PIL import Image 
 
 #creating current user
 
@@ -26,9 +23,9 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
-    profile_pic = models.ImageField(upload_to='profile_images/', default='default.jpg')
+    photo = models.ImageField(upload_to='profile_images/', default='default.jpg')
     phone_number = PhoneNumberField(blank=True, null=True)
-    country = models.ForeignKey('cities_light.Country', on_delete=models.SET_NULL, null=True, blank=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
     bio = models.TextField(null=True,blank=True)
     gender_choices = [
         ('M', 'Male'),
@@ -45,14 +42,13 @@ class Profile(models.Model):
         return f"{self.user.username}'s Profile"
     
     # Override the save method of the model
+    # resizing images
     def save(self, *args, **kwargs):
         super().save()
-        img = Image.open(self.profile_pic.path) # Open image
-        # resize image
-        if img.height > 100 or img.width > 100:
-            output_size = (500, 500)
-            img.thumbnail(output_size) # Resize image
-            img.save(self.profile_pic.path)  # Save it again and override the larger image
-    
-    def get_absolute_url(self):
-        return reverse('user_profile', kwargs={'pk': self.pk})
+
+        img = Image.open(self.photo.path)
+
+        if img.height > 500 or img.width > 500:
+            new_img = (500, 500)
+            img.thumbnail(new_img)
+            img.save(self.photo.path)

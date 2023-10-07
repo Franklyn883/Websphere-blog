@@ -10,7 +10,7 @@
 <section class="userprofile container">
     <div class="user">
         <div class="user__profile-pic">
-            <img src="{{ user.profile.profile_pic.url }}" />
+            <img src="{{ user.profile.photo.url }}" alt="{{user}}'s photo" />
         </div>
         <div class="user__name-and-bio">
         <h1 class="user__fullname">
@@ -25,7 +25,7 @@
     <div class="user-details">
         <div class="user__location">
             <svg viewBox="0 0 24 24" fill="#b0bec5" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#b0bec5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            <p>{{user.profile.country}}</p>
+            <p>{{user.profile.location}}</p>
         </div>
         <div class="user__date-joined">
             <svg viewBox="0 0 24 24" fill="#b0bec5" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#b0bec5" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#000000"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#000000"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#000000"></rect> </g></svg>
@@ -169,6 +169,19 @@
             </div>
             {% endif %}
         </div>
+    </div>
+</section>
+<section class="tech-stack container">
+    <div class="tech-stack__item">
+<h3 class="tech-stack__title"> Tech Stack/Languages</h3>
+  <p class="tech-stack__text">{{user.profile.tech_stack}}  </p> 
+</div>
+
+</section>
+<section class="user-post container">
+    <div class="user-post__item">
+        <p class="user-post__published">{{user.post|length}} posts published </p>
+        <p class="user-post__comments">0 comments written</p>
     </div>
 </section>
 

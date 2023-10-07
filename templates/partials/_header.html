@@ -2,18 +2,13 @@
 
 <header>
     <nav class="nav">
-        <a href="{% url 'home' %}">
-        <img
-            src="{% static 'assets/images/WebSphere.png' %}"
-            alt="WebSphere logo"
-            class="nav__logo"
-            id="logo"
-        />
+        <a href="{% url 'home' %}" class="link--logo">
+      <h1 class="font--logo">WebSphere</h1>
     </a>
         <ul class="nav__links">
             <li class="nav__item">
                 <div class="dropdown">
-                    <span>Explore</span>
+                    <span class="nav__item-text">Explore</span>
                     <div class="dropdown-content">
                         {% for category in categories %}
                         
@@ -39,6 +34,7 @@
                     <button type="submit" value="search" class="btn--search"> search</button>
                 </form>
             </li>
+            <div class="nav-section-2">
             <li class="nav__item write-post">
                 <a class="nav__link" href="{% url 'create_blogpost'%}">
                     <div class="nav__link--post">
@@ -50,6 +46,7 @@
                     </div>
                 </a>
             </li>
+            
             <li class="nav__item icon">
                 <img
                     src="{% static 'assets/images/light-mode.svg' %}"
@@ -61,22 +58,23 @@
                 <img
                     src="{% static 'assets/images/notification.svg' %}"
                     alt="notification icon"
-                    title="notifications"
-                />
+                    title="notifications"/>
             </li>
 
             {% if user.is_authenticated %}
-            <a href="{% url 'user_profile' pk=user.pk %}"><p class="user">{{user}}</p></a>
-            <a href="{% url 'account_logout' %}"> logout </a>
+            <li class="nav__item user-detail">
+            <div class="nav__item-user">
+            <img src="{{  user.profile.photo.url }}" alt="{{user}}'s photo"/>   
+        </div>
+        <a href="{% url 'user_profile' pk=user.pk %}" class="nav__link--user">{{user}}</a>
+    </li>
             {% else %}
-
             <li class="nav__item d-flex--c">
-                <a class="nav__link" href="{% url 'account_signup' %}"
-                    >Signup</a
-                >
+                <a class="nav__link" href="{% url 'account_signup' %}">Signup</a>
             </li>
 
             {% endif%}
+        </div>  
         </ul>
     </nav>
 </header>

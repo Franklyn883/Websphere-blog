@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 import uuid
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from PIL import Image
 
 # Create your models here.
@@ -27,10 +27,10 @@ class Post(models.Model):
     default=uuid.uuid4,editable=False)
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
-    content = RichTextField()
+    content = CKEditor5Field('Text', config_name='extends')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post")
     cover_img = models.ImageField(upload_to='post_covers/', blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name='posts')
    

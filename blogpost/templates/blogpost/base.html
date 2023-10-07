@@ -1,8 +1,4 @@
-{% load static %} {% block extrahead %}
-<script de>
-    window.CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/";
-</script>
-{{ block.super }} {% endblock %}
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,21 +24,5 @@
         <main class="container">
             {% block content %} {% endblock content %}
         </main>
-        <script>
-        CKEDITOR.replace( 'post-content', {
-            on: {
-                instanceReady: function( ev ) {
-                    // Output paragraphs as <p>Text</p>.
-                    this.dataProcessor.writer.setRules( 'p', {
-                        indent: false,
-                        breakBeforeOpen: true,
-                        breakAfterOpen: false,
-                        breakBeforeClose: false,
-                        breakAfterClose: true
-                    });
-                }
-            }
-        } );
-    </script>
     </body>
 </html>

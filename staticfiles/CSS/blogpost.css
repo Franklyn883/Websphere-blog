@@ -2,7 +2,6 @@
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
-    color: white;
 }
 main {
     background-color: var(--background-color2);
@@ -148,13 +147,4 @@ cursor: pointer;
     padding: 0.25rem;
     font: 1rem;
 }
-.ck-content textarea{
-    color: black;
-}
 
-.django-ckeditor-widget{
-    width: 100%;
-}
-.ck-editor__editable {
-    background-color: black;  /* Set the background color you want */
-}

@@ -5,6 +5,10 @@ grid-template-columns: 3fr 2fr;
 gap: 4rem;
 }
 
+
+header{
+    margin-bottom: 4rem;
+}
 /* Post settings */
 .post-card{
     border: var(--border);

@@ -10,9 +10,8 @@ python-dotenv = "*"
 django-allauth = "*"
 pillow = "*"
 django-taggit = "*"
-django-ckeditor = "*"
-django-cities-light = "*"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
+django-ckeditor-5 = "*"
 
 [dev-packages]
 

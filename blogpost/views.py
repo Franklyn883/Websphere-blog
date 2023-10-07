@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth import get_user_model
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
@@ -30,11 +31,12 @@ class HomePageView(ListView):
         context['categories'] = Category.objects.all()
         return context
 
-class BlogPostCreateView(LoginRequiredMixin, CreateView):
+class BlogPostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     '''Creates Blog post'''
     form_class = PostForm
     model = Post
     template_name = 'blogpost/blogpost_create.html'
+    success_message = " Post Added Successfully"
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
