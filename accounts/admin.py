@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model 
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserChangeForm, CustomUsercreationForm
-from .models import Profile, SocialMedia
+from .models import Profile
 
 
 @admin.register(Profile)
@@ -26,4 +26,4 @@ class CustomUserAdmin(UserAdmin):
     ]
     
 admin.site.register(CustomUser,CustomUserAdmin)
-admin.site.register(SocialMedia)
+

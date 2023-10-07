@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
-from .models import Profile, Technology, SocialMedia
+from .models import Profile
 
 
 class CustomUsercreationForm(UserCreationForm):
@@ -22,20 +22,17 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
        model = get_user_model()
        fields = ('username', 'first_name', 'last_name', 'email')
-        
-
+       
 #update user profile
 class UserProfileUpdateForm(forms.ModelForm):
-    tech_stack = forms.ModelMultipleChoiceField(
-        queryset=Technology.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False
-    )
+    tech_stack = forms.CharField(widget=forms.Textarea, required=False) 
     profile_pic=forms.ImageField(widget=forms.FileInput)
     bio = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = Profile
-        fields = ['user', 'profile_pic', 'phone_number', 'country', 'bio', 'gender', 'tech_stack', 'social_media_links']
- 
+        fields = ['user', 'profile_pic', 'phone_number', 'country', 'bio', 'gender', 'tech_stack', 'twitter', 'github', 'linkedIn', 'facebook']
+  
+    
+
     

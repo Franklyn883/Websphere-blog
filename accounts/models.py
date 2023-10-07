@@ -21,17 +21,11 @@ class CustomUser(AbstractUser):
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'pk': self.user_profile.user.pk})
 
-
-class Technology(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
     
 class Profile(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
-    profile_pic = models.ImageField(upload_to='profile_pic/', default='default.jpg')
+    profile_pic = models.ImageField(upload_to='profile_images/', default='default.jpg')
     phone_number = PhoneNumberField(blank=True, null=True)
     country = models.ForeignKey('cities_light.Country', on_delete=models.SET_NULL, null=True, blank=True)
     bio = models.TextField(null=True,blank=True)
@@ -41,18 +35,17 @@ class Profile(models.Model):
         ('O', 'Other'),
     ]
     gender = models.CharField(max_length=1, choices=gender_choices, null=True, blank=True)
-    tech_stack = models.ManyToManyField(Technology, blank=True, null=True)
-    social_media_links = models.OneToOneField('SocialMedia', on_delete=models.CASCADE,null=True, blank=True, default=None)
-    
+    tech_stack = models.CharField(max_length=255,blank=True,null=True)
+    github = models.URLField(blank=True, null=True)
+    linkedIn = models.URLField(blank=True,null=True)
+    facebook = models.URLField(blank=True, null=True) 
     def __str__(self):
         return f"{self.user.username}'s Profile"
     
     # Override the save method of the model
     def save(self, *args, **kwargs):
         super().save()
-
         img = Image.open(self.profile_pic.path) # Open image
-
         # resize image
         if img.height > 100 or img.width > 100:
             output_size = (100, 100)
@@ -61,14 +54,3 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'pk': self.pk})
-    
-    
-    
-class SocialMedia(models.Model):
-    twitter = models.URLField(blank=True, null=True)
-    github = models.URLField(blank=True, null=True)
-    linkedIn = models.URLField(blank=True,null=True)
-    facebook = models.URLField(blank=True, null=True)   
-    
-    def __str__(self):
-        return f"social media links for {self.user_profile.user.username}"

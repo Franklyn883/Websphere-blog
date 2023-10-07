@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 import uuid
 from ckeditor.fields import RichTextField
+from PIL import Image
 
 # Create your models here.
 
@@ -33,6 +34,14 @@ class Post(models.Model):
     cover_img = models.ImageField(upload_to='post_covers/', blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name='posts')
    
+    def save(self, *args, **kwargs):
+        super().save()
+        img = Image.open(self.cover_img.path) # Open image
+        # resize image
+        if img.height > 840 or img.width > 1600:
+            output_size = (840, 1600)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.cover_img.path)  # Save it again and override the larger image
     
     def __str__(self):
         return self.title
