@@ -66,7 +66,7 @@
             </li>
 
             {% if user.is_authenticated %}
-            <p class="user">{{user}}</p>
+            <a href="{% url 'user_profile' pk=user.pk %}"><p class="user">{{user}}</p></a>
             <a href="{% url 'account_logout' %}"> logout </a>
             {% else %}
 

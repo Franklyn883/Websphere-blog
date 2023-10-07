@@ -28,36 +28,36 @@ class Technology(models.Model):
     def __str__(self):
         return self.name
     
-class UserProfile(models.Model):
+class Profile(models.Model):
     User = get_user_model()
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True, default=None)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
     profile_pic = models.ImageField(upload_to='profile_pic/', default='default.jpg')
     phone_number = PhoneNumberField(blank=True, null=True)
     country = models.ForeignKey('cities_light.Country', on_delete=models.SET_NULL, null=True, blank=True)
     bio = models.TextField(null=True,blank=True)
-    sex_choices = [
+    gender_choices = [
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     ]
-    sex = models.CharField(max_length=1, choices=sex_choices, null=True, blank=True)
-    tech_stack = models.ManyToManyField(Technology, blank=True)
+    gender = models.CharField(max_length=1, choices=gender_choices, null=True, blank=True)
+    tech_stack = models.ManyToManyField(Technology, blank=True, null=True)
     social_media_links = models.OneToOneField('SocialMedia', on_delete=models.CASCADE,null=True, blank=True, default=None)
     
     def __str__(self):
         return f"{self.user.username}'s Profile"
     
     # Override the save method of the model
-    def save(self):
+    def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.image.path) # Open image
+        img = Image.open(self.profile_pic.path) # Open image
 
         # resize image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
+        if img.height > 100 or img.width > 100:
+            output_size = (100, 100)
             img.thumbnail(output_size) # Resize image
-            img.save(self.image.path) # Save it again and override the larger image
+            img.save(self.profile_pic.path)  # Save it again and override the larger image
     
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'pk': self.pk})

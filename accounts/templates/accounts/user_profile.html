@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ user.username }}'s Profile</h2>
+  <!-- Display user's profile information -->
+  <p>First Name: {{ user.first_name }}</p>
+  <p>Last Name: {{ user.last_name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Profile Picture: <img src="{{ user.profile.profile_pic.url }}" alt="Profile Picture" style="width:300px; height:300px"></p>
+  <p>Phone Number: {{ user.userprofile.phone_number }}</p>
+  <p>Country: {{ user.userprofile.country }}</p>
+  <p>Bio: {{ user.userprofile.bio }}</p>
+  <p>Gender: {{ user.userprofile.get_gender_display }}</p>
+  <p>Technology Stack:</p>
+  <ul>
+    {% for tech in user.userprofile.tech_stack.all %}
+      <li>{{ tech.name }}</li>
+    {% endfor %}
+  </ul>
+  <p>Social Media Links:</p>
+  <ul>
+    <li>Twitter: <a href="{{ user.userprofile.social_media_links.twitter }}">{{ user.userprofile.social_media_links.twitter }}</a></li>
+    <li>Github: <a href="{{ user.userprofile.social_media_links.github }}">{{ user.userprofile.social_media_links.github }}</a></li>
+    <li>LinkedIn: <a href="{{ user.userprofile.social_media_links.linkedIn }}">{{ user.userprofile.social_media_links.linkedIn }}</a></li>
+    <li>Facebook: <a href="{{ user.userprofile.social_media_links.facebook }}">{{ user.userprofile.social_media_links.facebook }}</a></li>
+  </ul>
+  <a href="{% url 'profile_update' %}">Edit Profile</a>
+  {% endblock content %}
