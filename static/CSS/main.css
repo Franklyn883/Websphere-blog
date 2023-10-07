@@ -19,8 +19,10 @@
     --background-color2: #111722;
     --header-font: "Montserrat", sans-serif;
     --font: "Roboto", sans-serif;
-    --border:1px solid  white;
+    --border:1px solid  rgba(152, 152, 152, 0.502);
     --font-color:#ffffff;
+    --primary-btn-padding:0.5em 1em;
+    --primary-btn-border-radius:2em;
 }
 
 body {
@@ -30,7 +32,6 @@ body {
 }
 header {
     background-color: var(--background-color2);
-    margin-bottom: 6rem;
 }
 header ul {
     list-style: none;
@@ -118,8 +119,8 @@ img {
 
 .write-post .nav__link{
     background-color: var(--darker-primary-color);
-    padding: 0.5em 1em;
-    border-radius: 2rem;
+    padding: var(--primary-btn-padding);
+    border-radius: var(  --primary-btn-border-radius);
 
 }
 .write-post .nav__link:hover,

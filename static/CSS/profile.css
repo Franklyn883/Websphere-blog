@@ -1,0 +1,80 @@
+.userprofile{
+    margin-top: 2em;
+    border: var(--border);
+    padding: 2em;
+    border-radius: 2em;
+}
+
+.user__profile-pic{
+    width: 150px;
+    height:150px;
+   
+}
+.user__profile-pic img{
+    border-radius: 50%;
+}
+
+.socials svg{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.user__location svg,
+.user__date-joined svg{
+    width:24px;
+    height:24px;
+}
+
+.user{
+    display:flex;
+    gap: 3rem;
+    justify-content: start;
+    align-content: center;
+}
+.user__name-and-bio{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    flex: 1;
+    gap: 1rem;
+}
+.link--edit{
+    padding:var(--primary-btn-padding)  ;
+    margin-left: auto;
+    border-radius: var(  --primary-btn-border-radius);
+    background-color:var(--darker-primary-color) ;
+    color: inherit;
+    text-decoration: none;
+}
+
+.link--edit:hover,
+.link--edit:active{
+    background-color: var(--primary-color);
+}
+.user-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+}
+.user__location,
+.user__date-joined{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:0.25em;
+}
+.socials{
+    display:flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.social__link svg :hover{
+fill: #cfd8dc;
+stroke:#cfd8dc
+}
+.linkedIn svg{
+    width: 1.8rem;
+    height: 1.8rem;
+}

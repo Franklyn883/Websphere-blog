@@ -5,6 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from PIL import Image
+from io import StringIO
 import uuid
 # Create your models here.
 
@@ -39,6 +40,7 @@ class Profile(models.Model):
     github = models.URLField(blank=True, null=True)
     linkedIn = models.URLField(blank=True,null=True)
     facebook = models.URLField(blank=True, null=True) 
+    twitter = models.URLField(blank=True, null=True)
     def __str__(self):
         return f"{self.user.username}'s Profile"
     
@@ -48,7 +50,7 @@ class Profile(models.Model):
         img = Image.open(self.profile_pic.path) # Open image
         # resize image
         if img.height > 100 or img.width > 100:
-            output_size = (100, 100)
+            output_size = (500, 500)
             img.thumbnail(output_size) # Resize image
             img.save(self.profile_pic.path)  # Save it again and override the larger image
     
