@@ -19,7 +19,7 @@ onload="this.rel='stylesheet'"
 
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-   
+    {{ form.media}}
     <div class="post-options d-flex--c">
         <div>
         <button type="button" class="btn btn--cover d-flex">
@@ -128,12 +128,5 @@ onload="this.rel='stylesheet'"
     </div>
     
 </form>
-<script>
-    CKEDITOR.replace('content', {
-      width: '100%',
-      height: '100%',
-      removeButtons: 'PasteFromWord',
-      extraPlugins :'codesnippet',
-    });
-  </script>
+
 {% endblock content %}

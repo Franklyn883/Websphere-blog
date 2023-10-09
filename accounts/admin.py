@@ -5,9 +5,7 @@ from .forms import CustomUserChangeForm, CustomUsercreationForm
 from .models import Profile
 
 
-@admin.register(Profile)
-class Profile(admin.ModelAdmin):
-    pass
+
     
 
 CustomUser = get_user_model()
@@ -26,4 +24,5 @@ class CustomUserAdmin(UserAdmin):
     ]
     
 admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(Profile)
 

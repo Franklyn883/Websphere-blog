@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
+from taggit.models import Tag
 
 # Create your views here.
 

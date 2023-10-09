@@ -4,6 +4,7 @@ from django.urls import reverse
 import uuid
 from django_ckeditor_5.fields import CKEditor5Field
 from PIL import Image
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -33,6 +34,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post")
     cover_img = models.ImageField(upload_to='post_covers/', blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name='posts')
+    tags = TaggableManager()
    
     def save(self, *args, **kwargs):
         super().save()
