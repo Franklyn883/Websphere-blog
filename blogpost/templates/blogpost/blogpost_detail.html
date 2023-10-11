@@ -22,7 +22,9 @@
         <li class="nav__item">
             <a class="nav__link"
                 ><div class="author">
-                    <div class="author__profile-pic"></div>
+                    <div class="author__profile-pic profile-pic">
+                        <img src="{{ post.author.profile.photo.url }}"/>
+                    </div>
                     <div class="author__name">{{ post.author }}</div>
                 </div></a
             >
@@ -94,7 +96,10 @@
                 </button>
             </div>
             <div class="nav__item">
-                <a class="nav__link user__profile-pic">profile pics </a>
+                <div class="user__profile-pic profile-pic">
+                    <img src=" {{ user.profile.photo.url}}"/>
+                </div>
+                
             </div>
         </li>
     </ul>

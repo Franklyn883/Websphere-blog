@@ -15,17 +15,23 @@ input {
     gap: 8px;
     align-items: center;
 }
-.d-flex--c {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 .form {
     background-color: var(--background-color2);
+    border:2px white solid;
 }
 /*Post options*/
+
 .post-options{
+    display: flex;
+    align-items:center ;
+    justify-content:space-between ;
     height: 100px;
+    border:2px solid white;
+
+}
+.post-options div{
+    border:2px solid white
 }
 .post-options button {
     border: none;

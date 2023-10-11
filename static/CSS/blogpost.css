@@ -15,18 +15,21 @@ input {
     gap: 8px;
     align-items: center;
 }
-.d-flex--c {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 .form {
     background-color: var(--background-color2);
+
 }
 /*Post options*/
+
 .post-options{
-    height: 100px;
+    display: flex;
+    align-items:center ;
+    justify-content:space-between ;
+    padding:2.5em 0 ;
+
 }
+
 .post-options button {
     border: none;
     background-color: inherit;
@@ -129,8 +132,8 @@ cursor: pointer;
     border: none;
     outline: none;
     background-color: var(--darker-primary-color);
-    padding: 0.5em 1em;
-    border-radius: 2rem;
+    padding:var(--primary-btn-padding);
+    border-radius: 2em;
     justify-self: flex-end;
 }
 .post-options .btn-primary:hover,

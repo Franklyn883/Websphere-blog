@@ -26,12 +26,12 @@ class CustomUserChangeForm(UserChangeForm):
 #update user profile
 class UserProfileUpdateForm(forms.ModelForm):
     tech_stack = forms.CharField(widget=forms.Textarea, required=False) 
-    profile_pic=forms.ImageField(widget=forms.FileInput)
+    photo=forms.ImageField(widget=forms.FileInput)
     bio = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = Profile
-        fields = ['user', 'profile_pic', 'phone_number', 'location', 'bio', 'gender', 'tech_stack', 'twitter', 'github', 'linkedIn', 'facebook']
+        fields = ['user', 'photo', 'phone_number', 'location', 'bio', 'gender', 'tech_stack', 'twitter', 'github', 'linkedIn', 'facebook']
   
     
 

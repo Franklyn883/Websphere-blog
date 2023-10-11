@@ -18,11 +18,34 @@ header{
     
 }
 
+.post-author{
+    display:flex;
+  
+    gap:0.75em
+    
+}
+
 .post-title{
     margin-bottom: 0.5rem;
     font-weight: bold;
     font-size: 1.4rem;
     
+}
+
+.post-author__detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.75em;
+    
+}
+.post-author__profile-pic{
+    width:64px;
+    height:64px;
+}
+
+.post-author__profile-pic img{
+    border-radius: 50%;
 }
 .publish-date{
     color: rgb(212, 209, 209);

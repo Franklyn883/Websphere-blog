@@ -13,10 +13,15 @@
         {% for post in posts %}
         <div class="post-card">
             <div class="post-author">
-                <span class="post-author__profile-pic">profile-pic</span>
-                <span class="post-author__username"> {{post.author}} </span>
+                <div class="post-author__profile-pic">
+                    <img src="{{  user.profile.photo.url }}" alt="{{user}}'s photo"/>
+                                  </div>
+                    <div class="post-author__detail">         
+                    <span class="post-author__username"> {{post.author}} </span>
+                    <p id="publish-date">{{post.created_at|timesince }} ago</p>
+                </div> 
             </div>
-            <p id="publish-date">{{post.created_at|timesince }} ago</p>
+            
 
             <div class="blogpost__content">
                 <div class="post-content">
