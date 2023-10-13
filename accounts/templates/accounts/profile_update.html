@@ -1,11 +1,100 @@
-{% extends 'base.html' %}{% load static %}{% block content %}
-<h2>Update Profile</h2>
-<h2>Edit Profile</h2>
-  <form method="POST" enctype="multipart/form-data">
+{% extends 'base.html' %}{% load static %}{% block title%}settings{% endblock %}
+{% block custom_css %}
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/profile-update.css' %}"
+    onload="this.rel='stylesheet'"
+/>
+{% endblock custom_css %} {% block content %}
+<form method="POST" enctype="multipart/form-data" class="form--user-update">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    <button type="submit">Save changes</button>
-    <button type="rest">Reset</button>
-</form>>
+  
+    <div class="alert alert-danger">
+        {% for field, errors in form.errors.items %} {% for error in errors %}
+       <p> {{ field }}: {{ error }}</p> {% endfor %} {% endfor %}
+    </div>
+    <section class="user-update container">
+        <section class="user__personal-info section--border">
+            <h3 class="section__header">User</h3>
+            <div class="form-class">
+                <label for="id_first_name">First Name</label>
+                <p>{{ user_form.first_name}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_last_name">Last Name</label>
+                <p>{{ user_form.last_name}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_gender">Gender</label>
+                <p>{{ profile_form.gender}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_phone_number">Phone number</label>
+                <p>{{ profile_form.phone_number}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_email">Email</label>
+                <p>{{ user_form.email}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_username">Username</label>
+                <p>{{ user_form.username}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_">Profile Image</label>
+                <p>{{ profile_form.photo}}</p>
+            </div>
+        </section>
+        <section class="user__basic-info section--border">
+            <h3 class="section__header">Basic information</h3>
+            <div class="form-class">
+                <label for="id_location">Location</label>
+                <p>{{ profile_form.location}}</p>
+                <div class="charcount">
+                <small id="charcount__location"></small>
+            </div>
+            </div>
+            <div class="form-class">
+                <label for="id_bio">Bio</label>
+                <p>{{ profile_form.bio}}</p>
+                <div class="charcount">
+                <small id="charcount__bio"></small>
+            </div>
+            </div>
+            <div class="form-class">
+                <label for="id_tech_stack">Tech Stack</label>
+                <p>{{ profile_form.tech_stack}}</p>
+                <div class="charcount">
+                <small id="charcount__tech-stack"></small>
+            </div>
+            </div>
+        </section>
+
+        <section class="socials section--border">
+            <h3 class="section__header">Socials</h3>
+            <div class="form-class">
+                <label for="id_twitter">Twitter-X</label>
+                <p>{{ profile_form.twitter}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_github">Github</label>
+                <p>{{ profile_form.github}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_lindkedIn">LinkedIn</label>
+                <p>{{ profile_form.linkedIn}}</p>
+            </div>
+            <div class="form-class">
+                <label for="id_facebook">Facebook</label>
+                <p>{{ profile_form.facebook}}</p>
+            </div>
+        </section>
+        <div class="btn-container section--border">
+            <button type="submit" class="btn--submit">Save changes</button> 
+        </div>
+          
+    </section>
+
+</form>
 {% endblock %}

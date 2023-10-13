@@ -14,7 +14,7 @@
         <div class="post-card">
             <div class="post-author">
                 <div class="post-author__profile-pic">
-                    <img src="{{  user.profile.photo.url }}" alt="{{user}}'s photo"/>
+                    <img src="  {{ post.author.profile.photo.url }} " alt="{{user}}'s photo"/>
                                   </div>
                     <div class="post-author__detail">         
                     <span class="post-author__username"> {{post.author}} </span>
@@ -26,7 +26,7 @@
             <div class="blogpost__content">
                 <div class="post-content">
                     <h3 class="post-title">{{ post.title }}</h3>
-                    {{ post.content|truncatewords:40 | safe }}
+                    {{ post.content|truncatewords:20 | safe }}
                 </div>
                 {% if post.cover_img %}
                 <div class="post-image">
@@ -62,8 +62,8 @@
                 {% for category in categories %}
                 <li class="category-list__item">
                     <a href="{% url 'category_filter' category.id %}"
-                        class="category-list__link"><h1 class="category-list__item__title">{{ category.name }}</h1>
-                    <p class="category-list__item__description">{{ category.description}} </p>
+                        class="category-list__link"><h1 class="category-list__title">{{ category.name }}</h1>
+                    <p class="category-list__description">{{ category.description}} </p>
                 </a>
                 </li>
                 {% endfor %}

@@ -11,9 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django. contrib import messages 
 
-
-
-
 @login_required
 def profile_update(request):
     if request.method == 'POST':
@@ -21,10 +18,10 @@ def profile_update(request):
         profile_form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
        
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+            user_form.save()    
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='user_profile',pk=request.user.pk)
+            return redirect('user_profile',pk=request.user.pk)
     else:
         user_form = CustomUserChangeForm(instance=request.user)
         profile_form = UserProfileUpdateForm(instance=request.user.profile)

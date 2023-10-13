@@ -18,9 +18,11 @@
         </h1>
         <p class="user__bio">{{user.profile.bio}}</p>
     </div>
+    {% if user == request.user %}
     <div class="user__edit">
     <a class="link--edit" href="{% url 'profile_update' %}" alt="update {{user.username}}'s profile">Edit Profile</a>
 </div>    
+{% endif%}
 </div>
     <div class="user-details">
         <div class="user__location">

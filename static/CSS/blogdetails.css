@@ -11,8 +11,8 @@ padding: 1.25rem 3rem;
 }
 
 .profile-pic{
-    height: 54px;
-    width:54px;
+    height: 3rem;
+    width:3rem;
 }
 .profile-pic img{
     border-radius: 50%;
@@ -49,4 +49,10 @@ padding: 1.25rem 3rem;
 }
 .delete-confirmation{
     display: none;
+}
+.author{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin:2em;
 }

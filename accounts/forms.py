@@ -22,17 +22,19 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
        model = get_user_model()
        fields = ('username', 'first_name', 'last_name', 'email')
-       
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['readonly'] = True
 #update user profile
 class UserProfileUpdateForm(forms.ModelForm):
-    tech_stack = forms.CharField(widget=forms.Textarea, required=False) 
+    tech_stack = forms.CharField(widget=forms.Textarea(attrs={'maxlength':200}), required=False) 
     photo=forms.ImageField(widget=forms.FileInput)
-    bio = forms.CharField(widget=forms.Textarea)
+    bio = forms.CharField(widget=forms.Textarea(attrs={'maxlength':255,'class':'textarea'}))
 
     class Meta:
         model = Profile
-        fields = ['user', 'photo', 'phone_number', 'location', 'bio', 'gender', 'tech_stack', 'twitter', 'github', 'linkedIn', 'facebook']
-  
+        fields = ['photo', 'phone_number', 'location', 'bio', 'gender', 'tech_stack', 'twitter', 'github', 'linkedIn', 'facebook']
+    
     
 
     

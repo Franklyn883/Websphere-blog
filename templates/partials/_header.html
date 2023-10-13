@@ -64,9 +64,9 @@
             {% if user.is_authenticated %}
             <li class="nav__item user-detail">
             <div class="nav__item-user">
-            <img src="{{  user.profile.photo.url }}" alt="{{user}}'s photo"/>   
+            <img src="{{  request.user.profile.photo.url }}" alt="{{request.user}}'s photo"/>   
         </div>
-        <a href="{% url 'user_profile' pk=user.pk %}" class="nav__link--user">{{user}}</a>
+        <a href="{% url 'user_profile' pk=request.user.pk %}" class="nav__link--user">{{request.user}}</a>
     </li>
             {% else %}
             <li class="nav__item d-flex--c">

@@ -18,17 +18,10 @@
 {% block nav %}
 <nav class="nav">
     <ul class="nav__items">
-        <li class="nav__item"> <a href="{%  url 'home' %}">Home</a></li>
-        <li class="nav__item">
-            <a class="nav__link"
-                ><div class="author">
-                    <div class="author__profile-pic profile-pic">
-                        <img src="{{ post.author.profile.photo.url }}"/>
-                    </div>
-                    <div class="author__name">{{ post.author }}</div>
-                </div></a
-            >
-        </li>
+        <li class="nav__item"> <a href="{% url 'home' %}" class="link--logo">
+            <h1 class="font--logo">WebSphere</h1>
+          </a></li>
+    
         <li class="nav__item nav__search">
             <form
                 action="{% url 'search_results' %}"
@@ -110,6 +103,17 @@
     {% if post.cover_img%}
     <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
     {% endif %}
+    <a class="nav__link" href="{% url 'user_profile' pk=post.author.id%}"
+    ><div class="author">
+        <div class="author__profile-pic profile-pic">
+            <img src="{{ post.author.profile.photo.url }}"/>
+        </div>
+        <div class="author__text">
+        <p class="author__name">{{ post.author.first_name }} {{ post.author.last_name}}</p>
+        <small class="publication-date">posted on {{post.created_at|date:"d M, Y"  }}</small>
+        </div>
+    </div></a
+>
     <h1 class="post-title">{{ post.title}}</h1>
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
     <div class="post-content">{{post.content|safe}}</div>

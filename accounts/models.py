@@ -25,8 +25,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
     photo = models.ImageField(upload_to='profile_images/', default='default.jpg')
     phone_number = PhoneNumberField(blank=True, null=True)
-    location = models.CharField(max_length=255, blank=True, null=True)
-    bio = models.TextField(null=True,blank=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    bio = models.TextField(max_length=255,null=True,blank=True)
     gender_choices = [
         ('M', 'Male'),
         ('F', 'Female'),

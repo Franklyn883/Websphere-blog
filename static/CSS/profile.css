@@ -3,6 +3,7 @@
     border: var(--border);
     padding: 2em;
     border-radius: 1em;
+   background-color: var(--background-color);
 }
 
 .user__profile-pic{
@@ -80,10 +81,10 @@ stroke:#cfd8dc
 }
 
 .tech-stack{
-    margin-top: 2rem;
+    margin-top: 2em;
 }
 .tech-stack__item{
-    
+    background-color: var(--background-color);
     border: var(--border);
     max-width: 450px;
     border-radius: 0.5em;
@@ -97,13 +98,15 @@ stroke:#cfd8dc
     padding:0.75em 1.5em ;
 }
 .user-post{
-    margin-top: 2rem;
+    margin-top: 2em;
+    
 }
 
 .user-post__item{
     border: var(--border);
     max-width: 450px;
     border-radius: 0.5em;
+    background-color: var(--background-color);
 }
 .user-post__published,
 .user-post__comments{

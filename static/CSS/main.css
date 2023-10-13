@@ -12,11 +12,11 @@
     --secondary-color: #4caf50;
     --darker-secondary-color: #357a35;
     --secondary-opacity: rgba(76, 175, 80, 0.5);
-    --tertiary-color: #e91e63;
-    --darker-tertiary-color: #ad1457;
-    --tertiary-opacity: rgba(233, 30, 99, 0.5);
-    --background-color: #192734;
-    --background-color2: #111722;
+    --tertiary-color: #b7dde9;
+    --darker-tertiary-color: #add8e6;
+    --tertiary-opacity: rgba(183, 221, 233, 0.556);
+    --background-color: #0f0f0f;
+    --background-color2: #040404;
     --header-font: "Montserrat", sans-serif;
     --font: "Roboto", sans-serif;
     --border:1px solid  rgba(152, 152, 152, 0.502);
