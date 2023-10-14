@@ -52,3 +52,8 @@ class Profile(models.Model):
             new_img = (500, 500)
             img.thumbnail(new_img)
             img.save(self.photo.path)
+            
+class Follower(models.Model):
+    User = get_user_model()
+    user = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+    followed_user = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)

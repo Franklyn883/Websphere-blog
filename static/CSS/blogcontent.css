@@ -78,6 +78,8 @@
     border-radius: 4px;
     padding: 0.2em 0.4em;
     font-family: "Courier New", monospace;
+    color:black;
+
 }
 /* Apply styles to tables inside the content */
 .post-content table {

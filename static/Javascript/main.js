@@ -30,3 +30,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     })
     textareaTechStack.dispatchEvent(new Event('input'))
 })
+
+
+//Dark-light-mode toggle
+let lightMode = localStorage.getItem('lightMode')

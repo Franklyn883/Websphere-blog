@@ -86,4 +86,5 @@
 .section__header{
     font-size: clamp(1rem,5vmin,2rem);
     font-weight: 900;
+    color: var(--tertiary-color);
 }

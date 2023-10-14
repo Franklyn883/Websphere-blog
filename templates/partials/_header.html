@@ -2,10 +2,10 @@
 
 <header>
     <nav class="nav">
-        <a href="{% url 'home' %}" class="link--logo">
-      <h1 class="font--logo">WebSphere</h1>
+        <a href="{% url 'home' %}" class="logo">
+      <h1 class="logo-font">WebSphere</h1>
     </a>
-        <ul class="nav__links">
+        <ul class="nav__items">
             <li class="nav__item">
                 <div class="dropdown">
                     <span class="nav__item-text">Explore</span>
@@ -21,7 +21,7 @@
                 <form
                     action="{% url 'search_results' %}"
                     method="get"
-                    class="nav__container--search-bar"
+                    class="container--search-bar"
                 >
                     <input
                         type="search"
@@ -37,7 +37,7 @@
             <div class="nav-section-2">
             <li class="nav__item write-post">
                 <a class="nav__link" href="{% url 'create_blogpost'%}">
-                    <div class="nav__link--post">
+                    <div class="nav__link-post">
                         <img
                             src="{% static 'assets/images/writing.svg' %}"
                             alt="writing icon"
@@ -48,11 +48,13 @@
             </li>
             
             <li class="nav__item icon">
-                <img
-                    src="{% static 'assets/images/light-mode.svg' %}"
-                    alt="light-mode icon"
-                    title="toggle light-dark mode"
-                />
+                <button id="light-mode-toggle"
+                class="light-mode-toggle"
+                aria-label="toggle light mode"
+                >
+                <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#a)" fill="var(--svg-dark-mode)"> <path d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"></path> </g> <defs> <clipPath id="a"> <path fill="#ffffff" d="M0 0h24v24H0z"></path> </clipPath> </defs> </g></svg>
+                    
+                </button>
             </li>
             <li class="nav__item icon" id="notification">
                 <img
@@ -63,10 +65,14 @@
 
             {% if user.is_authenticated %}
             <li class="nav__item user-detail">
+                <a href="{% url 'user_profile' pk=request.user.pk %}" class="nav__link--user">
             <div class="nav__item-user">
-            <img src="{{  request.user.profile.photo.url }}" alt="{{request.user}}'s photo"/>   
-        </div>
-        <a href="{% url 'user_profile' pk=request.user.pk %}" class="nav__link--user">{{request.user}}</a>
+                
+            
+                <img src="{{  request.user.profile.photo.url }}" alt="{{request.user}}'s photo"/>   
+           
+            </div>
+        </a>
     </li>
             {% else %}
             <li class="nav__item d-flex--c">

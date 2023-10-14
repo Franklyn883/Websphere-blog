@@ -4,11 +4,12 @@
     padding: 2em;
     border-radius: 1em;
    background-color: var(--background-color);
+   min-width: 450px;
 }
 
 .user__profile-pic{
-    width: 150px;
-    height:150px;
+    width: 9.375rem;
+    height:9.375rem;
    
 }
 .user__profile-pic img{

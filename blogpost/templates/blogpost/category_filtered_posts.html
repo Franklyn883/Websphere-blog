@@ -10,24 +10,23 @@
 {% endblock custom_css %} {% block content %}
 <section class="container container-grid">
     <article class="blogposts">
-    
         {% for post in posts %}
-        <div>
-            {% for category in post.categories.all %}
-    <h2>{{ category.name }}</h2>
-            {% endfor %}
-        </div>
         <div class="post-card">
             <div class="post-author">
-                <span class="post-author__profile-pic">profile-pic</span>
-                <span class="post-author__username"> {{post.author}} </span>
+                <div class="post-author__profile-pic">
+                    <img src="  {{ post.author.profile.photo.url }} " alt="{{user}}'s photo"/>
+                                  </div>
+                    <div class="post-author__detail">         
+                    <span class="post-author__username"> {{post.author}} </span>
+                    <p id="publish-date">{{post.created_at|timesince }} ago</p>
+                </div> 
             </div>
-            <p id="publish-date">{{post.created_at|timesince }} ago</p>
+            
 
             <div class="blogpost__content">
                 <div class="post-content">
                     <h3 class="post-title">{{ post.title }}</h3>
-                    {{ post.content|truncatewords:40 | safe }}
+                    {{ post.content|truncatewords:20 | safe }}
                 </div>
                 {% if post.cover_img %}
                 <div class="post-image">
@@ -53,16 +52,15 @@
                 </div>
             </div>
         </div>
-      {% empty %}
+        {% empty %}
         <div>
             <h1>Sorry there are no Post, explore other Categories</h1>
         </div>
-    
         {% endfor %}
-       
+
     </article>
-
-
 </section>
 
 {% endblock content %}
+
+    

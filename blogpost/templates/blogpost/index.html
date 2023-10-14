@@ -12,6 +12,7 @@
     <article class="blogposts">
         {% for post in posts %}
         <div class="post-card">
+            <a class="link" href="{% url 'user_profile' pk=post.author.id%}">
             <div class="post-author">
                 <div class="post-author__profile-pic">
                     <img src="  {{ post.author.profile.photo.url }} " alt="{{user}}'s photo"/>
@@ -21,7 +22,7 @@
                     <p id="publish-date">{{post.created_at|timesince }} ago</p>
                 </div> 
             </div>
-            
+        </a>
 
             <div class="blogpost__content">
                 <div class="post-content">

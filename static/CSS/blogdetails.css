@@ -55,4 +55,16 @@ padding: 1.25rem 3rem;
     align-items: center;
     gap: 1em;
     margin:2em;
+
+
+}
+.author__link{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 300px;
+}
+
+.author__link:hover{
+    color: var(--tertiary-opacity);
 }
