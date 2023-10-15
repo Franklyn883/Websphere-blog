@@ -1,3 +1,6 @@
+body{
+    padding-top: 4em;
+}
 .form--user-update{
     margin-top:5em;
 }
@@ -13,7 +16,7 @@
     border-radius: 0.25em;
     border: none;
     background-color: var(--background-color);
-    color: white;
+    color: var(--font-color);
     font-size:1.075rem;
 
 }
@@ -30,7 +33,7 @@
     width: 100%;
     border-radius: 0.25em;
     background-color: var(--background-color);
-    color: white;
+    color: var(--font-color);
     padding: 1em;
     font-size: 1rem;
 }
@@ -61,7 +64,7 @@
 
 .btn--submit:hover,
 .btn--submit:active{
-    background-color: var( --primary-opacity);
+    background-color: var( --primary-color);
 }
 .charcount{
     text-align: end;
@@ -69,7 +72,7 @@
 
 #id_gender{
     background-color: var(--background-color);
-    color: white;
+    color:var(--font-color);
     border-radius: 0.25em ;
     padding:0.5em 0.75em ;
     font-size: 1rem;

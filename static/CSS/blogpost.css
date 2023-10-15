@@ -16,10 +16,7 @@ input {
     align-items: center;
 }
 
-.form {
-    background-color: var(--background-color2);
 
-}
 /*Post options*/
 
 .post-options{
@@ -34,10 +31,10 @@ input {
     border: none;
     background-color: inherit;
     padding: 0.25em 1em;
-    color: white;
+    color: inherit;
 }
 .post-options button:hover {
-    background-color: #55647379;
+    background-color: var(--hover   );
     border-radius: 16px;
 }
 
@@ -45,7 +42,7 @@ input {
 button,
 span {
     font-size: 1rem;
-    color: white;
+    color:inherit;
     font-weight: 700;
 }
 
@@ -68,6 +65,7 @@ span {
     font-family: "Plus Jakarta Sans", sans-serif;
     font-weight: bold;
     padding: 1rem;
+    color: var(--font-color2);
 }
 #id_subtitle {
     border: none;
@@ -76,26 +74,27 @@ span {
     font-size: 1.5rem;
     font-family: "Plus Jakarta Sans", sans-serif;
     padding: 1rem;
+    color: var(--font-color2);
 }
 .post-subtitle {
     position: relative;
     background-color: var(--background-color2);
-    color: white;
+    color: var(--font-color);
 }
 .post-title {
-    color: white;
+    color: var(--font-color);
     background-color: var(--background-color2);
 }
 #btn--close-subtitle{
     position: absolute;
     top: 1rem;
-    color: rgba(0, 0, 0, 0.726);
+    color: var(--font-color2);
     font-size: 1.5rem;
     padding: 4px 8px;
     border-radius: 50%;
 }
 #btn--close-subtitle:hover {
-    background-color: rgba(20, 53, 88, 0.795);
+    background-color: var(--hover);
 }
 
 
@@ -107,7 +106,7 @@ span {
     position:absolute;
     top: 0px;
     right: 0px;
-    color:white;
+    color:var(--font-color);
     padding: 4px 8px;
     border-radius: 50%;
     margin: 4px;
@@ -115,7 +114,7 @@ span {
 
 .btn--close-modal:hover,
 .btn--close-modal:active{
-background-color: #55647379;
+background-color:var(--hover);
 cursor: pointer;
 }
 
@@ -135,11 +134,12 @@ cursor: pointer;
     padding:var(--primary-btn-padding);
     border-radius: 2em;
     justify-self: flex-end;
+    color: white;
 }
 .post-options .btn-primary:hover,
 .post-options .btn-primary:active{
     background-color: var(--primary-color);
-    color: inherit;
+    color: white;
 }
 #id_tags{
     background-color: var(--background-color);

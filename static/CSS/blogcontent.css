@@ -6,11 +6,12 @@
 .post-title {
     font-size: 3rem;
     text-align: center;
+    color: var(--font-color2);
 }
 .post-subtitle {
     font-size: 2rem;
     text-align: center;
-    color: rgb(159, 163, 167);
+    color: var(--font-color2);
     font-weight: 200;
 }
 /*post__content styles*/
@@ -19,7 +20,7 @@
 .post-content span {
     font-size: 1.2rem !important ;
     line-height: 1.6;
-    color: #f0f0f0 !important; /* Slightly off-white */
+    color: var(--font-color) !important; /* Slightly off-white */
 }
 
 /* Apply styles to headings inside the content */

@@ -8,8 +8,8 @@ gap: 2em;
     max-width: 1150px;
 }
 
-header{
-    margin-bottom: 4em;
+main{
+    margin-top:8em;
 }
 
 
@@ -20,6 +20,7 @@ header{
     padding: 1.5em;
     gap: 0.5em;
     background-color: var(--background-color);
+   
 }
 
 .post-author{
@@ -30,7 +31,6 @@ header{
     color: inherit;
     text-decoration: none;
     display: block;
-    width: 300px;
 }
 .post-card a:hover{
     color: var(--tertiary-opacity);
@@ -74,7 +74,7 @@ header{
     
 }
 .post-content span {
-    color: rgb(212, 209, 209)!important;
+    color: var(--font-color2)!important;
     font-size: 1rem;
 }
 .post-image{
@@ -100,17 +100,23 @@ justify-self: start;
 .category{
     padding: 0.75rem;
     border-radius: 2em;
-    background-color:#192734;
+    background-color:var( --category-background);
+    
 }
 .category:hover, .category:active{
-background-color: #192734b6;
+background-color: var( --category-background-hover);
 cursor: pointer;
 }
 .bottom{
     display: flex;
-    justify-content: space-between;
-    align-content: center;
-    margin-top: 0.85em;
+    justify-content:space-between;
+    margin-top: 1em;
+    width: 100%;
+}
+.post-card__categories{
+    display: flex;
+   gap: 0.25em;
+
 }
 .link--post-details{
     color: #1c6bbf;
@@ -122,6 +128,7 @@ cursor: pointer;
 .link--category{
     color: inherit;
     text-decoration: none;
+    align-self: flex-end;
 
 }
 
@@ -184,12 +191,12 @@ cursor: pointer;
   }
 
   .dropdown-content a {
-    color: white;
+    color: var(--font-color);
     padding: 0.75rem;
     text-decoration: none;
     display: block;
   }
 
   .dropdown-content a:hover {
-    background-color: var(--tertiary-opacity);
+    background-color: var( --category-background);
   }

@@ -1,3 +1,7 @@
+
+main{
+    margin-top: 8em;
+}
 .userprofile{
     margin-top: 2em;
     border: var(--border);
@@ -44,7 +48,7 @@
     margin-left: auto;
     border-radius: var(  --primary-btn-border-radius);
     background-color:var(--darker-primary-color) ;
-    color: inherit;
+    color: white;
     text-decoration: none;
 }
 
@@ -72,10 +76,7 @@
     align-items: center;
 }
 
-.social__link svg :hover{
-fill: #cfd8dc;
-stroke:#cfd8dc
-}
+
 .linkedIn svg{
     width: 1.8rem;
     height: 1.8rem;

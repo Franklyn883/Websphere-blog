@@ -40,13 +40,14 @@
                 {% endif %}
             </div>
             <div class="bottom">
+                <div>
                 <a
                     href="{% url 'blogpost_detail' pk=post.pk %}"
                     class="link--post-details"
                     >Read More</a
                 >
-
-                <div class="categories">
+            </div>
+               <div class="post-card__categories">
                     {% for category in post.categories.all %}
                     <a href="{% url 'category_filter' pk=category.pk %}" class="link--category"> <small class="category">{{ category.name }}</small></a>
                     {% endfor %}

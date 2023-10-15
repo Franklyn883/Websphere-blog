@@ -1,6 +1,10 @@
-.nav{
-padding: 1.25rem 3rem;
+header{
+    padding: 0.75em 3em;
 }
+body{
+    padding-top: 5em;
+}
+
 .nav__items{
     display: flex;
     justify-content: space-between;

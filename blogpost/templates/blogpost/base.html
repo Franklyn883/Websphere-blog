@@ -18,12 +18,17 @@
        
 {% block custom-css %}
 {% endblock custom-css %}
-       
-        {% block script %} {% endblock script %}
+<script src="{% static 'Javascript/light-mode.js' %}" defer></script> 
+        {% block script %}
+        
+
+        {% endblock script %}
     </head>
     <body>
+        <header>
         {% block nav %}
         {% endblock nav %}
+    </header>
         <main class="container">
             {% block content %} {% endblock content %}
         </main>

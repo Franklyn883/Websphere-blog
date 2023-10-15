@@ -6,7 +6,12 @@
     href="{% static 'CSS/profile-update.css' %}"
     onload="this.rel='stylesheet'"
 />
-{% endblock custom_css %} {% block content %}
+{% endblock custom_css %}
+{% block javascript %}
+<script src="{% static 'Javascript/light-mode.js' %}" defer></script> 
+<script src="{% static 'Javascript/main.js' %}" defer ></script>
+{% endblock javascript %}
+{% block content %}
 <form method="POST" enctype="multipart/form-data" class="form--user-update">
     {% csrf_token %}
   
