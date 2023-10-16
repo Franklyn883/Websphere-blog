@@ -30,23 +30,9 @@ def profile_update(request):
 
 
     
-class UserProfileView(View):
+class UserProfileView(View, LoginRequiredMixin):
     template_name = 'accounts/user_profile.html'
 
     def get(self, request, pk):
         user = get_object_or_404(get_user_model(), pk=pk)
         return render(request, self.template_name, {'user': user})
-    
-@login_required
-def follow_user(request, user_id):
-    User = get_user_model()
-    user_to_follow = get_object_or_404(User, id=user_id)
-    request.user.following.add(user_to_follow)
-    return redirect('profile', user_id=user_id)
-
-@login_required
-def unfollow_user(request, user_id):
-    User= get_user_model()
-    user_to_unfollow = get_object_or_404(User, id=user_id)
-    request.user.following.remove(user_to_unfollow)
-    return redirect('profile', user_id=user_id)

@@ -53,11 +53,17 @@
         <div class="user-reg">
         <form action="#" method="POST">
             {% csrf_token %}
-                {{ form.as_p }}
-            
-
-            <div class="form-btn">
-             
+            {{form.errors}}
+                {{ form.email.label }}
+                {{ form.email }}
+                {{ form.password1.label }}
+                {{ form.password1}}
+                {{ form.password2.label }}
+                {{ form.password2 }}
+                 <div class="form-btn">
+             {% for message in messages %}
+             {{message}}
+             {% endfor%}
                 <input
                     type="submit"
                     class="submit-btn"

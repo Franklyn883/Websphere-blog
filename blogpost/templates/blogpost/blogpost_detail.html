@@ -2,13 +2,13 @@
 <link
     rel="preload"
     as="style"
-    href="{% static 'CSS/blogcontent.css' %}"
+    href="{% static 'CSS/blogpost/blogcontent.css' %}"
     onload="this.rel='stylesheet'"
 />
 <link
     rel="preload"
     as="style"
-    href="{% static 'CSS/blogdetails.css' %}"
+    href="{% static 'CSS/blogpost/blogdetails.css' %}"
     onload="this.rel='stylesheet'"
 />
 {% endblock custom-css %}
@@ -92,14 +92,23 @@
             </a>
             </div>
             <div class="nav__item">
-                <a href="{% url 'user_profile' pk=request.user.pk %}" class="nav__link--user">
-                    <div class="user__profile-pic profile-pic">
-                        
-                    
-                        <img src="{{  request.user.profile.photo.url }}" alt="{{request.user}}'s photo"/>   
-                   
+                <div class="nav__item-user">
+                    <div class="dropdown">
+                        <img
+                            src="{{  request.user.profile.photo.url }}"
+                            alt="{{request.user}}'s photo"
+                        />
+                        <div class="dropdown-content">
+                            <a
+                                href="{% url 'user_profile' pk=request.user.pk %}"
+                                class="nav__link--user"
+                            >
+                                Profile</a
+                            >
+                            <a href="{% url 'account_logout' %}">Logout</a>
+                        </div>
                     </div>
-                </a>  
+                </div>  
             </div>
         </li>
     </ul>

@@ -3,8 +3,8 @@
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
 }
-main {
-    background-color: var(--background-color2);
+header{
+box-shadow: none;
 }
 input {
     background-color: var(--background-color2);
@@ -30,14 +30,16 @@ input {
 .post-options button {
     border: none;
     background-color: inherit;
-    padding: 0.25em 1em;
+    padding: 0.25em 0.75em;
     color: inherit;
 }
 .post-options button:hover {
     background-color: var(--hover   );
     border-radius: 16px;
 }
-
+.post-category .btn--show-categories{
+    padding: 0.5em 0.75em;
+}
 .post-options p,
 button,
 span {

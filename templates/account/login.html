@@ -1,4 +1,4 @@
-{% load static %}
+{% load socialaccount %}  {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,9 +51,14 @@
             </div>
         </div>
         <div class="user-reg">
+            {% for message in messages %}
+             {{message}}
+             {% endfor%}
         <form action="#" method="POST">
             {% csrf_token %}
-                {{ form.as_div }}
+            
+               {{form.as_div}}
+
             
 
             <div class="form-btn">
@@ -64,7 +69,10 @@
                     value="Log in"
                 />
              
-            </div>            <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+        </div> <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+        <a href="{% provider_login_url  'github' %}"> log in with Github</a>
+        <a href="{% provider_login_url 'google' %}">log in with google</a>
+
             </div>
         </form>
     </div>

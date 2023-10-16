@@ -3,7 +3,7 @@
 <link
     rel="preload"
     as="style"
-    href="{% static 'CSS/profile.css' %}"
+    href="{% static 'CSS/accounts/profile.css' %}"
     onload="this.rel='stylesheet'"
 />
 {% endblock custom_css %} {% block content %}
@@ -180,9 +180,10 @@
 </div>
 
 </section>
-<section class="user-post container">
-    <div class="user-post__item">
-        <p class="user-post__published">{{user.post|length}} posts published </p>
+<section class="user-post-and-comment container">
+    <div class="user-post-and-comment__item">
+        <h3 class="user-post-and-comment__title"> Posts and Comments</h3>
+        <p class="user-post__published">{{ request.user.post|length }} posts published </p>
         <p class="user-post__comments">0 comments written</p>
     </div>
 </section>
