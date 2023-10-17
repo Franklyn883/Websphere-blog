@@ -6,131 +6,117 @@
     font-family: 'poppins', sans-serif;
   }
   
-  body{
-    background-color: rgb(14, 13, 13);
-    min-height: 100vh;
-    color: white;
-    display: flex;
-    }
-
-    :root {
-
-        --accent-color: #45A5F5;
-        --accent-color2:#4CAF50;
-        --border-color:#333333;
-        --background-color: #192734;
-        --background-color2:#111722;
-        --link-color:#45A5F5;
-    
-        --header-font: 'Montserrat', sans-serif;
-        --font:'Roboto', sans-serif;
-    }
   @font-face {
     font-family:Norse-bold;
     src: url("resources/Norse-Bold.otf") format("opentype")
   }
-  .right-side{
-   flex:1;
-    text-align: center;
-    display: flex;
-    flex-direction: column; 
-  }
-  .logo{
-    display: block;
-    font-family: Norse-Bold;
-    font-size: 3.75rem;
-  }
 
- 
-.intro-text{
-    width: 80%;
-    margin: auto;
-    text-align: start;
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.5;
+main{
+ height: 100vh;
+ display:flex;
+ justify-content: center;
+ align-items: center;
 }
-
-.intro-text .intro-heading{
-    font-size: 6.5vmin;
-    color: #45A5F5;
-    margin-bottom: 0.4em;
+  
+form{
+    padding: 2em;
+    max-width: 450px;
+    border: 1px solid  rgba(152, 152, 152, 0.502);
+    border-radius: 0.25em;
 }
- .intro-text span{
-    color: #4CAF50;
-}
-  .photo-credit{
-    padding-bottom: 1rem    ;
-    margin-top: auto;
-  }
-
-  .photo-credit a{
-    text-decoration: none;
-    color: white;
-  }
-  .photo-credit a:hover{
-    color: green;
-  }
-
-  .user-reg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex:0.75;
-    padding: 3rem;
-  }
-
   input{
     outline: none;
+    width: 100%;
+    margin: 0.5em 0;
+    padding: 0.75em;
+    font-size: 1rem;
+    border-radius: 0.25em;
+    border:1px solid  rgba(152, 152, 152, 0.502);
+    background-color: #f8f8f8;
+  }
+  label{
+    font-size: 1rem;
   }
 
-  .log-in a{
-    text-decoration: none;
-    color: rgba(15, 228, 15, 0.747);
-  }
-  .log-in a:hover{
-    color: rgba(21, 95, 21, 0.747);
-  }
-form p{
-    display: block;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 2px 0;
 
+.form-class{
+    margin: 1em 0;
 }
-
-form input{
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-} 
-form input:focus {
-  border-color: #111722;
-  outline: none;
-}
-
-.form-btn .submit-btn{
+.submit-btn{
+    background-color: #1c6bbf;
     outline: none;
     border: none;
-    padding:12px 20px;
-    margin: 12px 0;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: rgba(15, 228, 15, 0.747);
-    color: white;
-    border: 1px solid white;
-    border: none;
-  }
-  .form-btn .submit-btn:hover{
-   
-    background:rgba(21, 95, 21, 0.747) ;
+    font-size: 1rem;
+    color:white;
+    font-weight: 700;
+}
 
-  }
-  .errorlist{
+.form-errors{
+    margin: 0.5em 0;
+}
+
+svg{
+    width:24px;
+    height:24px;
+}
+.logo{
+    font-size: clamp(1rem,5.25vmin,4rem);
+    font-weight:700;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.social-Oauth{
+    display:flex;
+    gap:1em;
+    align-items: center;
+    margin: .5em 0;
+    justify-content: center;
+    margin-bottom: 1em;
+   
+}
+.social-Oauth p{
+    font-size:1rem;
+    color:#0D47A1;
+    font-weight: 600;
+}
+.github svg{
+    width:22px;
+    height:22px;
+}
+.github, .google{
+    padding: 0.45em 2.25em;
+    border:1px solid rgba(152, 152, 152, 0.502);
+    background-color: #f8f8f8;
+    border-radius: 1.5em;
+
+}
+.login a{
+    text-decoration: none;
+    color: #0D47A1;
+    font-weight: 600;
+}
+.login{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.errorlist li{
     list-style: none;
     color: red;
-  }
- 
+    text-align: center;
+}
 
-  
+#logout-form{
+    border: none;
+}
+.confirm{
+    margin: 0.5em 0;
+}
+
+.confirm-logout{
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}

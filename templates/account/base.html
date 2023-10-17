@@ -1,0 +1,28 @@
+{% load socialaccount %}{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>{% block title %} Accounts {% endblock title%}</title>
+        <link
+            rel="preload"
+            as="style"
+            href="{% static 'CSS/accounts/accounts.css' %}"
+            onload="this.rel='stylesheet'"
+        />
+    </head>
+    <body>
+        <main>
+            {% block content %}
+
+            {% endblock content %}
+           
+        </main>
+
+        {% block javascript %}
+        <script src="{% static 'Javascript/accounts.js' %}" defer></script>
+        {% endblock javascript %}
+    </body>
+</html>

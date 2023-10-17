@@ -1,0 +1,16 @@
+{% extends 'account/base.html' %}  {% load socialaccount %}{% load static %}
+{% block title %} Log Out {% endblock title%}
+{% block content %}
+<form action="#" method="POST" id="logout-form">
+    {% csrf_token %}
+    <div class="confirm">
+        <h3>Are you sure you want to logout?</h3>
+    </div>
+    {{ form.as_div }}
+    <input class="form-btn confirm-logout"
+    type="submit" 
+    value="confirm"
+    >
+
+</form>
+{% endblock content %}

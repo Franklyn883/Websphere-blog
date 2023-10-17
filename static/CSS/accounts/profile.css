@@ -61,7 +61,6 @@ main{
     justify-content: center;
     align-items: center;
     gap: 2em;
-
 }
 .user__location,
 .user__date-joined{
@@ -80,6 +79,14 @@ main{
 .linkedIn svg{
     width: 1.8rem;
     height: 1.8rem;
+}
+.social__item{
+    padding: 0.25em;
+}
+.social__item:hover{
+  
+    border-radius: 50%;
+    background-color: var(--hover);
 }
 
 .tech-stack{
@@ -118,4 +125,17 @@ main{
 .user-post__published,
 .user-post__comments{
     padding:0.75em 1.5em ;
+   
+}
+.user-post__published{
+    border-bottom: var(--border);
+}
+
+.user-post__published a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.user-post__published a:hover{
+    color:var( --tertiary-opacity);
 }

@@ -10,6 +10,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django. contrib import messages 
+from blogpost.models import Post
 
 @login_required
 def profile_update(request):
@@ -32,7 +33,7 @@ def profile_update(request):
     
 class UserProfileView(View, LoginRequiredMixin):
     template_name = 'accounts/user_profile.html'
-
+    
     def get(self, request, pk):
         user = get_object_or_404(get_user_model(), pk=pk)
         return render(request, self.template_name, {'user': user})

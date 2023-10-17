@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .forms import PostForm
 from django.views.generic import ListView, DetailView,UpdateView,DeleteView
@@ -60,27 +62,6 @@ class BlogPostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         self.object.categories.set(form.cleaned_data['categories'])
         return response
 
-    # @login_required(login_url='account_login')
-    # def create_post(request):
-#     if request.method == 'POST':
-#         post_form = PostForm(data=request.POST, files=request.FILES)
-#         if post_form.is_valid():
-#             new_post = post_form.save(commit=False)
-#             new_post.author = request.user
-#             profile = Profile.objects.get(profile_user=request.user)
-#             new_post.slug = slugify(new_post.title)
-            
-#             new_post.save()
-#             post_form.save_m2m()
-#             messages.success(request, 'Post created successfully', extra_tags='post_saved')
-#             # redirect to new created item detail view
-#             return redirect(new_post.get_absolute_url())
-#     else:
-#         post_form = PostForm()
-#     context = {'post_form': post_form}
-#     return render(request,
-#                   'blogpost/blogpost_create.html',
-#                   context)
 
 class BlogPostDetailView(LoginRequiredMixin, DetailView):
     '''Renders the full details of a blogpost'''
@@ -119,19 +100,9 @@ class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('home')
     
-def tagged(request, slug):
-    tag = get_object_or_404(Tag, slug=slug)
-    # Filter posts by tag name  
-    posts = Post.objects.filter(tags=tag)
-    context = {
-        'tag':tag,
-        'posts':posts,
-    }
-    return render(request, 'blog/index.html', context)
     
 class SearchResultsListView(ListView):
     '''Implement search functionality'''
-    
     model = Post
     context_object_name = 'post_list'
     template_name = 'blogpost/search_results.html'
@@ -148,3 +119,10 @@ class SearchResultsListView(ListView):
     
 class AuthorBlogpostList(LoginRequiredMixin, ListView):
     '''Render all blogpost related to a user'''
+    model = Post
+    template_name ='blogpost/authorblogpost.html'
+    context_object_name = 'posts'
+    
+    def get_queryset(self):
+        user = get_object_or_404(get_user_model(),username=self.kwargs.get('username'))
+        return Post.objects.filter(author = user)
