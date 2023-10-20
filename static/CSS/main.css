@@ -59,6 +59,7 @@ body {
     background-color: var(--background-color2);
     color: var(--font-color); 
     font-family: var(--font);
+    padding-top: 8em;
 }
 header {
     background-color: var(--background-color2);
@@ -78,7 +79,7 @@ img {
 
 .container {
     max-width: 1000px;
-    width: 95vw;
+    width: 90vw;
     margin: 0 auto;
    
 }
@@ -87,13 +88,12 @@ img {
 .nav {
     display: flex;
     justify-content: space-between;
-    gap: 3em;
     align-items: center;
-  
+   gap: 1em;
 }
 
 .logo-font{
-font-size: clamp(1rem,5.25vmin,4rem);
+font-size: clamp(1rem,4.5vmin,3rem);
 color:var(--font-color);
 }
 .logo{
@@ -246,6 +246,10 @@ color:var(--font-color);
 .sign-up:hover{
     background-color: var(--primary-color);
 }
+.user-img{
+    width: 42px;
+    height: 42px;
+}
 /*Drop down Menu*/
 .dropdown {
     position: relative;
@@ -286,17 +290,51 @@ color:var(--font-color);
   .dropdown-content a:hover {
     background-color: var( --category-background);
   }
- @media(max-width:480px){
+
+  .toggle-button{
+    position: absolute;
+    top:.75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+  }
+
+  .toggle-button .bar{
+    height:3px;
+    width:100%;
+    background-color: var(--svg-dark-mode);
+    border-radius: 10px;
+  }
+ @media(max-width:600px){
     html{
-        font-size: 11px;
+        font-size: 12px;
     }
-    .container{
-        width: 98vw;
+    .toggle-button{
+        display: flex;
     }
+    /* .nav__item{
+        display: none;
+    } */
+    .nav__items{
+        flex-direction: column;
+        align-items: flex-start;
+       gap: 0.125em;
+    }
+   
+    .nav{
+        display: block;
+    }
+   
 }
 
-@media(max-width:768px){
+@media(max-width:900px){
     html{
         font-size:14px;
+    }
+    header{
+        padding: 0.75em 1em;
     }
 } 

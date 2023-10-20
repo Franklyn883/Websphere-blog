@@ -2,7 +2,7 @@
 {% block title %} Sign Up {% endblock title%}
 
 {% block content %}
-            <form action="#" method="POST" class="signup-form">
+            <form action="#" method="POST" class="signup-form form">
                 <div class="logo"> Websphere</div>
                 {% csrf_token %}
                 <div class="form-class form-errors">{{form.errors}}</div>

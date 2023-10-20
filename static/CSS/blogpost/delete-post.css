@@ -1,0 +1,27 @@
+
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+input{
+    padding: 0.75em 1em;
+    background-color: red;
+    color: white;
+    border:none;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1em;
+    border-radius: 0.25em;
+
+}
+.delete-post{
+  text-align: center;
+}
+p{
+    font-size: 1.1rem;
+    font-weight: 600;
+}

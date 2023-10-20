@@ -8,11 +8,6 @@ gap: 2em;
     max-width: 1150px;
 }
 
-main{
-    margin-top:8em;
-}
-
-
 /* Post settings */
 .post-card{
     border: var(--border);
@@ -80,6 +75,7 @@ main{
 .post-image{
     width: 250px;
     height: auto; 
+    align-self: center;
 }
 .blogpost__cover-img{
     border-radius: 1em;
@@ -167,6 +163,31 @@ cursor: pointer;
     color:var(--tertiary-color);
     font-size:1.5rem;
     
+}
+
+@media(max-width:900px){
+    .sidebar{
+        display: none;
+    }
+    .container-grid{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+   
+}
+@media(max-width:600px){
+    .post-card{
+        max-width: 450px;
+    }
+    .post-image{
+        width:200px;
+    }
+    .post-author__profile-pic{
+        width:32px;
+        height:32px;
+    }
 }
 
 

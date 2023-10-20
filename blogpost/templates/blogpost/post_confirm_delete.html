@@ -1,7 +1,16 @@
 
-{% extends 'blogpost/base.html'%}{% load static %}
+{% extends 'base.html'%}{% load static %}
+{% block title %} delete post {% endblock title %}
+{% block custom_css %}
+<link
+rel="preload"
+as="style"
+href="{% static 'CSS/blogpost/delete-post.css' %}"
+onload="this.rel='stylesheet'"
+/>
+{% endblock custom_css %}
  {% block content %}
-<form method="post">
+<form method="post" class="delete-post">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     {{ form }}

@@ -1,7 +1,7 @@
 {% extends 'account/base.html' %}  {% load socialaccount %}{% load static %}
 {% block title %} Sign In {% endblock title%}
 {% block content %}
-        <form action="#" method="POST">
+        <form action="#" method="POST" class="login-form form">
             <div class="logo"> Websphere</div>
             {% csrf_token %}
             

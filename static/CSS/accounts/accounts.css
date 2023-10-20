@@ -14,11 +14,13 @@
 main{
  height: 100vh;
  display:flex;
+ flex-direction: column;
  justify-content: center;
  align-items: center;
+gap: 1em;
 }
   
-form{
+.form{
     padding: 2em;
     max-width: 450px;
     border: 1px solid  rgba(152, 152, 152, 0.502);
@@ -119,4 +121,19 @@ svg{
     color: white;
     font-size: 1rem;
     font-weight: 600;
+}
+
+h1{
+    display: block;
+}
+
+button{
+    background-color: #1c6bbf;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color:white;
+    font-weight: 700;
+    padding: 0.5em 0.75em ;
+    border-radius: 0.25em;
 }

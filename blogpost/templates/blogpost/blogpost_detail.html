@@ -137,10 +137,10 @@
 
 
 <div class="update-delete">
-    {% if post.author == user %}
-<div> <a href="{% url 'update_blogpost' pk=post.pk %}">Edit Post</a></div>
+    {% if post.author == request.user %}
+ <a href="{% url 'update_blogpost' pk=post.pk %}" class="edit">Edit Post</a>
 
-    <a href="{% url 'delete_blogpost' pk=post.pk %}">Delete Post</a>
+    <a href="{% url 'delete_blogpost' pk=post.pk %}" class="delete">Delete Post</a>
 
 {% endif %}
 </div>
