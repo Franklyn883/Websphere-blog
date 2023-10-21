@@ -4,7 +4,12 @@ body{
 .form--user-update{
     margin-top:5em;
 }
-
+.explore{
+    display: none;
+}
+.nav__search-bar{
+    width: 40vw;
+}
 .container{
     max-width: 800px;
     width: 60vw;
@@ -90,4 +95,13 @@ body{
     font-size: clamp(1rem,5vmin,2rem);
     font-weight: 900;
     color: var(--tertiary-color);
+}
+
+@media(max-width:800px){
+    .container{
+        width: 95vw;
+    }
+    .nav__search-bar {
+        width: 80vw;
+    }
 }

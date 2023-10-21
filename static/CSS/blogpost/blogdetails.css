@@ -1,6 +1,4 @@
-header{
-    padding: 0.75em 3em;
-}
+
 body{
     padding-top: 5em;
 }
@@ -13,7 +11,9 @@ body{
     align-items: center;
     
 }
-
+.nav__search-bar{
+    width:50vw;
+}
 .profile-pic{
     height: 3rem;
     width:3rem;
@@ -26,31 +26,7 @@ body{
    margin-top: 4px;
 }
 
-.second-sec{
-    display: flex;
-    justify-content: space-between;
-    gap: 1.2rem;
-    align-items: center;
-}
-.btn__follow{
-    padding:  0.5em 1em;
-    border: none;
-    border-radius: 2rem;
-    background-color:var(--darker-primary-color) ;
-    display: flex;
-    align-content: center;
-    gap: 4px;    
-}
 
-.btn__follow:hover, .btn__follow:active{
-    background-color: var(--primary-color);
-}
-.btn__follow span{
-    color: white;
-    font: 1.2rem;
-    margin-top: 4px;
-    font-weight: bolder;
-}
 .delete-confirmation{
     display: none;
 }

@@ -51,7 +51,7 @@ span {
 
 .post-category__options {
     height: 125px;
-    width: 275px;
+    width: 17rem;
     position: absolute;
     z-index: 1;
     overflow-x: hidden;

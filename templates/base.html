@@ -21,13 +21,15 @@
 
 {% block javascript %}
 
-
+<script src="{% static 'Javascript/main.js' %}" defer></script>
 <script src="{% static 'Javascript/light-mode.js' %}" defer></script>
         {% endblock javascript %}
 
     </head>
     <body>
+     
         {% include "partials/_header.html" %}
+         
         <main class="container">
         
             {% block content %} {% endblock content %}</main>

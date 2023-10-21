@@ -7,7 +7,11 @@
     onload="this.rel='stylesheet'"
 />
 
-{% endblock custom_css %} {% block content %}
+{% endblock custom_css %} 
+{% block explore %}
+
+{% endblock explore %}
+{% block content %}
 <section class="container-grid">
     <article class="blogposts">
         {% for post in posts %}

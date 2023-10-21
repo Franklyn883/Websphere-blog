@@ -2,13 +2,20 @@
 main{
     margin-top: 8em;
 }
+
+.explore{
+    display: none;
+}
+.nav__search-bar{
+    width: 40vw;
+}
 .userprofile{
     margin-top: 2em;
     border: var(--border);
     padding: 2em;
     border-radius: 1em;
    background-color: var(--background-color);
-   min-width: 450px;
+
 }
 
 .user__profile-pic{
@@ -32,7 +39,7 @@ main{
 
 .user{
     display:flex;
-    gap: 3rem;
+    gap: 3em;
     justify-content: start;
     align-content: center;
 }
@@ -139,3 +146,15 @@ main{
 .user-post__published a:hover{
     color:var( --tertiary-opacity);
 }
+@media(max-width:800px){
+    .user  .user__profile-pic{
+          width: 5rem;
+          height:5rem;
+      }
+      .container{
+        width: 98vw;
+      }
+      .user{
+        gap: 1em;
+      }
+  }
