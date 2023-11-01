@@ -123,6 +123,26 @@ svg{
     font-weight: 600;
 }
 
+/* account management */
+.reset_password a{
+    color: #1c6bbf;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+ 
+
+}
+.reset_password{
+    margin: 0.25em 0;
+}
+/* from the library template */
+.password_reset input[type="submit"]{
+    background-color: #1c6bbf;
+    font-size: 1rem;
+    color:white;
+    font-weight: 700;
+    cursor: pointer;
+}
 h1{
     display: block;
 }

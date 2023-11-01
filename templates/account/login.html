@@ -7,7 +7,9 @@
             
                {{form.as_div}}
 
-            
+               <div class="reset_password">
+                <a href=" {% url 'account_reset_password' %}">Forgot your password?</a>
+            </div>
 
             <div class="form-btn">
              
@@ -72,6 +74,7 @@
                 </div>
             </a>
             </div>
+            
             <p class="login">
                 Don't have an account?
                 <a href="{% url 'account_signup' %}"> Sign up</a>

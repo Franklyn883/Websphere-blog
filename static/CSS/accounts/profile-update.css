@@ -96,7 +96,21 @@ body{
     font-weight: 900;
     color: var(--tertiary-color);
 }
+.change_password{
 
+margin: 0 auto;
+}
+.change_password a{
+color: #ffffff;
+text-decoration: none;
+
+
+}
+.change_password span{
+    padding: 0.75em 1em;
+    background-color: var(--darker-primary-color);
+    border-radius: 0.25em;
+}
 @media(max-width:800px){
     .container{
         width: 95vw;

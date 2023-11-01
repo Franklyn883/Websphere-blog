@@ -29,10 +29,7 @@ urlpatterns = [
     path('blogpost/', include("blogpost.urls")),
     
     #user management
-    path("accounts/", include("allauth.urls")),
-
-   
-   
+    path("accounts/", include("allauth.urls")), 
 
     #thirdparty
   path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),        

@@ -51,6 +51,9 @@
                 <label for="id_">Profile Image</label>
                 <p>{{ profile_form.photo}}</p>
             </div>
+            <div class="form-class change_password">
+                <a href="{% url 'account_change_password' %}"><span>Change password</span></a>
+            </div>
         </section>
         <section class="user__basic-info section--border">
             <h3 class="section__header">Basic information</h3>
