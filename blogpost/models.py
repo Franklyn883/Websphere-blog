@@ -38,13 +38,17 @@ class Post(models.Model):
    
     def save(self, *args, **kwargs):
         super().save()
-        img = Image.open(self.cover_img.path) # Open image
-        # resize image
-        if img.height > 840 or img.width > 1600:
-            output_size = (840, 1600)
-            img.thumbnail(output_size) # Resize image
-            img.save(self.cover_img.path)  # Save it again and override the larger image
-    
+        if self.cover_img:
+            try:
+                img = Image.open(self.cover_img.path)
+                # Perform operations with the image if needed
+                if img.height > 840 or img.width > 1600:
+                    output_size = (840, 1600)
+                    img.thumbnail(output_size)
+                    img.save(self.cover_img.path)
+            except FileNotFoundError:
+                # Handle the case where the file is not found
+                pass
     def __str__(self):
         return self.title
     def get_absolute_url(self):

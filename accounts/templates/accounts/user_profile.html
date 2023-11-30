@@ -14,7 +14,11 @@
         </div>
         <div class="user__name-and-bio">
         <h1 class="user__fullname">
+            {% if user.first_name and user.last_name %}
             {{ user.first_name|title }} {{user.last_name|title}}
+            {% else %}
+            {{ user.username }}
+            {% endif %}
         </h1>
         {% if user.profile.bio %}
         <p class="user__bio">{{user.profile.bio}}</p>
