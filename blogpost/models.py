@@ -55,3 +55,12 @@ class Post(models.Model):
         return reverse("blogpost_detail", args=[str(self.id)])
     
     
+class PostComment(models.Model):
+    User = get_user_model()
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.comment

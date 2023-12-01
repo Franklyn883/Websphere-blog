@@ -1,4 +1,4 @@
-from .models import Post,Category
+from .models import Post,Category,PostComment
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
 
@@ -20,3 +20,9 @@ class PostForm(forms.ModelForm):
             )
         }
         
+class PostCommentForm(forms.ModelForm):
+    comment = forms.CharField(widget=forms.Textarea(attrs={'maxlength':255,'class':'comment__textarea'}))
+    class Meta:
+        model = PostComment
+        fields = ['comment']
+    

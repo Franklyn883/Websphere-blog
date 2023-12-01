@@ -291,6 +291,7 @@ CKEDITOR_5_CONFIGS = {
             ]
         }
     },
+    
     'list': {
         'properties': {
             'styles': 'true',

@@ -1,12 +1,12 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from .forms import PostForm
+from .forms import PostForm, PostCommentForm
 from django.views.generic import ListView, DetailView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Post,Category
+from .models import Post,Category,PostComment
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
@@ -68,6 +68,28 @@ class BlogPostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'blogpost/blogpost_detail.html'
     context_object_name = 'post'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = PostComment.objects.filter(post=self.object)
+        context['form'] = PostCommentForm()
+        return context
+    
+    def post(self, request, *arg, **kwargs):
+        post = self.get_object()
+        form = PostCommentForm(request.POST)
+        
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = self.request.user
+            comment.save()
+            return redirect('blogpost_detail', pk=post.pk)
+        else:
+            context = self.get_context_data()
+            context['form'] = form
+            return self.render_to_response(context)
+        
 
 
 class PostCategoryFilterView(ListView):
