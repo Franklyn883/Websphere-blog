@@ -91,6 +91,29 @@ class BlogPostDetailView(LoginRequiredMixin, DetailView):
             return self.render_to_response(context)
         
 
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(PostComment,id=comment_id,author = request.user)
+    
+    if request.method == 'POST':
+        form = PostCommentForm(request.POST,instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('blogpost_detail',pk=comment.post.id)
+        
+    else:
+        form = PostCommentForm(instance=comment)
+        
+    return render(request, 'edit_comment.html',{'form':form})
+    
+    
+    
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
+    post_id = comment.post.id
+    comment.delete()
+    return redirect('blogpost_detail',pk=post_id)
 
 class PostCategoryFilterView(ListView):
     '''Renders all post related to a selected category'''

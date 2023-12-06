@@ -1,4 +1,5 @@
-{% extends 'blogpost/base.html' %} {% load static %}{% block title %} {{ post.title }} {% endblock %}{% block custom-css %}
+{% extends 'blogpost/base.html' %} {% load static %}{% block title %} {{
+post.title }} {% endblock %}{% block custom-css %}
 <link
     rel="preload"
     as="style"
@@ -11,18 +12,18 @@
     href="{% static 'CSS/blogpost/blogdetails.css' %}"
     onload="this.rel='stylesheet'"
 />
-{% endblock custom-css %}
-{% block script %}
+{% endblock custom-css %} {% block script %}
 <script src="{% static 'Javascript/blogpostdetails.js' %}" defer></script>
-{% endblock script %}
-{% block nav %}
+{% endblock script %} {% block nav %}
 <nav class="nav">
     <ul class="nav__items">
-        <li class="nav__item"> <a href="{% url 'home' %}" class="logo">
-            <h1 class="logo-font desktop-version">WebSphere</h1>
-            <h1 class="logo-font mobile-version">WS</h1>
-          </a></li>
-    
+        <li class="nav__item">
+            <a href="{% url 'home' %}" class="logo">
+                <h1 class="logo-font desktop-version">WebSphere</h1>
+                <h1 class="logo-font mobile-version">WS</h1>
+            </a>
+        </li>
+
         <li class="nav__item nav__search">
             <form
                 action="{% url 'search_results' %}"
@@ -37,49 +38,79 @@
                     aria-\
                     label="Search"
                 />
-                <button type="submit" value="search" class="btn--search"> search</button>
+                <button type="submit" value="search" class="btn--search">
+                    search
+                </button>
             </form>
         </li>
 
         <li class="nav__item">
             <div class="nav__item icon">
-                <button id="light-mode-toggle"
-                class="light-mode-toggle"
-                aria-label="toggle light mode"
+                <button
+                    id="light-mode-toggle"
+                    class="light-mode-toggle"
+                    aria-label="toggle light mode"
                 >
-                <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#a)" fill="var(--svg-dark-mode)"> <path d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"></path> </g> <defs> <clipPath id="a"> <path fill="#ffffff" d="M0 0h24v24H0z"></path> </clipPath> </defs> </g></svg>
-                    
+                    <svg
+                        width="1.5rem"
+                        height="1.5rem"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g clip-path="url(#a)" fill="var(--svg-dark-mode)">
+                                <path
+                                    d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"
+                                ></path>
+                            </g>
+                            <defs>
+                                <clipPath id="a">
+                                    <path
+                                        fill="#ffffff"
+                                        d="M0 0h24v24H0z"
+                                    ></path>
+                                </clipPath>
+                            </defs>
+                        </g>
+                    </svg>
                 </button>
             </div>
         </li>
         {% if user.is_authenticated %}
-            <li class="nav__item">
-                <div class="nav__item-user">
-                    <div class="dropdown">
-                        <img
-                            src="{{  request.user.profile.photo.url }}"
-                            alt="{{request.user}}'s photo"
-                        />
-                        <div class="dropdown-content">
-                            <a
-                                href="{% url 'user_profile' pk=request.user.pk %}"
-                                class="nav__link--user"
-                            >
-                                Profile</a
-                            >
-                            <a href="{% url 'account_logout' %}">Logout</a>
-                        </div>
+        <li class="nav__item">
+            <div class="nav__item-user">
+                <div class="dropdown">
+                    <img
+                        src="{{  request.user.profile.photo.url }}"
+                        alt="{{request.user}}'s photo"
+                    />
+                    <div class="dropdown-content">
+                        <a
+                            href="{% url 'user_profile' pk=request.user.pk %}"
+                            class="nav__link--user"
+                        >
+                            Profile</a
+                        >
+                        <a href="{% url 'account_logout' %}">Logout</a>
                     </div>
-                </div>  
-            </li>
-            {% else %}
-                <li class="nav__item">
-                    <a class="nav__link sign-up" href="{% url 'account_signup' %}"
-                        >Sign-up</a
-                    >
-                </li>
+                </div>
+            </div>
+        </li>
+        {% else %}
+        <li class="nav__item">
+            <a class="nav__link sign-up" href="{% url 'account_signup' %}"
+                >Sign-up</a
+            >
+        </li>
 
-                {% endif%}
+        {% endif%}
     </ul>
 </nav>
 
@@ -89,64 +120,210 @@
     <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
     {% endif %}
     <a class="author__link" href="{% url 'user_profile' pk=post.author.id%}"
-    ><div class="author">
-        <div class="author__profile-pic profile-pic">
-            <img src="{{ post.author.profile.photo.url }}"/>
-        </div>
-        <div class="author__text">
-        <p class="author__name">{{ post.author.first_name }} {{ post.author.last_name}}</p>
-        <small class="publication-date">posted on {{post.created_at|date:"d M, Y"  }}</small>
-        </div>
-    </div></a
->
+        ><div class="author">
+            <div class="author__profile-pic profile-pic">
+                <img src="{{ post.author.profile.photo.url }}" />
+            </div>
+            <div class="author__text">
+                <p class="author__name">
+                    {{ post.author.first_name }} {{ post.author.last_name}}
+                </p>
+                <small class="publication-date"
+                    >posted on {{post.created_at|date:"d M, Y" }}</small
+                >
+            </div>
+        </div></a
+    >
     <h1 class="post-title">{{ post.title}}</h1>
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
     <div class="post-content">{{post.content|safe}}</div>
 </section>
 
 <div class="post-option--container">
-<div class="post-options">
-    <div class="post-option post-option__like icon" >
-        <div class="svg-container" title="like this post">
-        <svg width="24px" height="24px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Stock_cut" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><desc></desc><path d="M28.343,17.48L16,29 L3.657,17.48C1.962,15.898,1,13.684,1,11.365v0C1,6.745,4.745,3,9.365,3h0.17c2.219,0,4.346,0.881,5.915,2.45L16,6l0.55-0.55 C18.119,3.881,20.246,3,22.465,3h0.17C27.255,3,31,6.745,31,11.365v0C31,13.684,30.038,15.898,28.343,17.48z" fill="none" stroke="var(--svg-dark-mode)" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></path></g></svg>
+    <div class="post-options">
+        <div class="post-option post-option__like icon">
+            <div class="svg-container" title="like this post">
+                <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 32 32"
+                    enable-background="new 0 0 32 32"
+                    id="Stock_cut"
+                    version="1.1"
+                    xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    fill="#000000"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <desc></desc>
+                        <path
+                            d="M28.343,17.48L16,29 L3.657,17.48C1.962,15.898,1,13.684,1,11.365v0C1,6.745,4.745,3,9.365,3h0.17c2.219,0,4.346,0.881,5.915,2.45L16,6l0.55-0.55 C18.119,3.881,20.246,3,22.465,3h0.17C27.255,3,31,6.745,31,11.365v0C31,13.684,30.038,15.898,28.343,17.48z"
+                            fill="none"
+                            stroke="var(--svg-dark-mode)"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="2"
+                        ></path>
+                    </g>
+                </svg>
+            </div>
+            <span class="num-of-like">1</span>
         </div>
-        <span class="num-of-like">1</span>
-    </div>
-    <div class="post-option post-option__comment" >
-        <div class="svg-container" title="write a comment">
-        <svg width="24px" height="24px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>comment-3</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-204.000000, -255.000000)" fill="var(--svg-dark-mode)"> <path d="M228,267 C226.896,267 226,267.896 226,269 C226,270.104 226.896,271 228,271 C229.104,271 230,270.104 230,269 C230,267.896 229.104,267 228,267 L228,267 Z M220,281 C218.832,281 217.704,280.864 216.62,280.633 L211.912,283.463 L211.975,278.824 C208.366,276.654 206,273.066 206,269 C206,262.373 212.268,257 220,257 C227.732,257 234,262.373 234,269 C234,275.628 227.732,281 220,281 L220,281 Z M220,255 C211.164,255 204,261.269 204,269 C204,273.419 206.345,277.354 210,279.919 L210,287 L217.009,282.747 C217.979,282.907 218.977,283 220,283 C228.836,283 236,276.732 236,269 C236,261.269 228.836,255 220,255 L220,255 Z M212,267 C210.896,267 210,267.896 210,269 C210,270.104 210.896,271 212,271 C213.104,271 214,270.104 214,269 C214,267.896 213.104,267 212,267 L212,267 Z M220,267 C218.896,267 218,267.896 218,269 C218,270.104 218.896,271 220,271 C221.104,271 222,270.104 222,269 C222,267.896 221.104,267 220,267 L220,267 Z" id="comment-3" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
-       </div>
-        <span class="num-of-comment">{{ comments.count }}</span>
-    </div>
-    <div class="post-option post-option__bookmark" >
-        <div class="svg-container" title="Add Bookmark">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.2C5 5.07989 5 4.51984 5.21799 4.09202C5.40973 3.71569 5.71569 3.40973 6.09202 3.21799C6.51984 3 7.07989 3 8.2 3H15.8C16.9201 3 17.4802 3 17.908 3.21799C18.2843 3.40973 18.5903 3.71569 18.782 4.09202C19 4.51984 19 5.07989 19 6.2V21L12 16L5 21V6.2Z" stroke="var(--svg-dark-mode)" stroke-width="2" stroke-linejoin="round"></path> </g></svg>
-    </div>
-    </div>
-    <div class="post-option post-option__share" >
-          <div class="svg-container" title="share post">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Communication / Share_Android"> <path id="Vector" d="M9 13.5L15 16.5M15 7.5L9 10.5M18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18C21 19.6569 19.6569 21 18 21ZM6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12C9 13.6569 7.65685 15 6 15ZM18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6C21 7.65685 19.6569 9 18 9Z" stroke="var(--svg-dark-mode)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
-    </div>
-    </div>
-    <div class="post-option post-option__more more-option-btn" >
+        <div class="post-option post-option__comment">
+            <div class="svg-container" title="write a comment">
+                <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+                    fill="#000000"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <title>comment-3</title>
+                        <desc>Created with Sketch Beta.</desc>
+                        <defs></defs>
+                        <g
+                            id="Page-1"
+                            stroke="none"
+                            stroke-width="1"
+                            fill="none"
+                            fill-rule="evenodd"
+                            sketch:type="MSPage"
+                        >
+                            <g
+                                id="Icon-Set"
+                                sketch:type="MSLayerGroup"
+                                transform="translate(-204.000000, -255.000000)"
+                                fill="var(--svg-dark-mode)"
+                            >
+                                <path
+                                    d="M228,267 C226.896,267 226,267.896 226,269 C226,270.104 226.896,271 228,271 C229.104,271 230,270.104 230,269 C230,267.896 229.104,267 228,267 L228,267 Z M220,281 C218.832,281 217.704,280.864 216.62,280.633 L211.912,283.463 L211.975,278.824 C208.366,276.654 206,273.066 206,269 C206,262.373 212.268,257 220,257 C227.732,257 234,262.373 234,269 C234,275.628 227.732,281 220,281 L220,281 Z M220,255 C211.164,255 204,261.269 204,269 C204,273.419 206.345,277.354 210,279.919 L210,287 L217.009,282.747 C217.979,282.907 218.977,283 220,283 C228.836,283 236,276.732 236,269 C236,261.269 228.836,255 220,255 L220,255 Z M212,267 C210.896,267 210,267.896 210,269 C210,270.104 210.896,271 212,271 C213.104,271 214,270.104 214,269 C214,267.896 213.104,267 212,267 L212,267 Z M220,267 C218.896,267 218,267.896 218,269 C218,270.104 218.896,271 220,271 C221.104,271 222,270.104 222,269 C222,267.896 221.104,267 220,267 L220,267 Z"
+                                    id="comment-3"
+                                    sketch:type="MSShapeGroup"
+                                ></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <span class="num-of-comment">{{ comments.count }}</span>
+        </div>
+        <div class="post-option post-option__bookmark">
+            <div class="svg-container" title="Add Bookmark">
+                <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M5 6.2C5 5.07989 5 4.51984 5.21799 4.09202C5.40973 3.71569 5.71569 3.40973 6.09202 3.21799C6.51984 3 7.07989 3 8.2 3H15.8C16.9201 3 17.4802 3 17.908 3.21799C18.2843 3.40973 18.5903 3.71569 18.782 4.09202C19 4.51984 19 5.07989 19 6.2V21L12 16L5 21V6.2Z"
+                            stroke="var(--svg-dark-mode)"
+                            stroke-width="2"
+                            stroke-linejoin="round"
+                        ></path>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="post-option post-option__share">
+            <div class="svg-container" title="share post">
+                <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g id="Communication / Share_Android">
+                            <path
+                                id="Vector"
+                                d="M9 13.5L15 16.5M15 7.5L9 10.5M18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18C21 19.6569 19.6569 21 18 21ZM6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12C9 13.6569 7.65685 15 6 15ZM18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6C21 7.65685 19.6569 9 18 9Z"
+                                stroke="var(--svg-dark-mode)"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="post-option post-option__more more-option-btn">
             <div class="svg-container" title="more options">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.75 5C13.75 5.9665 12.9665 6.75 12 6.75C11.0335 6.75 10.25 5.9665 10.25 5C10.25 4.0335 11.0335 3.25 12 3.25C12.9665 3.25 13.75 4.0335 13.75 5ZM13.75 19C13.75 19.9665 12.9665 20.75 12 20.75C11.0335 20.75 10.25 19.9665 10.25 19C10.25 18.0335 11.0335 17.25 12 17.25C12.9665 17.25 13.75 18.0335 13.75 19ZM12 13.75C12.9665 13.75 13.75 12.9665 13.75 12C13.75 11.0335 12.9665 10.25 12 10.25C11.0335 10.25 10.25 11.0335 10.25 12C10.25 12.9665 11.0335 13.75 12 13.75Z" fill="var(--svg-dark-mode)"></path> </g></svg>
-   </div>
+                <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M13.75 5C13.75 5.9665 12.9665 6.75 12 6.75C11.0335 6.75 10.25 5.9665 10.25 5C10.25 4.0335 11.0335 3.25 12 3.25C12.9665 3.25 13.75 4.0335 13.75 5ZM13.75 19C13.75 19.9665 12.9665 20.75 12 20.75C11.0335 20.75 10.25 19.9665 10.25 19C10.25 18.0335 11.0335 17.25 12 17.25C12.9665 17.25 13.75 18.0335 13.75 19ZM12 13.75C12.9665 13.75 13.75 12.9665 13.75 12C13.75 11.0335 12.9665 10.25 12 10.25C11.0335 10.25 10.25 11.0335 10.25 12C10.25 12.9665 11.0335 13.75 12 13.75Z"
+                            fill="var(--svg-dark-mode)"
+                        ></path>
+                    </g>
+                </svg>
+            </div>
+        </div>
     </div>
-</div>
-<div class="post-option-more-content hidden">
-    {% if post.author == request.user %}
-    <div class="post-option-more__edit post-option">
-    <a href="{% url 'update_blogpost' pk=post.pk %}" class="edit">Edit Post</a>
-</div>
-<div class="post-option-more__delete post-option">
-       <a href="{% url 'delete_blogpost' pk=post.pk %}" class="delete">Delete Post</a>
+    <div class="post-option-more-content hidden">
+        {% if post.author == request.user %}
+        <div class="post-option-more__edit post-option">
+            <a href="{% url 'update_blogpost' pk=post.pk %}" class="edit"
+                >Edit Post</a
+            >
+        </div>
+        <div class="post-option-more__delete post-option">
+            <a href="{% url 'delete_blogpost' pk=post.pk %}" class="delete"
+                >Delete Post</a
+            >
+        </div>
+        {% endif %}
+        <div class="post-option-more__report post-option">
+            <p>Report</p>
+        </div>
     </div>
-   {% endif %}
-   <div class="post-option-more__report post-option">
-    <p> Report</p> 
-   </div>
-</div>
 </div>
 
 <section class="author-details">
@@ -155,58 +332,110 @@
     </div>
     <div class="author-details__profile">
         <div class="author-details__profile-pic profile-pic">
-            <a class="author-details__link" href="{% url 'user_profile' pk=post.author.id%}">
-            <img src="{{ post.author.profile.photo.url }}"/>
+            <a
+                class="author-details__link"
+                href="{% url 'user_profile' pk=post.author.id%}"
+            >
+                <img src="{{ post.author.profile.photo.url }}" />
             </a>
         </div>
         <div class="author-details__username-bio">
-            <a class="author__link" href="{% url 'user_profile' pk=post.author.id%}">
-        <p class="author-details__username">{{ post.author.first_name }} {{ post.author.last_name}}</p>
-        </a>
-        <div class="author-details__about">
-            <p>{{request.user.profile.bio}}</p>
+            <a
+                class="author__link"
+                href="{% url 'user_profile' pk=post.author.id%}"
+            >
+                <p class="author-details__username">
+                    {{ post.author.first_name }} {{ post.author.last_name}}
+                </p>
+            </a>
+            <div class="author-details__about">
+                <p>{{request.user.profile.bio}}</p>
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <section class="blog-post-comment">
-    <p class="blog-post-comment__text">Top comments <span class="num-of-comments">{{ comments.count }}</span></p>
+    <p class="blog-post-comment__text">
+        Top comments <span class="num-of-comments">{{ comments.count }}</span>
+    </p>
 
     <div class="blog-post-comment__user-comment">
-    <div class="comment__user-profile-pic">
-        <img src="{{ post.author.profile.photo.url }}"/> 
+        <div class="comment__user-profile-pic">
+            <img src="{{ post.author.profile.photo.url }}" />
+        </div>
+        <div class="comment__comment-input">
+            <form method="post" action="{% url 'blogpost_detail' pk=post.pk %}">
+                {% csrf_token %}
+                <div class="content">{{ form.comment }}</div>
+                <button type="submit" class="comment__add-comment-btn">
+                    Add comment
+                </button>
+            </form>
+        </div>
     </div>
-    <div class="comment__comment-input">
+    {% for comment in comments %}
+    <div class="blog-post-comment__comments">
+        <div class="blog-post__comment-container">
+            <div class="blog-post__user-details">
+                <div class="blog-post__user-profile-pic">
+                    <img
+                        src="{{ comment.author.profile.photo.url }}"
+                        alt="{{ comment.author }}'s profile pic"
+                    />
+                </div>
+                <p class="blog-post__user-name">{{ comment.author }}</p>
+                <p class="blog-post__comment-date">
+                    {{ comment.created_at|date:"d M, Y" }}
+                </p>
 
-  <form method="post" action="{% url 'blogpost_detail' pk=post.pk %}">
-    {% csrf_token %}
-    <div class="content" >
-    {{ form.comment }}
-</div>
-    <button type="submit" class="comment__add-comment-btn">Add comment</button>
-  </form>
+                {% if request.user == user %}
+
+                <div
+                    class="blog-post__comment-actions comment-action-btn svg-container"
+                    title="more option"
+                >
+                    <svg
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        fill="var(--svg-dark-mode)"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title></title>
+                            <g id="Complete">
+                                <g id="F-More">
+                                    <path
+                                        d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
+                                        id="Horizontal"
+                                    ></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="blog-post__comment-action-options hidden">
+                    <div class="comment-action-option__edit-comment">
+                        <a href="{% url 'blogpost_detail' post.id %}">Edit comment</a>
+                    </div>
+                    <div class="comment-action-option__delete-comment">
+                        <a href="{% url 'blogpost_detail' post.id %}">Delete comment</a>
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+        <div class="blog-post__comment-details">{{ comment.comment }}</div>
     </div>
-</div>
-{% for comment in comments %}
-<div class="blog-post-comment__comments">
- <div class="blog-post__user-details">  
-<div class="blog-post__user-profile-pic">
-    <img src="{{ comment.author.profile.photo.url }}" alt="{{ comment.auther }}'s profile pic"/>
-</div>  
-<p class="blog-post__user-name">{{ comment.author }}</p>
-<p class="blog-post__comment-date">{{ comment.created_at|date:"d M, Y"  }}</p>
-{% if request.user == user %}
-<div class="blog-post__actions svg-container" title="more option">
-    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="var(--svg-dark-mode)" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="F-More"> <path d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z" id="Horizontal"></path> </g> </g> </g></svg>
-</div>
-{% endif %}
-</div> 
-<div class="blog-post__comment-details">
-    {{ comment.comment }}
-    </div>
-  
-</div>
-{% endfor %}
+    {% endfor %}
 </section>
 
 {% endblock content %}
