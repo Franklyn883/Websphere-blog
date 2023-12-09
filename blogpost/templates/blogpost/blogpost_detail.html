@@ -423,13 +423,12 @@ post.title }} {% endblock %}{% block custom-css %}
 
                 <div class="blog-post__comment-action-options hidden">
                     <div class="comment-action-option__edit-comment">
-                        <a href="{% url 'blogpost_detail' post.id %}">Edit comment</a>
+                        <a href="{% url 'edit_comment' pk=comment.pk %}">Edit comment</a>
                     </div>
                     <div class="comment-action-option__delete-comment">
-                        <a href="{% url 'blogpost_detail' post.id %}">Delete comment</a>
+                        <a href="#">Delete comment</a>
                     </div>
                 </div>
-
                 {% endif %}
             </div>
         </div>

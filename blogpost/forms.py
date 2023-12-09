@@ -21,8 +21,9 @@ class PostForm(forms.ModelForm):
         }
         
 class PostCommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea(attrs={'maxlength':255,'class':'comment__textarea'}))
+    comment = forms.CharField(widget=forms.Textarea(attrs={'maxlength':1000,'class':'comment__textarea'}))
     class Meta:
         model = PostComment
-        fields = ['comment']
+        fields = ['comment', 'edited']
+        widgets = {'edited': forms.HiddenInput()}
     

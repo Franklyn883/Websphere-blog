@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import ( HomePageView,BlogpostDeleteView,PostCategoryFilterView,BlogPostDetailView,
-                    BlogpostUpdateView,SearchResultsListView,BlogPostCreateView, AuthorBlogpostList,edit_comment)
+                    BlogpostUpdateView,SearchResultsListView,BlogPostCreateView, AuthorBlogpostList, EditCommentView)
+
 urlpatterns = [
     # path("r'^create/$'", create_post, name="create_blogpost"),
     path('create/',BlogPostCreateView.as_view(), name='create_blogpost'),
@@ -11,5 +12,5 @@ urlpatterns = [
     path('delete/<uuid:pk>/', BlogpostDeleteView.as_view(), name='delete_blogpost'),
     path('search/', SearchResultsListView.as_view(), name="search_results"),
     path('userposts/<str:username>', AuthorBlogpostList.as_view(), name='user-posts'),
-     path('comment/<int:comment_id>/edit/', edit_comment, name='edit_comment'),
+    path('comment/<int:pk>/edit/', EditCommentView.as_view(), name='edit_comment'),
 ]

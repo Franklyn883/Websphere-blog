@@ -62,9 +62,10 @@ class PostComment(models.Model):
     comment = models.TextField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    edited = models.BooleanField(default=False)
     
     def get_absolute_url(self):
-        return reverse('blogpost_detail', args=[str(self.post.id)])
+       return reverse('edit_comment', args=[str(self.id)])
     
     def __str__(self):
         return self.comment

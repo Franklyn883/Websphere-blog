@@ -91,20 +91,24 @@ class BlogPostDetailView(LoginRequiredMixin, DetailView):
             return self.render_to_response(context)
         
 
-@login_required
-def edit_comment(request, comment_id):
-    comment = get_object_or_404(PostComment,id=comment_id,author = request.user)
+class EditCommentView(LoginRequiredMixin, UpdateView):
+    model = PostComment
+    form_class = PostCommentForm
+    template_name = 'blogpost/edit_comment.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment'] = self.get_object()
+        return context
     
-    if request.method == 'POST':
-        form = PostCommentForm(request.POST,instance=comment)
-        if form.is_valid():
-            form.save()
-            return redirect('blogpost_detail',pk=comment.post.id)
-        
-    else:
-        form = PostCommentForm(instance=comment)
-        
-    return render(request, 'edit_comment.html',{'form':form})
+    def get_success_url(self):
+        return reverse_lazy('blogpost_detail', kwargs={'pk': self.object.post.pk})
+
+
+    def form_valid(self, form):
+        form.instance.edited = True
+        return super().form_valid(form)
+
     
     
     
