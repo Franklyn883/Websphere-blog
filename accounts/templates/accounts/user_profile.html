@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block title %} {{user.username}}
+{% extends 'base.html' %} {% load static %} {% block title %} {{user.username}}'s profile
 {% endblock title %} {% block custom_css %}
 <link
     rel="preload"
@@ -82,7 +82,7 @@
     <div class="user-post-and-comment__item">
         <h3 class="user-post-and-comment__title"> Posts and Comments</h3>
         <p class="user-post__published"> <a href="{% url 'user-posts' user.username  %}">{{ user.post.count}} posts published</a> </p>
-        <p class="user-post__comments">0 comments written</p>
+        <p class="user-post__comments"> 0 comments written</p>
     </div>
    
 </section>
