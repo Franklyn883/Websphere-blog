@@ -1,4 +1,5 @@
-{% extends 'blogpost/base.html' %} {% load static %}{% block title %} {{post.title}} {% endblock title%}{% block custom-css %}
+{% extends 'blogpost/base.html' %} {% load static %}{% block title %}
+{{post.title}} {% endblock title%}{% block custom-css %}
 <link
     rel="preload"
     as="style"
@@ -422,7 +423,9 @@
 
                 <div class="blog-post__comment-action-options hidden">
                     <div class="comment-action-option__edit-comment">
-                        <a href="{% url 'edit_comment' pk=comment.pk %}">Edit comment</a>
+                        <a href="{% url 'edit_comment' pk=comment.pk %}"
+                            >Edit comment</a
+                        >
                     </div>
                     <div class="comment-action-option__delete-comment">
                         <a href="#">Delete comment</a>

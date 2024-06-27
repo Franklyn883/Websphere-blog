@@ -9,33 +9,35 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    
+
     class Meta:
         verbose_name_plural = "categories"
-    
+
     def __str__(self):
         return self.name
 
-    
-    
+
 class Post(models.Model):
     User = get_user_model()
-    id = models.UUIDField(
-    primary_key=True,
-    default=uuid.uuid4,editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
-    content = CKEditor5Field('Text', config_name='extends')
+    content = CKEditor5Field("Text", config_name="extends")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post")
-    cover_img = models.ImageField(upload_to='post_covers/', blank=True, null=True)
-    categories = models.ManyToManyField(Category, related_name='posts')
-   
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="post"
+    )
+    cover_img = models.ImageField(
+        upload_to="post_covers/", blank=True, null=True
+    )
+    categories = models.ManyToManyField(Category, related_name="posts")
+
     def save(self, *args, **kwargs):
         super().save()
         if self.cover_img:
@@ -49,23 +51,27 @@ class Post(models.Model):
             except FileNotFoundError:
                 # Handle the case where the file is not found
                 pass
+
     def __str__(self):
         return self.title
+
     def get_absolute_url(self):
         return reverse("blogpost_detail", args=[str(self.id)])
-    
-    
+
+
 class PostComment(models.Model):
     User = get_user_model()
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, related_name="comments", on_delete=models.CASCADE
+    )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     edited = models.BooleanField(default=False)
-    
+
     def get_absolute_url(self):
-       return reverse('edit_comment', args=[str(self.id)])
-    
+        return reverse("edit_comment", args=[str(self.id)])
+
     def __str__(self):
         return self.comment
