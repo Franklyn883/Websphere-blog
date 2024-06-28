@@ -152,7 +152,7 @@
                         </div>
                         <div class="dropdown-content">
                             <a
-                                href="{% url 'user_profile' pk=request.user.pk %}"
+                                href="{% url 'user_profile' request.user.pk %}"
                                 class="nav__link--user"
                             >
                                 Profile</a

@@ -12,93 +12,77 @@ from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
-from taggit.models import Tag
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import Profile
 
-# Create your views here.
-from django.views.generic import ListView
-from blogpost.models import Post
+
 
 # Create your views here.
 
 
-class HomePageView(ListView):
-    """Render all the blogpost in the database"""
-
-    model = Post
-    template_name = "blogpost/index.html"
-    context_object_name = "posts"
-
-    def get_context_data(self, **kwargs):
-        """Get the related fields, categories, so it can be rendered in the template"""
-        context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
-        return context
-
-    def get(self, request, *args, **kwargs):
-        tag = self.request.GET.get("tag")
-        if tag:
-            posts = Post.objects.filter(
-                tags__name__in=[tag]
-            )  # tags filtered by tag parameter
-        else:
-            posts = Post.objects.all()
-        return render(
-            request,
-            "blogpost/index.html",
-            {"posts": posts, "categories": Category.objects.all()},
-        )
+def home_view(request):
+    """Display the home view."""
+    posts = Post.objects.all()
+    categories = Category.objects.all()
+    context = {"posts":posts,"categories":categories}
+    return render(request, 'blogpost/index.html',context)
 
 
-class BlogPostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    """Creates Blog post."""
+@login_required
+def post_create_view(request):
+    form = PostForm()
+    context = {"form":form}
+    
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.author = request.user
+            post.cover_img = request.FILES.get('cover_img')
+            post.save()
+            form.save_m2m()
+            messages.success(request, "Post created successfully")
+            return redirect('home')
+            
+    return render(request,'blogpost/blogpost_create.html', context)
 
-    form_class = PostForm
-    model = Post
-    template_name = "blogpost/blogpost_create.html"
-    success_message = " Post Added Successfully"
-    success_url = reverse_lazy("home")
+# class BlogPostDetailView(LoginRequiredMixin, DetailView):
+#     """Renders the full details of a blogpost"""
 
-    def form_valid(self, form):
-        """validates form and ensure proper saving of the many to many fields"""
-        form.instance.author = self.request.user
-        form.instance.cover_img = self.request.FILES.get("cover_img")
-        response = super().form_valid(form)
-        print(self.object)  # Add this line
-        self.object.categories.set(form.cleaned_data["categories"])
-        return response
+#     model = Post
+#     template_name = "blogpost/blogpost_detail.html"
+#     context_object_name = "post"
 
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["comments"] = PostComment.objects.filter(post=self.object)
+#         context["form"] = PostCommentForm()
+#         return context
 
-class BlogPostDetailView(LoginRequiredMixin, DetailView):
-    """Renders the full details of a blogpost"""
+#     def post(self, request, *arg, **kwargs):
+#         post = self.get_object()
+#         form = PostCommentForm(request.POST)
 
-    model = Post
-    template_name = "blogpost/blogpost_detail.html"
-    context_object_name = "post"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["comments"] = PostComment.objects.filter(post=self.object)
-        context["form"] = PostCommentForm()
-        return context
-
-    def post(self, request, *arg, **kwargs):
-        post = self.get_object()
-        form = PostCommentForm(request.POST)
-
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.author = self.request.user
-            comment.save()
-            return redirect("blogpost_detail", pk=post.pk)
-        else:
-            context = self.get_context_data()
-            context["form"] = form
-            return self.render_to_response(context)
-
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.post = post
+#             comment.author = self.request.user
+#             comment.save()
+#             return redirect("blogpost_detail", pk=post.pk)
+#         else:
+#             context = self.get_context_data()
+#             context["form"] = form
+#             return self.render_to_response(context)
+def post_detail_view(request,pk):
+    post = get_object_or_404(Post,id=pk)
+    comments = post.post_comments.all().order_by("-created_at")
+    form = PostCommentForm()
+    if request.method == "POST":
+       comment = PostComment.objects.create(author=request.user,post=post, comment=request.POST.get('comment'))
+        
+    context = {"post":post,"comments":comments,"form":form}
+    return render(request,"blogpost/blogpost_detail.html",context)
 
 class EditCommentView(LoginRequiredMixin, UpdateView):
     model = PostComment

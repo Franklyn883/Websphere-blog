@@ -82,7 +82,7 @@
     <div class="user-post-and-comment__item">
         <h3 class="user-post-and-comment__title"> Posts and Comments</h3>
         <p class="user-post__published"> <a href="{% url 'user-posts' user.username  %}">{{ user.post.count}} posts published</a> </p>
-        <p class="user-post__comments"> 0 comments written</p>
+        <p class="user-post__comments"> {{user.comment.count}} comments written</p>
     </div>
    
 </section>

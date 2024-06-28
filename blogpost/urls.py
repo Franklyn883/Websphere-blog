@@ -1,35 +1,35 @@
 from django.urls import path
 from .views import (
-    HomePageView,
+    home_view,
     BlogpostDeleteView,
     PostCategoryFilterView,
-    BlogPostDetailView,
+    post_detail_view,
     BlogpostUpdateView,
     SearchResultsListView,
-    BlogPostCreateView,
+    post_create_view,
     AuthorBlogpostList,
     EditCommentView,
 )
 
 urlpatterns = [
     # path("r'^create/$'", create_post, name="create_blogpost"),
-    path("create/", BlogPostCreateView.as_view(), name="create_blogpost"),
-    path("", HomePageView.as_view(), name="home"),
-    path("<uuid:pk>/", BlogPostDetailView.as_view(), name="blogpost_detail"),
+    path("create/", post_create_view, name="create_blogpost"),
+    path("", home_view, name="home"),
+    path("<uuid:pk>/", post_detail_view, name="blogpost_detail"),
     path(
         "category/<uuid:pk>/",
         PostCategoryFilterView.as_view(),
-        name="category_filter",
+        name="category_filter"
     ),
     path(
         "update/<uuid:pk>/",
         BlogpostUpdateView.as_view(),
-        name="update_blogpost",
+        name="update_blogpost"
     ),
     path(
         "delete/<uuid:pk>/",
         BlogpostDeleteView.as_view(),
-        name="delete_blogpost",
+        name="delete_blogpost"
     ),
     path("search/", SearchResultsListView.as_view(), name="search_results"),
     path(

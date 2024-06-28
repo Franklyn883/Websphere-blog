@@ -1,0 +1,15 @@
+<aside class="sidebar">
+    <div class="category-section">
+        <h1 class="category-section-heading">Browse Categories</h1>
+        <ul class=" category-list">
+            {% for category in categories|slice:":5"  %}
+            <li class="category-list__item">
+                <a href="{% url 'category_filter' category.id %}"
+                    class="category-list__link"><h1 class="category-list__title">{{ category.name }}</h1>
+                <p class="category-list__description">{{ category.description}} </p>
+            </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</aside>

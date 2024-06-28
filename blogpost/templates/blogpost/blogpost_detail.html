@@ -364,9 +364,15 @@
             <img src="{{ post.author.profile.photo.url }}" />
         </div>
         <div class="comment__comment-input">
-            <form method="post" action="{% url 'blogpost_detail' pk=post.pk %}">
+            <form method="post" action="{% url 'blogpost_detail' post.pk %}">
                 {% csrf_token %}
-                <div class="content">{{ form.comment }}</div>
+                <div class="content">
+                    <textarea
+                        class="comment__textarea"
+                        name="comment"
+                        placeholder="Add your comment here!"
+                    ></textarea>
+                </div>
                 <button type="submit" class="comment__add-comment-btn">
                     Add comment
                 </button>

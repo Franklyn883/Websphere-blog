@@ -14,6 +14,7 @@ class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True)
 
     class Meta:
         verbose_name_plural = "categories"
@@ -51,7 +52,9 @@ class Post(models.Model):
             except FileNotFoundError:
                 # Handle the case where the file is not found
                 pass
-
+            
+    class Meta:
+        ordering = ["-created_at","-updated_at"]    
     def __str__(self):
         return self.title
 
@@ -62,9 +65,9 @@ class Post(models.Model):
 class PostComment(models.Model):
     User = get_user_model()
     post = models.ForeignKey(
-        Post, related_name="comments", on_delete=models.CASCADE
+        Post, related_name="post_comments", on_delete=models.CASCADE
     )
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment")
     comment = models.TextField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

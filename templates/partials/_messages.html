@@ -1,0 +1,10 @@
+{% if messages %}
+<div>
+    {% for message in messages %}
+
+    <div>
+        <div class="text-lg">{{ message }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
