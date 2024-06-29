@@ -17,7 +17,6 @@ from django.contrib import messages
 from accounts.models import Profile
 
 
-
 # Create your views here.
 
 
@@ -25,83 +24,94 @@ def home_view(request):
     """Display the home view."""
     posts = Post.objects.all()
     categories = Category.objects.all()
-    context = {"posts":posts,"categories":categories}
-    return render(request, 'blogpost/index.html',context)
+    context = {"posts": posts, "categories": categories}
+    return render(request, "blogpost/index.html", context)
 
 
 @login_required
 def post_create_view(request):
     form = PostForm()
-    context = {"form":form}
-    
+    context = {"form": form}
+
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid:
             post = form.save(commit=False)
             post.author = request.user
-            post.cover_img = request.FILES.get('cover_img')
+            post.cover_img = request.FILES.get("cover_img")
             post.save()
             form.save_m2m()
             messages.success(request, "Post created successfully")
-            return redirect('home')
-            
-    return render(request,'blogpost/blogpost_create.html', context)
+            return redirect("home")
 
-# class BlogPostDetailView(LoginRequiredMixin, DetailView):
-#     """Renders the full details of a blogpost"""
+    return render(request, "blogpost/blogpost_create.html", context)
 
-#     model = Post
-#     template_name = "blogpost/blogpost_detail.html"
-#     context_object_name = "post"
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["comments"] = PostComment.objects.filter(post=self.object)
-#         context["form"] = PostCommentForm()
-#         return context
-
-#     def post(self, request, *arg, **kwargs):
-#         post = self.get_object()
+# def post_detail_view(request, pk):
+#     post = get_object_or_404(Post, id=pk)
+#     comments = post.post_comments.all().order_by("-created_at")
+#     form = PostCommentForm()
+#     if request.method == "POST":
 #         form = PostCommentForm(request.POST)
-
 #         if form.is_valid():
 #             comment = form.save(commit=False)
+#             comment.author = request.user
 #             comment.post = post
-#             comment.author = self.request.user
 #             comment.save()
-#             return redirect("blogpost_detail", pk=post.pk)
-#         else:
-#             context = self.get_context_data()
-#             context["form"] = form
-#             return self.render_to_response(context)
-def post_detail_view(request,pk):
-    post = get_object_or_404(Post,id=pk)
-    comments = post.post_comments.all().order_by("-created_at")
-    form = PostCommentForm()
+#             return redirect("blogpost_detail", pk=post.id)
+
+#     context = {"post": post, "comments": comments, "form": form}
+#     return render(request, "blogpost/blogpost_detail.html", context)
+
+
+def post_detail_view(request, pk, comment_id=None):
+    post = get_object_or_404(Post, id=pk)
+    
+    if comment_id:
+        comment = get_object_or_404(PostComment, id=comment_id, post=post)
+       
+    else:
+        comment = None
+      
     if request.method == "POST":
-       comment = PostComment.objects.create(author=request.user,post=post, comment=request.POST.get('comment'))
-        
-    context = {"post":post,"comments":comments,"form":form}
-    return render(request,"blogpost/blogpost_detail.html",context)
+        if comment:
+            form = PostCommentForm(request.POST, instance=comment)
+        else:
+            form = PostCommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.author = request.user
+            new_comment.post = post
+            if comment:
+                new_comment.edited = True
+            new_comment.save()
+            return redirect("blogpost_detail", post.id)
+    else:
+        if comment:
+            form = PostCommentForm(instance=comment)
+        else:
+            form = PostCommentForm()
+            
+    comments = post.post_comments.all().order_by("-created_at")
 
-class EditCommentView(LoginRequiredMixin, UpdateView):
-    model = PostComment
-    form_class = PostCommentForm
-    template_name = "blogpost/edit_comment.html"
+    context = {"post": post, "comments": comments, "form": form,  'comment_id': comment_id,}
+    return render(request, "blogpost/blogpost_detail.html", context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["comment"] = self.get_object()
-        return context
 
-    def get_success_url(self):
-        return reverse_lazy(
-            "blogpost_detail", kwargs={"pk": self.object.post.pk}
-        )
+def edit_comment_view(request, pk):
+    comment = get_object_or_404(PostComment, id=pk)
+    form = PostCommentForm(instance=comment)
+    context = {"form": form}
+    if request.method == "POST":
+        form = PostCommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save(commit=False)
+            form.edited = True
+            form.save()
+            messages.success(request, "Comment updated")
+            return redirect("blogpost_detail", comment.post.pk)
 
-    def form_valid(self, form):
-        form.instance.edited = True
-        return super().form_valid(form)
+    return render(request, "blogpost/edit_comment.html", context)
 
 
 @login_required

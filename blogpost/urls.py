@@ -8,14 +8,15 @@ from .views import (
     SearchResultsListView,
     post_create_view,
     AuthorBlogpostList,
-    EditCommentView,
+   edit_comment_view,
 )
 
 urlpatterns = [
     # path("r'^create/$'", create_post, name="create_blogpost"),
     path("create/", post_create_view, name="create_blogpost"),
     path("", home_view, name="home"),
-    path("<uuid:pk>/", post_detail_view, name="blogpost_detail"),
+    path("post/<uuid:pk>/", post_detail_view, name="blogpost_detail"),
+    path("post/<uuid:pk>/comment/<int:comment_id>", post_detail_view, name="blogpost_detail_comment"),
     path(
         "category/<uuid:pk>/",
         PostCategoryFilterView.as_view(),
@@ -38,6 +39,6 @@ urlpatterns = [
         name="user-posts",
     ),
     path(
-        "comment/<int:pk>/edit/", EditCommentView.as_view(), name="edit_comment"
+        "comment/edit/<int:pk>/", edit_comment_view, name="edit_comment"
     ),
 ]

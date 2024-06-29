@@ -47,3 +47,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+let section = document.getElementById("comment-form")

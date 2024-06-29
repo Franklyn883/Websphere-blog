@@ -26,7 +26,7 @@ urlpatterns = [
 
     #local url
     path('accounts/profile/', include('accounts.urls')),
-    path('blogpost/', include("blogpost.urls")),
+    path('', include("blogpost.urls")),
     
     #user management
     path("accounts/", include("allauth.urls")), 

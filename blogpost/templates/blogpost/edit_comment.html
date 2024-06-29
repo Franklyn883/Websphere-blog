@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Edit Comment</h2>
-    <form method="post" action="{% url 'edit_comment' pk=comment.pk %}">
+    <form method="post" action="">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save Changes</button>
