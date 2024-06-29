@@ -25,9 +25,9 @@
         {% endblock script %}
     </head>
     <body>
-        <header>
+        
        {% include "layout/b.html" %}
-    </header>
+    {% include 'partials/_messages.html' %}
   
         <main class="container">
             {% block content %} {% endblock content %}

@@ -1,20 +1,17 @@
-from typing import Any
-from django.db.models.query import QuerySet
+
 from django.shortcuts import render
 from .forms import PostForm, PostCommentForm
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from .models import Post, Category, PostComment
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from accounts.models import Profile
+
 
 
 # Create your views here.
@@ -22,7 +19,13 @@ from accounts.models import Profile
 
 def home_view(request):
     """Display the home view."""
-    posts = Post.objects.all()
+    q = request.GET.get("q") if request.GET.get("q") != None else ""
+    posts = Post.objects.filter(
+        Q(title__icontains=q)
+        | Q(subtitle__icontains=q)
+        | Q(author__username__icontains=q)
+        | Q(categories__name__icontains=q   )
+    )
     categories = Category.objects.all()
     context = {"posts": posts, "categories": categories}
     return render(request, "blogpost/index.html", context)
@@ -30,15 +33,17 @@ def home_view(request):
 
 @login_required
 def post_create_view(request):
+    """Creates a new post."""
     form = PostForm()
     context = {"form": form}
 
     if request.method == "POST":
         form = PostForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.cover_img = request.FILES.get("cover_img")
+            if "cover_img" in request.FILES:
+                post.cover_img = request.FILES.get("cover_img")
             post.save()
             form.save_m2m()
             messages.success(request, "Post created successfully")
@@ -47,32 +52,16 @@ def post_create_view(request):
     return render(request, "blogpost/blogpost_create.html", context)
 
 
-# def post_detail_view(request, pk):
-#     post = get_object_or_404(Post, id=pk)
-#     comments = post.post_comments.all().order_by("-created_at")
-#     form = PostCommentForm()
-#     if request.method == "POST":
-#         form = PostCommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.author = request.user
-#             comment.post = post
-#             comment.save()
-#             return redirect("blogpost_detail", pk=post.id)
-
-#     context = {"post": post, "comments": comments, "form": form}
-#     return render(request, "blogpost/blogpost_detail.html", context)
-
-
 def post_detail_view(request, pk, comment_id=None):
+    """Gets the post with the pk, then if the commment_id is present in the url, the comment with the id is initialized, associated with the right post."""
     post = get_object_or_404(Post, id=pk)
-    
+    # we check weather the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
         comment = get_object_or_404(PostComment, id=comment_id, post=post)
-       
+
     else:
         comment = None
-      
+
     if request.method == "POST":
         if comment:
             form = PostCommentForm(request.POST, instance=comment)
@@ -91,35 +80,28 @@ def post_detail_view(request, pk, comment_id=None):
             form = PostCommentForm(instance=comment)
         else:
             form = PostCommentForm()
-            
+
     comments = post.post_comments.all().order_by("-created_at")
 
-    context = {"post": post, "comments": comments, "form": form,  'comment_id': comment_id,}
+    context = {
+        "post": post,
+        "comments": comments,
+        "form": form,
+        "comment_id": comment_id,
+    }
     return render(request, "blogpost/blogpost_detail.html", context)
-
-
-def edit_comment_view(request, pk):
-    comment = get_object_or_404(PostComment, id=pk)
-    form = PostCommentForm(instance=comment)
-    context = {"form": form}
-    if request.method == "POST":
-        form = PostCommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            form.save(commit=False)
-            form.edited = True
-            form.save()
-            messages.success(request, "Comment updated")
-            return redirect("blogpost_detail", comment.post.pk)
-
-    return render(request, "blogpost/edit_comment.html", context)
 
 
 @login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
     post_id = comment.post.id
-    comment.delete()
-    return redirect("blogpost_detail", pk=post_id)
+    if request.method == "POST":
+        comment.delete()
+        messages.success(request, "Comment deleted successfully")
+        return redirect("blogpost_detail", pk=post_id)
+    context = {"obj": "your comment"}
+    return render(request, "blogpost/confirm_delete.html", context)
 
 
 class PostCategoryFilterView(ListView):
@@ -141,40 +123,58 @@ class PostCategoryFilterView(ListView):
         return context
 
 
-class BlogpostUpdateView(LoginRequiredMixin, UpdateView):
-    """Update blogpost."""
-
-    form_class = PostForm
-    queryset = Post.objects.all()
-    template_name = "blogpost/blogpost_create.html"
-
-
-class BlogpostDeleteView(LoginRequiredMixin, DeleteView):
-    """Delete blogpost"""
-
-    model = Post
-    success_url = reverse_lazy("home")
-
-
-class SearchResultsListView(ListView):
-    """Implement search functionality"""
-
-    model = Post
-    context_object_name = "post_list"
-    template_name = "blogpost/search_results.html"
-
-    def get_queryset(self):  # new
-        query = self.request.GET.get("q")
-        if query:
-            return Post.objects.filter(
-                Q(title__icontains=query)
-                | Q(subtitle__icontains=query)
-                | Q(author__username__icontains=query)
-                | Q(categories__name__icontains=query)
-            )
-
+def post_update_view(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    form = PostForm(instance=post)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            if "cover_img" in request.FILES:
+                post.cover_img = request.FILES.get("cover_img")
+            post.save()
+            form.save_m2m()
+            messages.success(request, "Post updated successfully")
+            return redirect("blogpost_detail", pk=post.id)
         else:
-            return Post.objects.all()
+            messages.error(
+                request,
+                "There was an error updating the post. Please try again.",
+            )
+    context = {"form": form}
+    return render(request, "blogpost/blogpost_create.html", context)
+
+
+@login_required(login_url="/login")
+def post_delete_view(request, pk):
+    """Deletes the post where id=pk."""
+    post = get_object_or_404(Post, id=pk)
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, "Post deleted successfully.")
+        return redirect("home")
+    return render(request, "blogpost/confirm_delete.html", {"obj": post})
+
+
+# class SearchResultsListView(ListView):
+#     """Implement search functionality"""
+
+#     model = Post
+#     context_object_name = "post_list"
+#     template_name = "blogpost/search_results.html"
+
+#     def get_queryset(self):  # new
+#         query = self.request.GET.get("q")
+#         if query:
+#             return Post.objects.filter(
+#                 Q(title__icontains=query)
+#                 | Q(subtitle__icontains=query)
+#                 | Q(author__username__icontains=query)
+#                 | Q(categories__name__icontains=query)
+#             )
+
+#         else:
+#             return Post.objects.all()
 
 
 class AuthorBlogpostList(LoginRequiredMixin, ListView):

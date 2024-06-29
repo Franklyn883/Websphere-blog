@@ -1,5 +1,5 @@
 
-{% extends 'base.html'%}{% load static %}
+{% extends 'base.html'%}{% load static %}{% load humanize %}
 {% block title %} delete post {% endblock title %}
 {% block custom_css %}
 <link
@@ -10,13 +10,13 @@ onload="this.rel='stylesheet'"
 />
 {% endblock custom_css %}
  {% block content %}
-<form method="post" class="delete-post">
+<form method="POST" class="delete-post">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>Are you sure you want to delete "{{ obj| truncatewords:10 | safe  }}"?</p>
     {{ form }}
     <input type="submit" value="confirm">
 </form>
-<div><a href="{{ request.META. }}"></a></div>
+<div><a href="{{ request.META.HTTP_REFERER }}">back</a></div>
 {% endblock content %}
 
 

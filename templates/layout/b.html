@@ -1,3 +1,4 @@
+<header>
 <nav class="nav">
     <ul class="nav__items">
         <li class="nav__item">
@@ -9,7 +10,7 @@
 
         <li class="nav__item nav__search">
             <form
-                action="{% url 'search_results' %}"
+                action="{% url 'home'% }"
                 method="get"
                 class="container--search-bar"
             >
@@ -96,3 +97,5 @@
         {% endif%}
     </ul>
 </nav>
+</header>
+{% include 'partials/_mobile_search.html' %}

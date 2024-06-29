@@ -35,7 +35,9 @@
         </div></a
     >
     <h1 class="post-title">{{ post.title}}</h1>
+    {% if post.subtitle %}
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
+    {% endif %}
     <div class="post-content">{{post.content|safe}}</div>
 </section>
 
@@ -210,12 +212,12 @@
     <div class="post-option-more-content hidden">
         {% if post.author == request.user %}
         <div class="post-option-more__edit post-option">
-            <a href="{% url 'update_blogpost' pk=post.pk %}" class="edit"
+            <a href="{% url 'update_blogpost' post.pk %}" class="edit"
                 >Edit Post</a
             >
         </div>
         <div class="post-option-more__delete post-option">
-            <a href="{% url 'delete_blogpost' pk=post.pk %}" class="delete"
+            <a href="{% url 'delete_blogpost' post.pk %}" class="delete"
                 >Delete Post</a
             >
         </div>
@@ -258,7 +260,7 @@
     <p class="blog-post-comment__text">
         Top comments <span class="num-of-comments">{{ comments.count }}</span>
     </p>
-
+{% if user.is_authenticated %}
     <div class="blog-post-comment__user-comment">
         
         <div class="comment__comment-input">
@@ -273,6 +275,7 @@
             </form>
         </div>
     </div>
+    {% endif %}
     {% for comment in comments %}
     <div class="blog-post-comment__comments">
         <div class="blog-post__comment-container">
@@ -328,7 +331,7 @@
                         >
                     </div>
                     <div class="comment-action-option__delete-comment">
-                        <a href="#">Delete comment</a>
+                        <a href="{% url 'delete-comment' comment.id %}#comment-form">Delete comment</a>
                     </div>
                 </div>
                 {% endif %}

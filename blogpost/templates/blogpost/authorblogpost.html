@@ -8,53 +8,8 @@
 />
 
 {% endblock custom_css %} {% block content %}
-<section class="container container-grid">
-    <article class="blogposts">
-        {% for post in posts %}
-        <div class="post-card">
-            <a class="link" href="{% url 'user_profile' pk=post.author.id%}">
-            <div class="post-author">
-                <div class="post-author__profile-pic">
-                    <img src="  {{ post.author.profile.photo.url }} " alt="{{user}}'s photo"/>
-                                  </div>
-                    <div class="post-author__detail">         
-                    <span class="post-author__username"> {{post.author}} </span>
-                    <p id="publish-date">{{post.created_at|timesince }} ago</p>
-                </div> 
-            </div>
-        </a>
-
-            <div class="blogpost__content">
-                <div class="post-content">
-                    <h3 class="post-title">{{ post.title }}</h3>
-                    {{ post.content|truncatewords:20 | safe }}
-                </div>
-                {% if post.cover_img %}
-                <div class="post-image">
-                    <img
-                        src=" {{ post.cover_img.url }}"
-                        alt="{{ post.title }}"
-                        class="blogpost__cover-img"
-                    />
-                </div>
-                {% endif %}
-            </div>
-            <div class="bottom">
-                <div>
-                <a
-                    href="{% url 'blogpost_detail' pk=post.pk %}"
-                    class="link--post-details"
-                    >Read More</a
-                >
-            </div>
-               <div class="post-card__categories">
-                    {% for category in post.categories.all %}
-                    <a href="{% url 'category_filter' pk=category.pk %}" class="link--category"> <small class="category">{{ category.name }}</small></a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </article>
+<div class="card">
+    {% include "blogpost/partials/_feed.html" %}
+</div>
 
     {% endblock content %}

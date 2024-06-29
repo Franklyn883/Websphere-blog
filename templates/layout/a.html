@@ -48,7 +48,7 @@
             </li>
             <li class="nav__item nav__search desktop-version">
                 <form
-                    action="{% url 'search_results' %}"
+                    action="{% url 'home' %}"
                     method="get"
                     class="container--search-bar"
                 >
@@ -173,3 +173,4 @@
         </ul>
     </nav>
 </header>
+{% include 'partials/_mobile_search.html' %}
