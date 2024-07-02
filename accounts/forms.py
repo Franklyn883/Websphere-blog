@@ -22,9 +22,9 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
        model = get_user_model()
        fields = ('username', 'first_name', 'last_name', 'email')
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['readonly'] = True
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['username'].widget.attrs['readonly'] = True
 #update user profile
 class UserProfileUpdateForm(forms.ModelForm):
     tech_stack = forms.CharField(widget=forms.Textarea(attrs={'maxlength':200}), required=False) 

@@ -54,9 +54,9 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
     "allauth.socialaccount.providers.google",
-    'taggit',
     'django_ckeditor_5',
     'phonenumber_field',
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -300,3 +300,4 @@ CKEDITOR_5_CONFIGS = {
         }
     }
 }
+ACCOUNT_USERNAME_BLACKLIST = ["account", "admin", "profile", "category","post","comment"]

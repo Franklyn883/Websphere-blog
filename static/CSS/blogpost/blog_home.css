@@ -8,7 +8,7 @@ gap: 2em;
     max-width: 1150px;
 }
 
-/* Post settings */
+/* Post style */
 .post-card{
     border: var(--border);
     border-radius: 0.45em;

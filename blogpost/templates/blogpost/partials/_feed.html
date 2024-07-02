@@ -2,13 +2,13 @@
 <article class="blogposts">
     {% for post in posts %}
     <div class="post-card">
-        <a class="link" href="{% url 'user_profile' pk=post.author.id%}">
+        <a class="link" href="{% url 'userprofile' post.author.username %}">
         <div class="post-author">
             <div class="post-author__profile-pic">
-                <img src="  {{ post.author.profile.photo.url }} " alt="{{user}}'s photo"/>
+                <img src="  {{ post.author.profile.profile_img }} " alt="{{user}}'s photo"/>
                               </div>
                 <div class="post-author__detail">         
-                <span class="post-author__username"> {{post.author}} </span>
+                <span class="post-author__username"> {{post.author.profile.name}} </span>
                 <p id="publish-date">{{post.created_at|timesince }} ago</p>
             </div> 
         </div>

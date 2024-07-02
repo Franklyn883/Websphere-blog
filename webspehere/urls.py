@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #local url
-    path('accounts/profile/', include('accounts.urls')),
+    path('profile/', include('accounts.urls')),
     path('', include("blogpost.urls")),
     
     #user management

@@ -57,7 +57,7 @@ def post_detail_view(request, pk, comment_id=None):
     post = get_object_or_404(Post, id=pk)
     # we check weather the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
-        comment = get_object_or_404(PostComment, id=comment_id, post=post)
+        comment = get_object_or_404(PostComment, id=comment_id, post=post, author=request.user)
 
     else:
         comment = None
@@ -122,9 +122,9 @@ class PostCategoryFilterView(ListView):
         context["categories"] = Category.objects.all()
         return context
 
-
+@login_required
 def post_update_view(request, pk):
-    post = get_object_or_404(Post, id=pk)
+    post = get_object_or_404(Post, id=pk, author=request.user)
     form = PostForm(instance=post)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -148,7 +148,7 @@ def post_update_view(request, pk):
 @login_required(login_url="/login")
 def post_delete_view(request, pk):
     """Deletes the post where id=pk."""
-    post = get_object_or_404(Post, id=pk)
+    post = get_object_or_404(Post, id=pk, author=request.user)
     if request.method == "POST":
         post.delete()
         messages.success(request, "Post deleted successfully.")

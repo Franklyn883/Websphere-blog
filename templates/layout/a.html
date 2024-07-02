@@ -146,13 +146,13 @@
                     <div class="dropdown">
                         <div class="user-img">
                             <img
-                                src="{{  request.user.profile.photo.url }}"
-                                alt="{{request.user}}'s photo"
+                                src="{{  request.user.profile.profile_img }}"
+                                alt="{{ request.user}}'s photo"
                             />
                         </div>
                         <div class="dropdown-content">
                             <a
-                                href="{% url 'user_profile' user.pk %}"
+                                href="{% url 'profile' %}"
                                 class="nav__link--user"
                             >
                                 Profile</a

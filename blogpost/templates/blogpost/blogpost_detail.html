@@ -14,20 +14,18 @@
 />
 {% endblock custom-css %} {% block script %}
 <script src="{% static 'Javascript/blogpostdetails.js' %}" defer></script>
-{% endblock script %}  {% block content%}
+{% endblock script %} {% block content%}
 <section class="post-details">
-    {% if post.cover_img%}
+    {% if post.cover_img %}
     <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
     {% endif %}
-    <a class="author__link" href="{% url 'user_profile' pk=post.author.id%}"
+    <a class="author__link" href="{% url 'userprofile' post.author.username %}"
         ><div class="author">
             <div class="author__profile-pic profile-pic">
-                <img src="{{ post.author.profile.photo.url }}" />
+                <img src="{{ post.author.profile.profile_img }}" />
             </div>
             <div class="author__text">
-                <p class="author__name">
-                    {{ post.author.first_name }} {{ post.author.last_name}}
-                </p>
+                <p class="author__name">{{ post.author.profile.name}}</p>
                 <small class="publication-date"
                     >posted on {{post.created_at|date:"d M, Y" }}</small
                 >
@@ -236,18 +234,18 @@
         <div class="author-details__profile-pic profile-pic">
             <a
                 class="author-details__link"
-                href="{% url 'user_profile' pk=post.author.id%}"
+                href="{% url 'userprofile' post.author.username %}"
             >
-                <img src="{{ post.author.profile.photo.url }}" />
+                <img src="{{ post.author.profile.profile_img }}" />
             </a>
         </div>
         <div class="author-details__username-bio">
             <a
                 class="author__link"
-                href="{% url 'user_profile' pk=post.author.id%}"
+                href="{% url 'userprofile' post.author.username %}"
             >
                 <p class="author-details__username">
-                    {{ post.author.first_name }} {{ post.author.last_name}}
+                    {{ post.author.profile.name }}
                 </p>
             </a>
             <div class="author-details__about">
@@ -260,38 +258,37 @@
     <p class="blog-post-comment__text">
         Top comments <span class="num-of-comments">{{ comments.count }}</span>
     </p>
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <div class="blog-post-comment__user-comment">
-        
         <div class="comment__comment-input">
             <form method="post" action="" id="comment-form">
                 {% csrf_token %}
-                <div class="content">
-                    {{ form.comment }}
-                </div>
+                <div class="content">{{ form.comment }}</div>
                 <button type="submit" class="comment__add-comment-btn">
-                    {% if comment_id %}Update  {% else %} Add {% endif%}comment
+                    {% if comment_id %}Update {% else %} Add {% endif%}comment
                 </button>
             </form>
         </div>
     </div>
-    {% endif %}
-    {% for comment in comments %}
+    {% endif %} {% for comment in comments %}
     <div class="blog-post-comment__comments">
         <div class="blog-post__comment-container">
+            
             <div class="blog-post__user-details">
+                
                 <div class="blog-post__user-profile-pic">
                     <img
-                        src="{{ comment.author.profile.photo.url }}"
+                        src="{{ comment.author.profile.profile_img }}"
                         alt="{{ comment.author }}'s profile pic"
                     />
                 </div>
                 <p class="blog-post__user-name">{{ comment.author }}</p>
+
                 <p class="blog-post__comment-date">
                     {{ comment.created_at|date:"d M, Y" }}
                 </p>
 
-                {% if request.user == user %}
+                {% if request.user == comment.author %}
 
                 <div
                     class="blog-post__comment-actions comment-action-btn svg-container"
@@ -326,19 +323,23 @@
 
                 <div class="blog-post__comment-action-options hidden">
                     <div class="comment-action-option__edit-comment">
-                        <a href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
+                        <a
+                            href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
                             >Edit comment</a
                         >
                     </div>
                     <div class="comment-action-option__delete-comment">
-                        <a href="{% url 'delete-comment' comment.id %}#comment-form">Delete comment</a>
+                        <a
+                            href="{% url 'delete-comment' comment.id %}#comment-form"
+                            >Delete comment</a
+                        >
                     </div>
                 </div>
                 {% endif %}
             </div>
         </div>
         <div class="blog-post__comment-details">{{ comment.comment }}</div>
-        {% if comment.edited  %}<small>Edited</small> {% endif %}
+        {% if comment.edited %}<small>Edited</small> {% endif %}
     </div>
     {% endfor %}
 </section>

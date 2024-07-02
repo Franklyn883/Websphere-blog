@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from PIL import Image 
-
+from django.templatetags.static import static
 #creating current user
 
 class CustomUser(AbstractUser):
@@ -23,14 +23,14 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
-    photo = models.ImageField(upload_to='profile_images/', default='default.jpg')
+    photo = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     phone_number = PhoneNumberField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     bio = models.TextField(max_length=255,null=True,blank=True)
     gender_choices = [
         ('M', 'Male'),
         ('F', 'Female'),
-        ('O', 'Other'),
+        ('O', 'Others'),
     ]
     gender = models.CharField(max_length=1, choices=gender_choices, null=True, blank=True)
     tech_stack = models.CharField(max_length=255,blank=True,null=True)
@@ -43,15 +43,36 @@ class Profile(models.Model):
     
     # Override the save method of the model
     # resizing images
-    def save(self, *args, **kwargs):
-        super().save()
+    
+    @property
+    def name(self):
+        if self.user.first_name and self.user.last_name:
+            name = "{0} {1}".format(self.user.first_name.title(), self.user.last_name.title())
+        else:
+            name = self.user.username
+        return name
+    
+    @property
+    def profile_img(self):
+        try:
+            profile_img = self.photo.url
+            
+        except:
+            profile_img = static('assets/images/default.jpg')
+            
+        return profile_img
+    
+    # def save(self, *args, **kwargs):
+    #     super().save()
 
-        img = Image.open(self.photo.path)
+    #     img = Image.open(self.photo.path)
 
-        if img.height > 500 or img.width > 500:
-            new_img = (500, 500)
-            img.thumbnail(new_img)
-            img.save(self.photo.path)
+    #     if img.height > 500 or img.width > 500:
+    #         new_img = (500, 500)
+    #         img.thumbnail(new_img)
+    #         img.save(self.photo.path)
+            
+    
             
 class Follower(models.Model):
     User = get_user_model()

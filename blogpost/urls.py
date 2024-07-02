@@ -11,7 +11,6 @@ from .views import (
 )
 
 urlpatterns = [
-    # path("r'^create/$'", create_post, name="create_blogpost"),
     path("create/", post_create_view, name="create_blogpost"),
     path("", home_view, name="home"),
     path("post/<uuid:pk>/", post_detail_view, name="blogpost_detail"),
@@ -27,11 +26,14 @@ urlpatterns = [
     ),
     path("update/<uuid:pk>/", post_update_view, name="update_blogpost"),
     path("post/delete/<uuid:pk>/", post_delete_view, name="delete_blogpost"),
-   
     path(
         "userposts/<str:username>",
         AuthorBlogpostList.as_view(),
         name="user-posts",
     ),
-    path("comment.delete/<int:comment_id>/", delete_comment, name="delete-comment")
+    path(
+        "comment/delete/<int:comment_id>/",
+        delete_comment,
+        name="delete-comment",
+    ),
 ]

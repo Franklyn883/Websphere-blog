@@ -72,12 +72,12 @@
             <div class="nav__item-user">
                 <div class="dropdown">
                     <img
-                        src="{{  request.user.profile.photo.url }}"
+                        src="{{  request.user.profile.profile_img }}"
                         alt="{{request.user}}'s photo"
                     />
                     <div class="dropdown-content">
                         <a
-                            href="{% url 'user_profile' pk=request.user.pk %}"
+                            href="{% url 'profile' %}"
                             class="nav__link--user"
                         >
                             Profile</a
