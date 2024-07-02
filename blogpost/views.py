@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from .forms import PostForm, PostCommentForm
 from django.views.generic import ListView
@@ -13,18 +12,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-
 # Create your views here.
 
 
 def home_view(request):
-    """Display the home view."""
+    """Display the home view. and filter displayed post."""
     q = request.GET.get("q") if request.GET.get("q") != None else ""
     posts = Post.objects.filter(
         Q(title__icontains=q)
         | Q(subtitle__icontains=q)
         | Q(author__username__icontains=q)
-        | Q(categories__name__icontains=q   )
+        | Q(categories__name__icontains=q)
     )
     categories = Category.objects.all()
     context = {"posts": posts, "categories": categories}
@@ -53,11 +51,16 @@ def post_create_view(request):
 
 
 def post_detail_view(request, pk, comment_id=None):
-    """Gets the post with the pk, then if the commment_id is present in the url, the comment with the id is initialized, associated with the right post."""
+    """Render, the post with the given pk in details.Gets the post with the pk, 
+    then if the comment_id is present in the url, the comment with the id is 
+    updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
-    # we check weather the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
+
+    # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
-        comment = get_object_or_404(PostComment, id=comment_id, post=post, author=request.user)
+        comment = get_object_or_404(
+            PostComment, id=comment_id, post=post, author=request.user
+        )
 
     else:
         comment = None
@@ -94,6 +97,7 @@ def post_detail_view(request, pk, comment_id=None):
 
 @login_required
 def delete_comment(request, comment_id):
+    """Deletes comment with the given id, where the author is the request user."""
     comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
     post_id = comment.post.id
     if request.method == "POST":
@@ -122,8 +126,10 @@ class PostCategoryFilterView(ListView):
         context["categories"] = Category.objects.all()
         return context
 
+
 @login_required
 def post_update_view(request, pk):
+    """Updates post with the given id, when the author is the request user."""
     post = get_object_or_404(Post, id=pk, author=request.user)
     form = PostForm(instance=post)
     if request.method == "POST":
@@ -147,7 +153,7 @@ def post_update_view(request, pk):
 
 @login_required(login_url="/login")
 def post_delete_view(request, pk):
-    """Deletes the post where id=pk."""
+    """Deletes the post where id=pk and the author is the request user."""
     post = get_object_or_404(Post, id=pk, author=request.user)
     if request.method == "POST":
         post.delete()

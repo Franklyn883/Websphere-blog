@@ -13,6 +13,7 @@ User = get_user_model()
 
 @login_required
 def profile_view(request, username=None):
+    """Returns the profile of the request user, or the profile of the user, with the username in the url param."""
     if username:
         profile = get_object_or_404(User, username=username).profile
     else:
@@ -22,11 +23,12 @@ def profile_view(request, username=None):
             Http404
     context = {"profile": profile}
 
-    return render(request, "accounts/user_profile.html",context)
+    return render(request, "accounts/user_profile.html", context)
 
 
 @login_required
 def profile_update(request):
+    """Update the profile of the request user, using the custom user form and the profile form."""
     user_form = CustomUserChangeForm(instance=request.user)
     profile_form = UserProfileUpdateForm(instance=request.user.profile)
     if request.method == "POST":
