@@ -271,76 +271,7 @@
         </div>
     </div>
     {% endif %} {% for comment in comments %}
-    <div class="blog-post-comment__comments">
-        <div class="blog-post__comment-container">
-            
-            <div class="blog-post__user-details">
-                
-                <div class="blog-post__user-profile-pic">
-                    <img
-                        src="{{ comment.author.profile.profile_img }}"
-                        alt="{{ comment.author }}'s profile pic"
-                    />
-                </div>
-                <p class="blog-post__user-name">{{ comment.author }}</p>
-
-                <p class="blog-post__comment-date">
-                    {{ comment.created_at|date:"d M, Y" }}
-                </p>
-
-                {% if request.user == comment.author %}
-
-                <div
-                    class="blog-post__comment-actions comment-action-btn svg-container"
-                    title="more option"
-                >
-                    <svg
-                        width="24px"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        fill="var(--svg-dark-mode)"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g
-                            id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <title></title>
-                            <g id="Complete">
-                                <g id="F-More">
-                                    <path
-                                        d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
-                                        id="Horizontal"
-                                    ></path>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="blog-post__comment-action-options hidden">
-                    <div class="comment-action-option__edit-comment">
-                        <a
-                            href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
-                            >Edit comment</a
-                        >
-                    </div>
-                    <div class="comment-action-option__delete-comment">
-                        <a
-                            href="{% url 'delete-comment' comment.id %}#comment-form"
-                            >Delete comment</a
-                        >
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        <div class="blog-post__comment-details">{{ comment.comment }}</div>
-        {% if comment.edited %}<small>Edited</small> {% endif %}
-    </div>
+    {% include 'blogpost/partials/_comment.html' %}
     {% endfor %}
 </section>
 

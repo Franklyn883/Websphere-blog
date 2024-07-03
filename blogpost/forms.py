@@ -1,4 +1,4 @@
-from .models import Post,Category,PostComment
+from .models import Post,Category,PostComment, Reply
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
 
@@ -26,3 +26,14 @@ class PostCommentForm(forms.ModelForm):
         fields = ['comment', 'edited']
         widgets = {'edited': forms.HiddenInput()}
     
+class ReplyForm(ModelForm):
+    class Meta:
+        model = Reply
+        fields = ["body","edited"]
+        labels ={
+            "body":""
+        }
+        widgets = {
+            "edited": forms.HiddenInput(),
+            "body": forms.TextInput(attrs={"placeholder":"Enter reply","class":"comment__reply"})
+        }

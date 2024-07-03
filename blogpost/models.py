@@ -81,3 +81,22 @@ class PostComment(models.Model):
 
     def __str__(self):
         return self.comment
+
+class Reply(models.Model):
+    """A model of the post comments."""
+    User = get_user_model()
+    parent_comment = models.ForeignKey(
+        PostComment, related_name="replies", on_delete=models.CASCADE
+    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="replies")
+    body = models.TextField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    edited = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        """returns the url of the comment."""
+        return reverse("blogpost_detail", args=[str(self.id)])
+
+    def __str__(self):
+        return self.body

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PostForm, PostCommentForm
+from .forms import PostForm, PostCommentForm,ReplyForm
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -54,6 +54,7 @@ def post_detail_view(request, pk, comment_id=None):
     then if the comment_id is present in the url, the comment with the id is
     updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
+    reply_form = ReplyForm()
 
     # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
@@ -84,12 +85,14 @@ def post_detail_view(request, pk, comment_id=None):
             form = PostCommentForm()
 
     comments = post.post_comments.all().order_by("-created_at")
+    
 
     context = {
         "post": post,
         "comments": comments,
         "form": form,
         "comment_id": comment_id,
+        "reply_form":reply_form,
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
@@ -160,6 +163,22 @@ def post_delete_view(request, pk):
         return redirect("home")
     return render(request, "blogpost/confirm_delete.html", {"obj": post})
 
+
+def add_reply(request,comment_id):
+    comment = get_object_or_404(PostComment,id=comment_id)
+    post_id = comment.post.id
+    if request.method == "POST":
+        print(request.POST)
+        form = ReplyForm(request.POST)
+        if form.is_valid:
+          reply = form.save(commit=False)
+          reply.author = request.user
+          reply.parent_comment = comment
+          reply.save()
+          messages.success(request, "New reply added")
+    return redirect('blogpost_detail', post_id)
+    
+    
 
 # class SearchResultsListView(ListView):
 #     """Implement search functionality"""

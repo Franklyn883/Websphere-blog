@@ -8,6 +8,7 @@ from .views import (
     post_create_view,
     AuthorBlogpostList,
     delete_comment,
+    add_reply
 )
 
 urlpatterns = [
@@ -36,4 +37,5 @@ urlpatterns = [
         delete_comment,
         name="delete-comment",
     ),
+    path("comment/reply/<comment_id>/", add_reply, name="comment-reply")
 ]
