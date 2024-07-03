@@ -1,12 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block title %} {{user.username}}'s profile
-{% endblock title %} {% block custom_css %}
+{% extends 'layouts/c.html' %} {% load static %} {% block title %} {{user.username}}'s profile
+{% endblock title %} {% block custom-css %}
 <link
     rel="preload"
     as="style"
     href="{% static 'CSS/accounts/profile.css' %}"
     onload="this.rel='stylesheet'"
 />
-{% endblock custom_css %} {% block content %}
+{% endblock custom-css %} {% block content %}
 <section class="userprofile container">
     <div class="user">
         <div class="user__profile-pic">
@@ -84,7 +84,5 @@
     </div>
    
 </section>
-
-
 
 {% endblock content %}

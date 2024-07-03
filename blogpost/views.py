@@ -14,7 +14,6 @@ from django.contrib import messages
 
 # Create your views here.
 
-
 def home_view(request):
     """Display the home view. and filter displayed post."""
     q = request.GET.get("q") if request.GET.get("q") != None else ""
@@ -51,8 +50,8 @@ def post_create_view(request):
 
 
 def post_detail_view(request, pk, comment_id=None):
-    """Render, the post with the given pk in details.Gets the post with the pk, 
-    then if the comment_id is present in the url, the comment with the id is 
+    """Render, the post with the given pk in details.Gets the post with the pk,
+    then if the comment_id is present in the url, the comment with the id is
     updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
 

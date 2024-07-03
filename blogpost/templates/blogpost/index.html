@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
+{% extends 'layouts/c.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom-css %}
 
 <link
     rel="preload"
@@ -7,14 +7,11 @@
     onload="this.rel='stylesheet'"
 />
 
-{% endblock custom_css %} 
-{% block explore %}
+{% endblock custom-css %} 
 
-{% endblock explore %}
 {% block content %}
 <section class="container-grid">
 {% include "blogpost/partials/_feed.html" %}
 {% include "blogpost/partials/_aside.html" %}
 </section>
-
 {% endblock content %}

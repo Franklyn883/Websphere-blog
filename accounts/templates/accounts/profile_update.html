@@ -1,17 +1,17 @@
-{% extends 'base.html' %}{% load static %}{% block title%}settings{% endblock %}
-{% block custom_css %}
+{% extends 'layouts/c.html' %}{% load static %}{% block title%}settings{% endblock %}
+{% block custom-css %}
 <link
     rel="preload"
     as="style"
     href="{% static 'CSS/accounts/profile-update.css' %}"
     onload="this.rel='stylesheet'"
 />
-{% endblock custom_css %}
-{% block javascript %}
+{% endblock custom-css %}
+{% block script %}
 <script src="{% static 'Javascript/light-mode.js' %}" defer></script> 
 <script src="{% static 'Javascript/main.js' %}" defer ></script>
 <script src=" {% static 'Javascript/accounts/profile-update.js' %}" defer></script>
-{% endblock javascript %}
+{% endblock script %}
 {% block content %}
 <form method="POST" enctype="multipart/form-data" class="form--user-update">
     {% csrf_token %}

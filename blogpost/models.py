@@ -24,6 +24,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    """A model of a post, with relevant fields."""
     User = get_user_model()
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
@@ -63,6 +64,7 @@ class Post(models.Model):
 
 
 class PostComment(models.Model):
+    """A model of the post comments."""
     User = get_user_model()
     post = models.ForeignKey(
         Post, related_name="post_comments", on_delete=models.CASCADE
@@ -74,7 +76,8 @@ class PostComment(models.Model):
     edited = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return reverse("edit_comment", args=[str(self.id)])
+        """returns the url of the comment."""
+        return reverse("blogpost_detail", args=[str(self.id)])
 
     def __str__(self):
         return self.comment
