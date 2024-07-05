@@ -9,7 +9,7 @@ from django.utils.text import slugify
 
 # Create your models here.
 
-
+User = get_user_model()
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
@@ -25,7 +25,6 @@ class Category(models.Model):
 
 class Post(models.Model):
     """A model of a post, with relevant fields."""
-    User = get_user_model()
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
@@ -39,6 +38,7 @@ class Post(models.Model):
         upload_to="post_covers/", blank=True, null=True
     )
     categories = models.ManyToManyField(Category, related_name="posts")
+    likes = models.ManyToManyField(User, related_name="likes", through="LikedPost")
 
     def save(self, *args, **kwargs):
         super().save()
@@ -62,10 +62,16 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("blogpost_detail", args=[str(self.id)])
 
-
+# class BookMark(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     class Meta:
+#         unique_together = ('user','post')
+        
 class PostComment(models.Model):
     """A model of the post comments."""
-    User = get_user_model()
+  
     post = models.ForeignKey(
         Post, related_name="post_comments", on_delete=models.CASCADE
     )
@@ -74,6 +80,7 @@ class PostComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     edited = models.BooleanField(default=False)
+    
 
     def get_absolute_url(self):
         """returns the url of the comment."""
@@ -100,3 +107,11 @@ class Reply(models.Model):
 
     def __str__(self):
         return self.body
+    
+class LikedPost(models.Model):
+    """A through table for the likes field in the post models."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.user.username}: {self.post.title}"

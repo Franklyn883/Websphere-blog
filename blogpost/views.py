@@ -213,3 +213,17 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
             get_user_model(), username=self.kwargs.get("username")
         )
         return Post.objects.filter(author=user)
+    
+def like_post_view(request,pk):
+    """Add like to a post, if the request user is not the author of the post. Then checks if the user already exits in the likes table, if the user exits remove user, else add the user.To implement the like and unlike feature"""
+    post = get_object_or_404(Post, id=pk)
+    user_exit = post.likes.filter(username=request.user.username).exists()
+    if request.user != post.author:
+        if user_exit:
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        
+    return render(request, 'blogpost/snippets/_likes.html',{"post":post})
+    
+    
