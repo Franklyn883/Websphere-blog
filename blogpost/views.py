@@ -165,6 +165,7 @@ def post_delete_view(request, pk):
 
 
 def add_reply(request,comment_id):
+    """Add reply to a comment with the specified id."""
     comment = get_object_or_404(PostComment,id=comment_id)
     post_id = comment.post.id
     if request.method == "POST":

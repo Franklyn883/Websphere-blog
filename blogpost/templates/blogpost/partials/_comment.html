@@ -1,6 +1,6 @@
 {% load static %}
 
-<comment class="blog-post-comment__comments">
+<comment class="blog-post-comment__comments" id="comment-section">
     <div class="blog-post__comment-container">
         
         <div class="blog-post__user-details">
@@ -70,17 +70,23 @@
 
 
     <div class="blog-post__comment-details">{{ comment.comment }}</div>
-    {% for reply in comment.replies.all %}
+    
+    <reply>
+        <details>
+        <summary>Replies</summary>
+        {% for reply in comment.replies.all %}
     <div>
        reply: {{ reply.body }}
        <div>by: {{ reply.author }}</div>
     </div>
     {% endfor %}
-    <reply>
         <form method="post" action="{% url 'comment-reply' comment.id %}"> 
             {% csrf_token %}
             {{reply_form}}
         </form>
+
+    </details>
+        
     
     </reply>
     {% if comment.edited %}<small>Edited</small> {% endif %}
