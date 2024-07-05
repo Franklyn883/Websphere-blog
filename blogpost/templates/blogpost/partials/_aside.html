@@ -6,7 +6,7 @@
             <li class="category-list__item">
                 <a href="{% url 'home'%}?q={{category}}"
                     class="category-list__link"><h1 class="category-list__title">{{ category.name }}</h1>
-                <p class="category-list__description">{{ category.description}} </p>
+                <p class="category-list__description">{{ category.description|truncatewords:5 | safe }} </p>
             </a>
             </li>
             {% endfor %}

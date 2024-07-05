@@ -23,7 +23,7 @@
     --font-color:#ffffff;
     --primary-btn-padding:0.5em 1em;
     --primary-btn-border-radius:2em;
-    --svg-dark-mode:#ffffff;
+    --svg-dark-mode:#ffffff;    
     --font-color2:rgb(212, 209, 209);
     --hover: rgba(183, 221, 233, 0.556);
     /* the category in the post-card */
@@ -31,6 +31,7 @@
     --category-background-hover:#192734b6;
     /* social icons */
     --social-icon:#b0bec5;
+    --social:#f34f4f(125, 30, 30)(136, 68, 68);
 
 }
 

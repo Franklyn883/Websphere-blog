@@ -93,6 +93,7 @@ def post_detail_view(request, pk, comment_id=None):
         "form": form,
         "comment_id": comment_id,
         "reply_form":reply_form,
+        
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
