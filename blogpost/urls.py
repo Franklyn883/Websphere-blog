@@ -10,6 +10,8 @@ from .views import (
     delete_comment,
     add_reply,
     like_post_view,
+    bookmark_post_view,
+    
 )
 
 urlpatterns = [
@@ -39,5 +41,6 @@ urlpatterns = [
         name="delete-comment",
     ),
     path("comment/reply/<comment_id>/", add_reply, name="comment-reply"),
-    path("post/<pk>/like/", like_post_view, name="like-post")
+    path("post/<pk>/like/", like_post_view, name="like-post"),
+    path("post/<pk>/bookmark/", bookmark_post_view, name="bookmark-post")
 ]

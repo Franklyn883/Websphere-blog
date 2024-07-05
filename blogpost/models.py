@@ -62,12 +62,13 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("blogpost_detail", args=[str(self.id)])
 
-# class BookMark(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     class Meta:
-#         unique_together = ('user','post')
+class BookMark(models.Model):
+    """A models for a post bookmark"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookmarks")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="bookmarks")
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        unique_together = ('user','post')
         
 class PostComment(models.Model):
     """A model of the post comments."""

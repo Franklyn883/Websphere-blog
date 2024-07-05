@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Post, Category, PostComment
+from .models import Post, Category, PostComment, BookMark
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
@@ -55,7 +55,7 @@ def post_detail_view(request, pk, comment_id=None):
     updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
     reply_form = ReplyForm()
-
+    
     # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
         comment = get_object_or_404(
@@ -226,5 +226,22 @@ def like_post_view(request,pk):
             post.likes.add(request.user)
         
     return render(request, 'blogpost/snippets/_likes.html',{"post":post})
+
+
+def bookmark_post_view(request,pk):
+    post = get_object_or_404(Post, id=pk)
+    bookmark, created = BookMark.objects.get_or_create(user=request.user, post=post)
+   
+    if not created:
+        bookmark.delete()
+        messages.success(request, "Removed from Bookmark")
+    else:
+        messages.success(request,"Added to Bookmark")
+        
+    is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
+    context = {"post":post, "is_bookmarked":is_bookmarked}
+        
+    return render(request, 'blogpost/snippets/_bookmark.html',context)
+    
     
     
