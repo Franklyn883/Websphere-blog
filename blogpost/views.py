@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from accounts.views import is_following
 
 
 # Create your views here.
@@ -25,7 +26,10 @@ def home_view(request):
         | Q(categories__name__icontains=q)
     ).distinct()
     categories = Category.objects.all()
-    context = {"posts": posts, "categories": categories}
+    if request.user.is_authenticated:
+        for post in posts:
+            is_following_author =is_following(request.user, post.author)
+    context = {"posts": posts, "categories": categories, "is_following_author":is_following_author}
     return render(request, "blogpost/index.html", context)
 
 
@@ -56,7 +60,7 @@ def post_detail_view(request, pk, comment_id=None):
     updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
     reply_form = ReplyForm()
-
+    is_following_author = is_following(request.user, post.author)
     # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
         comment = get_object_or_404(
@@ -93,6 +97,7 @@ def post_detail_view(request, pk, comment_id=None):
         "form": form,
         "comment_id": comment_id,
         "reply_form": reply_form,
+        "is_following_author":is_following_author
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 

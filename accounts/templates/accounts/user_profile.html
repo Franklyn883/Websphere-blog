@@ -23,7 +23,17 @@
     {% if request.user == profile.user %}
     <div class="user__edit">
     <a class="link--edit" href="{% url 'profile_update' %}" alt="update {{profile.name }}'s profile">Edit Profile</a>
-</div>    
+</div>
+{% else %}   
+<div>
+    
+    {% if is_following_user %}
+    <a href="{% url 'unfollow-user' profile.user %}" class="post-author__follow"><h3>Unfollow</h3></a>
+    {% else %}
+<a href="{% url 'follow-user' profile.user %}" class="post-author__follow"><h3>follow</h3></a>
+    {% endif %}  
+ 
+</div> 
 {% endif%}
 </div>
     <div class="user-details">
@@ -82,6 +92,23 @@
         <p class="user-post__published"> <a href="{% url 'user-posts' profile.user.username  %}">{{ profile.user.post.count}} posts published</a> </p>
         <p class="user-post__comments"> <a href="">{{profile.user.comment.count}} comments written</a></p>
     </div>
+    <div>
+        <h3>Followers:</h3>
+        {% for follower in followers %}
+        
+        <p>{{ follower.name }}</p>
+
+        {% endfor %}
+    </div>
+    <div>
+        <h3>Following</h3>
+        {% for following in followings %}
+       
+<p>{{ following.name }}</p>
+        {% endfor %}
+    </div>
+
+
    
 </section>
 

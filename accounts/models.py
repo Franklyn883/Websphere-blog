@@ -27,6 +27,7 @@ class Profile(models.Model):
     phone_number = PhoneNumberField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     bio = models.TextField(max_length=255,null=True,blank=True)
+    followers = models.ManyToManyField('self',symmetrical=False, related_name="following", blank=True)
     gender_choices = [
         ('M', 'Male'),
         ('F', 'Female'),

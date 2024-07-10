@@ -13,6 +13,7 @@
         </div>
     </a>
         {% endif %}
+        <div class="post-author-follow">
         <a class="link--post-author" href="{% url 'userprofile' post.author.username %}">
             <div class="post-author">
                 <div class="post-author__profile-pic">
@@ -29,6 +30,15 @@
                 </div>
             </div>
         </a>
+        {%  if user != post.author %}
+        {% if is_following_author %}
+        <a href="{% url 'unfollow-user' post.author.username %}" class="post-author__follow"><h3>Unfollow</h3></a>
+        {% else %}
+    <a href="{% url 'follow-user' post.author.username %}" class="post-author__follow"><h3>follow</h3></a>
+        {% endif %}  
+        {% endif %}
+</div>
+
         <a
             href="{% url 'blogpost_detail' pk=post.pk %}"
             class="link--post-details"
@@ -74,9 +84,9 @@
             {% endif %}
             {% if post.bookmarks.count %}
             <div id="feed-bookmark{{post.id}}" class="bookmark">
-            
-              {% include 'blogpost/snippets/_bookmark.html' %}
                 <span  hx-swap-oob="true" class="bookmark-count" id="bookmark{{post.id}}"> {{ post.bookmarks.count}}</span>
+              {% include 'blogpost/snippets/_bookmark.html' %}
+               
         </div>
             {% endif %}
         </div>

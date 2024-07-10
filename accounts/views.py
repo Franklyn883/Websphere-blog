@@ -11,17 +11,28 @@ from blogpost.models import Post
 User = get_user_model()
 
 
+def is_following(user, target_user):
+    return target_user.profile in user.profile.following.all()
+
 @login_required
 def profile_view(request, username=None):
     """Returns the profile of the request user, or the profile of the user, with the username in the url param."""
+    is_following_user = None
     if username:
         profile = get_object_or_404(User, username=username).profile
+        user = get_object_or_404(User,username=username)
+        is_following_user = is_following(request.user,user)
+        
     else:
         try:
+        
             profile = request.user.profile
         except:
             Http404
-    context = {"profile": profile}
+            
+    followers = profile.followers.all()
+    followings = profile.following.all()  
+    context = {"profile": profile,"followers":followers, "followings":followings, "is_following_user":is_following_user}
 
     return render(request, "accounts/user_profile.html", context)
 
@@ -44,3 +55,19 @@ def profile_update(request):
             return redirect("profile")
     context = {"user_form": user_form, "profile_form": profile_form}
     return render(request, "accounts/profile_update.html", context)
+
+def follow_user(request,username):
+    """Adds a the request user to the following """
+    user_to_follow = get_object_or_404(User,username=username)
+    request.user.profile.following.add(user_to_follow.profile)
+    messages.success(request, "Now following {}".format(user_to_follow.profile.name))
+    return redirect('userprofile', username)
+
+def unfollow_user(request,username):
+    """Removes the request user from following."""
+    user_to_follow = get_object_or_404(User,username=username).profile
+    request.user.profile.following.remove(user_to_follow)
+    messages.success(request, "unfollowed {}".format(user_to_follow.name))
+    return redirect('userprofile', username)
+    
+    
