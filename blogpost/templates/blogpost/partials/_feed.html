@@ -2,7 +2,18 @@
 <article class="blogposts">
     {% for post in posts %}
     <div class="post-card">
-        <a class="link" href="{% url 'userprofile' post.author.username %}">
+        {% if post.cover_img %}
+        <a href="{% url 'blogpost_detail' pk=post.pk %}">
+        <div class="post-image">
+            <img
+                src=" {{ post.cover_img.url }}"
+                alt="{{ post.title }}"
+                class="blogpost__cover-img"
+            />
+        </div>
+    </a>
+        {% endif %}
+        <a class="link--post-author" href="{% url 'userprofile' post.author.username %}">
             <div class="post-author">
                 <div class="post-author__profile-pic">
                     <img
@@ -14,7 +25,7 @@
                     <span class="post-author__username">
                         {{post.author.profile.name}}
                     </span>
-                    <p id="publish-date">{{post.created_at|timesince }} ago</p>
+                    <time   id="publish-date">{{post.created_at|timesince }} ago</time>
                 </div>
             </div>
         </a>
@@ -23,58 +34,15 @@
             class="link--post-details"
         >
             <div class="blogpost__content">
-                <div class="post-content">
+                <header class="post-content">
                     <h3 class="post-title">{{ post.title }}</h3>
                     {{ post.content|truncatewords:20 | safe }}
-                </div>
-                {% if post.cover_img %}
-                <div class="post-image">
-                    <img
-                        src=" {{ post.cover_img.url }}"
-                        alt="{{ post.title }}"
-                        class="blogpost__cover-img"
-                    />
-                </div>
-                {% endif %}
+                </header>
+               
             </div>
         </a>
         <div class="bottom">
-            <div>
-                {% if post.likes.count %}
-                <span>{{ post.likes.count }} </span>
-                likes. {% endif %}
-                {% if post.bookmarks.count %}
-                <span> {{ post.bookmarks.count}}</span>
-                <svg
-                    width="16px"
-                    height="auto"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M5 6.2C5 5.07989 5 4.51984 5.21799 4.09202C5.40973 3.71569 5.71569 3.40973 6.09202 3.21799C6.51984 3 7.07989 3 8.2 3H15.8C16.9201 3 17.4802 3 17.908 3.21799C18.2843 3.40973 18.5903 3.71569 18.782 4.09202C19 4.51984 19 5.07989 19 6.2V21L12 16L5 21V6.2Z"
-                            stroke=" var(--svg-dark-mode)"
-                            stroke-width="2"
-                            stroke-linejoin="round"
-                        ></path>
-                    </g>
-                </svg>
-                {% endif %}
-                {% if post.post_comments.count %}
-                <a href="{% url 'blogpost_detail' pk=post.pk %}#comment-{{ post.id }}">
-                <span>{{ post.post_comments.count }}</span>
-                comments
-            </a>
-                {% endif %}
-            </div>
+            
             <div class="post-card__categories">
                 {% for category in post.categories.all %}
                 <a
@@ -87,6 +55,30 @@
                 >
                 {% endfor %}
             </div>
+        </div>
+        <div class="post-engagements">
+            {% if post.likes.count %}
+            <div>
+            <span>{{ post.likes.count }} </span>
+            likes 
+        </div>
+            {% endif %}
+          
+            {% if post.post_comments.count %}
+            <div>
+            <a href="{% url 'blogpost_detail' pk=post.pk %}#comment-{{ post.id }}">
+            <span>{{ post.post_comments.count }}</span>
+            comments
+        </a>
+    </div >
+            {% endif %}
+            {% if post.bookmarks.count %}
+            <div id="feed-bookmark{{post.id}}" class="bookmark">
+            
+              {% include 'blogpost/snippets/_bookmark.html' %}
+                <span  hx-swap-oob="true" class="bookmark-count" id="bookmark{{post.id}}"> {{ post.bookmarks.count}}</span>
+        </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}

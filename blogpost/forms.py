@@ -35,5 +35,5 @@ class ReplyForm(ModelForm):
         }
         widgets = {
             "edited": forms.HiddenInput(),
-            "body": forms.TextInput(attrs={"placeholder":"Enter reply","class":"comment__reply"})
+            "body": forms.Textarea(attrs={"placeholder":"Enter reply","class":"comment__reply"})
         }

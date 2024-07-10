@@ -1,6 +1,6 @@
-<div >
-<div class="post-option post-option__bookmark" id="bookmark">
-    <a hx-get="{% url 'bookmark-post' post.id %}" hx-target="#bookmark" hx-swap="outerHTML" class="svg-container" title="Add Bookmark">
+
+<div class="post-option post-option__bookmark" id="bookmark{{post.id}}">
+    <a hx-get="{% url 'bookmark-post' post.id %}" hx-target="#bookmark{{post.id}}" hx-swap="outerHTML" class="svg-container" title="Add Bookmark">
         <svg
             width="24px"
             height="24px"
@@ -25,5 +25,4 @@
         </svg>
        
     </a>
-</div>
 </div>

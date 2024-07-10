@@ -1,97 +1,214 @@
 {% load static %}
 
-<comment class="blog-post-comment__comments" >
-    
+<article class="blog-post-comment__comments">
     <div class="blog-post__comment-container">
-        
-        <div class="blog-post__user-details">
-            
+        <header class="blog-post__user-details">
             <div class="blog-post__user-profile-pic">
                 <img
                     src="{{ comment.author.profile.profile_img }}"
                     alt="{{ comment.author }}'s profile pic"
                 />
             </div>
-            <p class="blog-post__user-name">{{ comment.author }}</p>
+            <p class="blog-post__user-name">
+                {{ comment.author.profile.name }}
+            </p>
 
             <p class="blog-post__comment-date">
                 {{ comment.created_at|date:"d M, Y" }}
             </p>
 
             {% if request.user == comment.author %}
-
-            <div
-                class="blog-post__comment-actions comment-action-btn svg-container"
-                title="more option"
+       
+        <div
+            class="blog-post__comment-actions comment-action-btn svg-container"
+            title="more option"
+        >
+            <svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                fill="var(--svg-dark-mode)"
+                xmlns="http://www.w3.org/2000/svg"
             >
-                <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    fill="var(--svg-dark-mode)"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <title></title>
-                        <g id="Complete">
-                            <g id="F-More">
-                                <path
-                                    d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
-                                    id="Horizontal"
-                                ></path>
-                            </g>
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                    <title></title>
+                    <g id="Complete">
+                        <g id="F-More">
+                            <path
+                                d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
+                                id="Horizontal"
+                            ></path>
                         </g>
                     </g>
-                </svg>
-            </div>
-
-            <div class="blog-post__comment-action-options hidden">
-                <div class="comment-action-option__edit-comment">
-                    <a
-                        href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
-                        >Edit comment</a
-                    >
-                </div>
-                <div class="comment-action-option__delete-comment">
-                    <a
-                        href="{% url 'delete-comment' comment.id %}#comment-form"
-                        >Delete comment</a
-                    >
-                </div>
-            </div>
-            {% endif %}
+                </g>
+            </svg>
         </div>
+    
+        <div class="blog-post__comment-action-options hidden">
+            <div class="comment-action-option__edit-comment">
+                <a
+                    href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
+                    >Edit comment</a
+                >
+            </div>
+            <div class="comment-action-option__delete-comment">
+                <a href="{% url 'delete-comment' comment.id %}#comment-form"
+                    >Delete comment</a
+                >
+            </div>
+        </div>
+    </header>
+        {% endif %}
     </div>
-
 
     <div class="blog-post__comment-details">{{ comment.comment }}</div>
-    
-    <reply>
-        <details>
-        <summary>Replies</summary>
-        {% for reply in comment.replies.all %}
-    <div>
-       reply: {{ reply.body }}
-       <div>by: {{ reply.author }}</div>
+    <div class="comment-like">
+        <a class="svg-container" title="like this comment">
+            <svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 32 32"
+                enable-background="new 0 0 32 32"
+                id="Stock_cut"
+                version="1.1"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                fill="#000000"
+            >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                    <desc></desc>
+                    <path
+                        d="M28.343,17.48L16,29 L3.657,17.48C1.962,15.898,1,13.684,1,11.365v0C1,6.745,4.745,3,9.365,3h0.17c2.219,0,4.346,0.881,5.915,2.45L16,6l0.55-0.55 C18.119,3.881,20.246,3,22.465,3h0.17C27.255,3,31,6.745,31,11.365v0C31,13.684,30.038,15.898,28.343,17.48z"
+                        fill="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}none{% endif %}"
+                        stroke="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}var(--svg-dark-mode){% endif %}"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        stroke-width="2"
+                    ></path>
+                </g>
+            </svg>
+        </a>
     </div>
-    {% endfor %}
-        <form method="post" action="{% url 'comment-reply' comment.id %}"> 
-            {% csrf_token %}
-            {{reply_form}}
-        </form>
-
-    </details>
-        
-    
-    </reply>
     {% if comment.edited %}<small>Edited</small> {% endif %}
-   
+    <section class="reply-section">
+        <details>
+            <summary>Replies</summary>
+            {% for reply in comment.replies.all %}
+            <article class="reply-item">
+                <header class="reply-header">
+                    <div class="reply-author-pic">
+                        <a href="">
+                            <img
+                                src="{{ reply.author.profile.profile_img }}"
+                                alt="{{ reply.author }}'s profile pic"
+                            />
+                        </a>
+                    </div>
+                    <div>
+                        {{reply.author.profile.name}} .
+                        <span> {{ reply.created_at|date:"d M, Y" }}</span>
+                    </div>
+                       
+        <div
+        class="blog-post__comment-actions comment-action-btn svg-container"
+        title="more option"
+    >
+        <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            fill="var(--svg-dark-mode)"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+                <title></title>
+                <g id="Complete">
+                    <g id="F-More">
+                        <path
+                            d="M8,12a2,2,0,1,1-2-2A2,2,0,0,1,8,12Zm10-2a2,2,0,1,0,2,2A2,2,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
+                            id="Horizontal"
+                        ></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
 
+    <div class="blog-post__comment-action-options hidden">
+        <div class="comment-action-option__edit-comment">
+            <a
+                href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
+                >Edit comment</a
+            >
+        </div>
+        <div class="comment-action-option__delete-comment">
+            <a href="{% url 'delete-comment' comment.id %}#comment-form"
+                >Delete comment</a
+            >
+        </div>
+    </div>
+                </header>
 
-</comment>
+                <div class="reply-body">{{ reply.body}}</div>
+                <div class="comment-like">
+                    <a class="svg-container" title="like this comment">
+                        <svg
+                            width="24px"
+                            height="24px"
+                            viewBox="0 0 32 32"
+                            enable-background="new 0 0 32 32"
+                            id="Stock_cut"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            fill="#000000"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g
+                                id="SVGRepo_tracerCarrier"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <desc></desc>
+                                <path
+                                    d="M28.343,17.48L16,29 L3.657,17.48C1.962,15.898,1,13.684,1,11.365v0C1,6.745,4.745,3,9.365,3h0.17c2.219,0,4.346,0.881,5.915,2.45L16,6l0.55-0.55 C18.119,3.881,20.246,3,22.465,3h0.17C27.255,3,31,6.745,31,11.365v0C31,13.684,30.038,15.898,28.343,17.48z"
+                                    fill="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}none{% endif %}"
+                                    stroke="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}var(--svg-dark-mode){% endif %}"
+                                    stroke-linejoin="round"
+                                    stroke-miterlimit="10"
+                                    stroke-width="2"
+                                ></path>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+            <form method="post" action="{% url 'comment-reply' comment.id %}" class="reply-form">
+                {% csrf_token %} {{reply_form}}
+                <button type="submit">submitx</button>
+            </form>
+        </details>
+    </section>
+</article>

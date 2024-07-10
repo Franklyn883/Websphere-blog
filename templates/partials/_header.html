@@ -1,2 +1,177 @@
 {% load static %}
-{% include 'layouts/a.html' %}
+{% load static %}
+<header class="nav-header">
+    <nav class="nav">
+        <a href="{% url 'home' %}" class="logo">
+            <h1 class="logo-font desktop-version">WebSphere</h1>
+            <h1 class="logo-font mobile-version">WS</h1>
+        </a>
+        <ul class="nav__items">
+            <!-- <li class="nav__item explore">
+                <div class="dropdown">
+                    <span class="nav__item-text">Explore</span>
+                    <div class="dropdown-content">
+                        {% for category in categories %}
+
+                        <a href="{% url 'category_filter' category.id %}"
+                            >{{ category.name }}</a
+                        >
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </li> -->
+
+            <li class="nav__item mobile-version">
+                <button class="search search-btn" aria-label="search button">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                                stroke="var(--svg-dark-mode)"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+                        </g>
+                    </svg>
+                </button>
+            </li>
+            <li class="nav__item nav__search desktop-version">
+                <form
+                    action="{% url 'home' %}"
+                    method="get"
+                    class="container--search-bar"
+                >
+                    <input
+                        type="text"
+                        class="nav__search-bar"
+                        placeholder="Enter your search here..."
+                        name="q"
+                        aria-\
+                        value="{{ request.GET.q }}"
+                    />
+                    <button type="submit" value="search" class="btn--search">
+                        search
+                    </button>
+                </form>
+            </li>
+
+            <li class="nav__item write-post desktop-version">
+                <a class="nav__link" href="{% url 'create_blogpost'%}">
+                    <div class="nav__link-post">
+                        <img
+                            src="{% static 'assets/images/writing.svg' %}"
+                            alt="writing icon"
+                        />
+                        <p>Write</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav__item write-post mobile-version">
+                <a class="nav__link" href="{% url 'create_blogpost'%}">
+                    <div class="nav__link-post">
+                        <svg
+                            fill="var( --svg-dark-mode)"
+                            width="64px"
+                            height="64px"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g
+                                id="SVGRepo_tracerCarrier"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M6.643,13.072,17.414,2.3a1.027,1.027,0,0,1,1.452,0L20.7,4.134a1.027,1.027,0,0,1,0,1.452L9.928,16.357,5,18ZM21,20H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"
+                                ></path>
+                            </g>
+                        </svg>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav__item icon">
+                <button
+                    id="light-mode-toggle"
+                    class="light-mode-toggle"
+                    aria-label="toggle light mode"
+                >
+                    <svg
+                        width="1.5rem"
+                        height="1.5rem"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g clip-path="url(#a)" fill="var(--svg-dark-mode)">
+                                <path
+                                    d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"
+                                ></path>
+                            </g>
+                            <defs>
+                                <clipPath id="a">
+                                    <path
+                                        fill="#ffffff"
+                                        d="M0 0h24v24H0z"
+                                    ></path>
+                                </clipPath>
+                            </defs>
+                        </g>
+                    </svg>
+                </button>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav__item user-detail">
+                <div class="nav__item-user">
+                    <div class="dropdown">
+                        <div class="user-img">
+                            <img
+                                src="{{  request.user.profile.profile_img }}"
+                                alt="{{ request.user}}'s photo"
+                            />
+                        </div>
+                        <div class="dropdown-content">
+                            <a
+                                href="{% url 'profile' %}"
+                                class="nav__link--user"
+                            >
+                                Profile</a
+                            >
+                            <a href="{% url 'account_logout' %}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav__item">
+                <a class="nav__link sign-up" href="{% url 'account_signup' %}"
+                    >Sign-up</a
+                >
+            </li>
+
+            {% endif%}
+        </ul>
+    </nav>
+</header>
+{% include 'partials/_mobile_search.html' %}

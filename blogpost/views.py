@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PostForm, PostCommentForm,ReplyForm
+from .forms import PostForm, PostCommentForm, ReplyForm
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -14,15 +14,16 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def home_view(request):
-    """Display the home view. and filter displayed post."""
+    """Display the home view and filter displayed post."""
     q = request.GET.get("q") if request.GET.get("q") != None else ""
     posts = Post.objects.filter(
         Q(title__icontains=q)
         | Q(subtitle__icontains=q)
         | Q(author__username__icontains=q)
         | Q(categories__name__icontains=q)
-    )
+    ).distinct()
     categories = Category.objects.all()
     context = {"posts": posts, "categories": categories}
     return render(request, "blogpost/index.html", context)
@@ -55,7 +56,7 @@ def post_detail_view(request, pk, comment_id=None):
     updated, else a new instance is created."""
     post = get_object_or_404(Post, id=pk)
     reply_form = ReplyForm()
-    
+
     # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
     if comment_id:
         comment = get_object_or_404(
@@ -85,15 +86,13 @@ def post_detail_view(request, pk, comment_id=None):
             form = PostCommentForm()
 
     comments = post.post_comments.all().order_by("-created_at")
-    
 
     context = {
         "post": post,
         "comments": comments,
         "form": form,
         "comment_id": comment_id,
-        "reply_form":reply_form,
-        
+        "reply_form": reply_form,
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
@@ -124,7 +123,8 @@ class PostCategoryFilterView(ListView):
         return Post.objects.filter(categories=category)
 
     def get_context_data(self, **kwargs):
-        """Get the related fields, categories, so it can be rendered in the template"""
+        """Get the related fields, categories, so it can be rendered in the
+        template"""
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
         return context
@@ -165,22 +165,21 @@ def post_delete_view(request, pk):
     return render(request, "blogpost/confirm_delete.html", {"obj": post})
 
 
-def add_reply(request,comment_id):
+def add_reply(request, comment_id):
     """Add reply to a comment with the specified id."""
-    comment = get_object_or_404(PostComment,id=comment_id)
+    comment = get_object_or_404(PostComment, id=comment_id)
     post_id = comment.post.id
     if request.method == "POST":
         print(request.POST)
         form = ReplyForm(request.POST)
         if form.is_valid:
-          reply = form.save(commit=False)
-          reply.author = request.user
-          reply.parent_comment = comment
-          reply.save()
-          messages.success(request, "New reply added")
-    return redirect('blogpost_detail', post_id)
-    
-    
+            reply = form.save(commit=False)
+            reply.author = request.user
+            reply.parent_comment = comment
+            reply.save()
+            messages.success(request, "New reply added")
+    return redirect("blogpost_detail", post_id)
+
 
 # class SearchResultsListView(ListView):
 #     """Implement search functionality"""
@@ -215,9 +214,12 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
             get_user_model(), username=self.kwargs.get("username")
         )
         return Post.objects.filter(author=user)
-    
-def like_post_view(request,pk):
-    """Add like to a post, if the request user is not the author of the post. Then checks if the user already exits in the likes table, if the user exits remove user, else add the user.To implement the like and unlike feature"""
+
+
+def like_post_view(request, pk):
+    """Add like to a post, if the request user is not the author of the post. 
+    Then checks if the user already exits in the likes table, if the user exits
+    remove user, else add the user.To implement the like and unlike feature"""
     post = get_object_or_404(Post, id=pk)
     user_exit = post.likes.filter(username=request.user.username).exists()
     if request.user != post.author:
@@ -225,24 +227,26 @@ def like_post_view(request,pk):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
-        
-    return render(request, 'blogpost/snippets/_likes.html',{"post":post})
+
+    return render(request, "blogpost/snippets/_likes.html", {"post": post})
 
 
-def bookmark_post_view(request,pk):
+def bookmark_post_view(request, pk):
     post = get_object_or_404(Post, id=pk)
-    bookmark, created = BookMark.objects.get_or_create(user=request.user, post=post)
-   
+    bookmark, created = BookMark.objects.get_or_create(
+        user=request.user, post=post
+    )
+
     if not created:
         bookmark.delete()
         messages.success(request, "Removed from Bookmark")
     else:
-        messages.success(request,"Added to Bookmark")
-        
-    is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
-    context = {"post":post, "is_bookmarked":is_bookmarked}
-        
-    return render(request, 'blogpost/snippets/_bookmark.html',context)
-    
-    
-    
+        messages.success(request, "Added to Bookmark")
+
+    is_bookmarked = (
+        request.user.is_authenticated
+        and post.id in request.user.bookmarks.values_list("post__id", flat=True)
+    )
+    context = {"post": post, "is_bookmarked": is_bookmarked}
+
+    return render(request, "blogpost/snippets/_bookmark.html", context)
