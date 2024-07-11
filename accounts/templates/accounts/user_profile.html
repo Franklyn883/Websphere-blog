@@ -6,6 +6,12 @@
     href="{% static 'CSS/accounts/profile.css' %}"
     onload="this.rel='stylesheet'"
 />
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/components/button.css' %}"
+    onload="this.rel='stylesheet'"
+/>
 {% endblock custom-css %} {% block content %}
 <section class="userprofile container">
     <div class="user">
@@ -28,9 +34,9 @@
 <div>
     
     {% if is_following_user %}
-    <a href="{% url 'unfollow-user' profile.user %}" class="post-author__follow"><h3>Unfollow</h3></a>
+    <a href="{% url 'unfollow-user' profile.user %}" class="btn__follow"><h3>following</h3></a>
     {% else %}
-<a href="{% url 'follow-user' profile.user %}" class="post-author__follow"><h3>follow</h3></a>
+<a href="{% url 'follow-user' profile.user %}" class="btn__follow"><h3>follow</h3></a>
     {% endif %}  
  
 </div> 

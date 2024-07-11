@@ -6,7 +6,12 @@
     href="{% static 'CSS/blogpost/blog_home.css' %}"
     onload="this.rel='stylesheet'"
 />
-
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/components/button.css' %}"
+    onload="this.rel='stylesheet'"
+/>
 {% endblock custom-css %} 
 
 {% block content %}

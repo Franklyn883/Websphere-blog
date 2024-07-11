@@ -12,6 +12,12 @@
     href="{% static 'CSS/blogpost/blogdetails.css' %}"
     onload="this.rel='stylesheet'"
 />
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/components/button.css' %}"
+    onload="this.rel='stylesheet'"
+/>
 {% endblock custom-css %} {% block script %}
 <script src="{% static 'Javascript/blogpostdetails.js' %}" defer></script>
 {% endblock script %} {% block content%}
@@ -196,11 +202,7 @@
         </div>
         <div>
             {%  if user != post.author %}
-            {% if is_following_author %}
-            <a href="{% url 'unfollow-user' post.author.username %}" class="post-author__follow"><h3>Unfollow</h3></a>
-            {% else %}
-        <a href="{% url 'follow-user' post.author.username %}" class="post-author__follow"><h3>follow</h3></a>
-            {% endif %}  
+           {% include 'blogpost/snippets/_follow.html' %} 
             {% endif %} 
         </div>
     </div>

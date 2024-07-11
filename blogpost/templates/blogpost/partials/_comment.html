@@ -121,7 +121,7 @@
                         {{reply.author.profile.name}} .
                         <span> {{ reply.created_at|date:"d M, Y" }}</span>
                     </div>
-                       
+                    {% if reply.author == user %}             
         <div
         class="blog-post__comment-actions comment-action-btn svg-container"
         title="more option"
@@ -154,6 +154,7 @@
     </div>
 
     <div class="blog-post__comment-action-options hidden">
+
         <div class="comment-action-option__edit-comment">
             <a
                 href="{% url 'blogpost_detail_comment' post.pk comment.id %}#comment-form"
