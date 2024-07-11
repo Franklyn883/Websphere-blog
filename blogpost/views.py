@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Post, Category, PostComment, BookMark
+from .models import Post, Category, PostComment, BookMark,Reply
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
@@ -29,7 +29,7 @@ def home_view(request):
     if request.user.is_authenticated:
         for post in posts:
             is_following_author =is_following(request.user, post.author)
-    context = {"posts": posts, "categories": categories, "is_following_author":is_following_author}
+    context = {"posts": posts, "categories": categories, "is_following_author":is_following_author }
     return render(request, "blogpost/index.html", context)
 
 
@@ -38,7 +38,6 @@ def post_create_view(request):
     """Creates a new post."""
     form = PostForm()
     context = {"form": form}
-
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -169,7 +168,7 @@ def post_delete_view(request, pk):
         return redirect("home")
     return render(request, "blogpost/confirm_delete.html", {"obj": post})
 
-
+@login_required
 def add_reply(request, comment_id):
     """Add reply to a comment with the specified id."""
     comment = get_object_or_404(PostComment, id=comment_id)
@@ -185,6 +184,32 @@ def add_reply(request, comment_id):
             messages.success(request, "New reply added")
     return redirect("blogpost_detail", post_id)
 
+
+@login_required
+def edit_reply(request,pk):
+    reply = get_object_or_404(Reply, id=pk, author=request.user)
+    reply_form = ReplyForm(instance=reply)
+    if request.method == "POST":
+        reply_form = ReplyForm(request.POST, instance=reply)
+        if reply_form.is_valid:
+            reply_form.save()
+            messages.success(request, "reply updated!")
+            
+            return redirect('blogpost_detail', reply.parent_comment.post.id )
+        
+    context = {"reply_form":reply_form}
+        
+    return render(request, "blogpost/edit_reply.html", context)
+
+def delete_reply(request,pk):
+    reply = get_object_or_404(Reply, id=pk, author=request.user)
+    if request.method == "POST":
+        reply.delete()
+        messages.success(request, "Reply deleted successfully")
+        return redirect('blogpost_detail', reply.parent_comment.post.id)
+    context={"obj":reply}
+    return render(request, 'blogpost/confirm_delete.html')
+        
 
 # class SearchResultsListView(ListView):
 #     """Implement search functionality"""

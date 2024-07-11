@@ -167,6 +167,7 @@
             >
         </div>
     </div>
+    {% endif %}
                 </header>
 
                 <div class="reply-body">{{ reply.body}}</div>
@@ -204,11 +205,16 @@
                         </svg>
                     </a>
                 </div>
+                <div>
+                    <a href="{% url 'reply-delete' reply.id %}"> delete</a>
+                    <a href="{% url 'reply-edit' reply.id %}"> edit</a>
+                </div>
             </article>
+
             {% endfor %}
             <form method="post" action="{% url 'comment-reply' comment.id %}" class="reply-form">
                 {% csrf_token %} {{reply_form}}
-                <button type="submit">submitx</button>
+                <button type="submit">submit</button>
             </form>
         </details>
     </section>
