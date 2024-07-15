@@ -30,24 +30,24 @@ To get a local copy up and running, follow these simple steps:
 
 #### Clone the Repository
 
-- git clone https://github.com/Franklyn883/Websphere-blog.git
-- cd websphere
+- `git clone https://github.com/Franklyn883/Websphere-blog.git`
+- `cd websphere`
 
 #### Create and Activate a Virtual Environment
-- python -m venv venv
+- `python -m venv venv`
 - source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 #### Install Dependencies
-- pip install -r requirements.txt
+- `pip install -r requirements.txt`
 
 #### Apply Migrations
-- python manage.py migrate
+- `python manage.py migrate`
 
 ### Create a Superuser
-python manage.py createsuperuser
+`python manage.py createsuperuser`
 
 #### Run the Server
-- python manage.py runserver
+- `python manage.py runserver`
 
 ## Usage
 ### Writing a Blog Post
@@ -76,8 +76,6 @@ Contributions are what make the open source community such an amazing place to b
 - Push to the Branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
 
-## License
-Distributed under the MIT License. See LICENSE for more information.
 
 ## Contact
 Email: Frankalimimian@gmail.com
