@@ -13,17 +13,16 @@ from .views import (
     bookmark_post_view,
     edit_reply,
     delete_reply,
+    add_comment,
+    edit_comment,
 )
 
 urlpatterns = [
     path("create/", post_create_view, name="create_blogpost"),
     path("", home_view, name="home"),
     path("post/<uuid:pk>/", post_detail_view, name="blogpost_detail"),
-    path(
-        "post/<uuid:pk>/comment/<int:comment_id>",
-        post_detail_view,
-        name="blogpost_detail_comment",
-    ),
+    path("post/comment/<pk>/", add_comment, name="comment-add"),
+    path("post/comment/edit/<pk>/", edit_comment, name="comment-edit"),
     path(
         "category/<uuid:pk>/",
         PostCategoryFilterView.as_view(),
@@ -36,12 +35,8 @@ urlpatterns = [
         AuthorBlogpostList.as_view(),
         name="user-posts",
     ),
-    path(
-        "comment/delete/<int:comment_id>/",
-        delete_comment,
-        name="delete-comment",
-    ),
-    path("comment/reply/<comment_id>/", add_reply, name="comment-reply"),
+    path("comment/delete/<pk>/", delete_comment, name="comment-delete"),
+    path("comment/reply/<pk>/", add_reply, name="comment-reply"),
     path("post/<pk>/like/", like_post_view, name="like-post"),
     path("post/<pk>/bookmark/", bookmark_post_view, name="bookmark-post"),
     path("post/comment/reply/edit/<pk>/", edit_reply, name="reply-edit"),

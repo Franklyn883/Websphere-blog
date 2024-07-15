@@ -1,0 +1,7 @@
+<form  hx-post="{% url 'comment-add' post.id %}" hx-target="#comment-contents" hx-swap="afterbegin" id="comment-form" _="on htmx:afterRequest reset() me">
+    {% csrf_token %}
+    <div class="content">{{ comment_form.comment }}</div>
+    <button type="submit" class="comment__add-comment-btn">
+        Add comment
+    </button>
+</form>

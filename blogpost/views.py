@@ -53,58 +53,61 @@ def post_create_view(request):
     return render(request, "blogpost/blogpost_create.html", context)
 
 
-def post_detail_view(request, pk, comment_id=None):
-    """Render, the post with the given pk in details.Gets the post with the pk,
-    then if the comment_id is present in the url, the comment with the id is
-    updated, else a new instance is created."""
+def post_detail_view(request,pk):
+    """Display all the post details, where the pk = post id."""
     post = get_object_or_404(Post, id=pk)
     reply_form = ReplyForm()
+    comment_form = PostCommentForm()
+    comments = post.post_comments.all()
     is_following_author = is_following(request.user, post.author)
-    # we check if the comment_id is present in the url,if it's present we get the comment with the id and get the right post the id belongs to.This will be use to edit the correct comment.
-    if comment_id:
-        comment = get_object_or_404(
-            PostComment, id=comment_id, post=post, author=request.user
-        )
-
-    else:
-        comment = None
-
-    if request.method == "POST":
-        if comment:
-            form = PostCommentForm(request.POST, instance=comment)
-        else:
-            form = PostCommentForm(request.POST)
-        if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.author = request.user
-            new_comment.post = post
-            if comment:
-                new_comment.edited = True
-            new_comment.save()
-            return redirect("blogpost_detail", post.id)
-    else:
-        if comment:
-            form = PostCommentForm(instance=comment)
-        else:
-            form = PostCommentForm()
-
-    comments = post.post_comments.all().order_by("-created_at")
-
     context = {
         "post": post,
-        "comments": comments,
-        "form": form,
-        "comment_id": comment_id,
+        "comment_form": comment_form,
         "reply_form": reply_form,
-        "is_following_author":is_following_author
+        "is_following_author":is_following_author,
+        "comments":comments,    
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
+@login_required
+def add_comment(request,pk):
+    """Add a comment to a post"""
+    post = get_object_or_404(Post,id=pk)
+    comment_form = PostCommentForm()
+    if request.method == "POST":
+        comment_form = PostCommentForm(request.POST)
+        if comment_form.is_valid:
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.success(request, "Comment added!")
+            
+    context={"comment":comment,"post":post}
+    return render(request, "blogpost/snippets/_add_comment.html",context)
+        
+@login_required   
+def edit_comment(request,pk):
+    """Edit comment with the given pk."""
+    comment = get_object_or_404(PostComment,id=pk, author=request.user)
+    comment_form = PostCommentForm(instance=comment)
+    post = comment.post
+    if request.method == "POST":
+        comment_form = PostCommentForm(request.POST, instance=comment)
+        if comment_form.is_valid:
+            comment = comment_form.save(commit=False)
+            comment.edited = True
+            messages.success(request, "Comment updated successfully!")
+            comment.save()
+            return redirect("blogpost_detail", comment.post.id)
+    context = { "comment_form":comment_form}
+    return render(request,"blogpost/partials/_edit_comment.html",context)
+        
 
 @login_required
-def delete_comment(request, comment_id):
+def delete_comment(request, pk):
     """Deletes comment with the given id, where the author is the request user."""
-    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
+    comment = get_object_or_404(PostComment, id=pk, author=request.user)
     post_id = comment.post.id
     if request.method == "POST":
         comment.delete()
@@ -169,9 +172,9 @@ def post_delete_view(request, pk):
     return render(request, "blogpost/confirm_delete.html", {"obj": post})
 
 @login_required
-def add_reply(request, comment_id):
+def add_reply(request, pk):
     """Add reply to a comment with the specified id."""
-    comment = get_object_or_404(PostComment, id=comment_id)
+    comment = get_object_or_404(PostComment, id=pk)
     post_id = comment.post.id
     if request.method == "POST":
         print(request.POST)

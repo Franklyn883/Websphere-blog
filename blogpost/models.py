@@ -86,6 +86,9 @@ class PostComment(models.Model):
     def get_absolute_url(self):
         """returns the url of the comment."""
         return reverse("blogpost_detail", args=[str(self.id)])
+    
+    class Meta:
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.comment

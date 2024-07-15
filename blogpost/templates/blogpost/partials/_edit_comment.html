@@ -1,0 +1,10 @@
+{% extends 'layouts/c.html' %}
+{% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="content">{{ comment_form.comment }}</div>
+    <button type="submit" class="comment__add-comment-btn">
+        Update comment
+    </button>
+</form>
+{% endblock content %}

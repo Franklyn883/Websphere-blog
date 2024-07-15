@@ -94,7 +94,7 @@
                     </g>
                 </svg>
             </a>
-            <span class="num-of-comment">{{ comments.count }}</span>
+            <span id="postoptions-commentcount-{{post.id}}" class="num-of-comment">{{ post.post_comments.count }}</span>
         </div>
         
         {% include "blogpost/snippets/_bookmark.html" %}
@@ -212,20 +212,18 @@
     {% if user.is_authenticated %}
     <div class="blog-post-comment__user-comment">
         <div class="comment__comment-input">
-            <form method="post" action="" id="comment-form">
-                {% csrf_token %}
-                <div class="content">{{ form.comment }}</div>
-                <button type="submit" class="comment__add-comment-btn">
-                    {% if comment_id %}Update {% else %} Add {% endif%}comment
-                </button>
-            </form>
-        </div>
+        {% include "blogpost/snippets/_commentform.html" %}
+            
+           </div>
+           
     </div>
     {% endif %}
-    <h1 id="comment-{{ post.id }}">Comments {{ comments.count }} </h1>
+    <h1>Comments <span id="commentscount-{{post.id}}">{{ post.post_comments.count }} </span></h1>
+    <section id="comment-contents">
      {% for comment in comments %}
     {% include 'blogpost/partials/_comment.html' %}
     {% endfor %}
+</section>
 </section>
 
 {% endblock content %}
