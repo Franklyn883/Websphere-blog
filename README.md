@@ -35,7 +35,7 @@ To get a local copy up and running, follow these simple steps:
 
 #### Create and Activate a Virtual Environment
 - `python -m venv venv`
-- source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+- `source venv/bin/activate`  On Windows use `venv\Scripts\activate`
 
 #### Install Dependencies
 - `pip install -r requirements.txt`
@@ -44,7 +44,7 @@ To get a local copy up and running, follow these simple steps:
 - `python manage.py migrate`
 
 ### Create a Superuser
-`python manage.py createsuperuser`
+- `python manage.py createsuperuser`
 
 #### Run the Server
 - `python manage.py runserver`
