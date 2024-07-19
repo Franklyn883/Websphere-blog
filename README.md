@@ -1,5 +1,6 @@
 # WebSphere
-WebSphere is a dynamic blogging platform where users can write, edit, and delete blog posts. Users can also engage with content through comments, replies, likes, and bookmarks. The project leverages modern web technologies to provide a smooth and responsive user experience.
+WebSphere is a dynamic blogging platform where users can write, edit, and delete blog posts. Users can also engage with content through comments, replies, likes, and bookmarks. The project leverages modern web technologies to provide a smooth and responsive user experience. 
+
 
 ## Features
 
@@ -76,6 +77,8 @@ Contributions are what make the open source community such an amazing place to b
 - Push to the Branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
 
+## Live site
+The project is still underdevelopment.
 
 ## Contact
 Email: Frankalimimian@gmail.com

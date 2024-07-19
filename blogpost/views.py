@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Post, Category, PostComment, BookMark,Reply
+from .models import Post, Category, PostComment, BookMark, Reply
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
@@ -26,10 +26,16 @@ def home_view(request):
         | Q(categories__name__icontains=q)
     ).distinct()
     categories = Category.objects.all()
+    is_following_author = {}
     if request.user.is_authenticated:
-        for post in posts:
-            is_following_author =is_following(request.user, post.author)
-    context = {"posts": posts, "categories": categories, "is_following_author":is_following_author }
+        is_following_author = {
+            post.id: is_following(request.user, post.author) for post in posts
+        }
+    context = {
+        "posts": posts,
+        "categories": categories,
+        "is_following_author": is_following_author,
+    }
     return render(request, "blogpost/index.html", context)
 
 
@@ -53,7 +59,7 @@ def post_create_view(request):
     return render(request, "blogpost/blogpost_create.html", context)
 
 
-def post_detail_view(request,pk):
+def post_detail_view(request, pk):
     """Display all the post details, where the pk = post id."""
     post = get_object_or_404(Post, id=pk)
     reply_form = ReplyForm()
@@ -64,15 +70,16 @@ def post_detail_view(request,pk):
         "post": post,
         "comment_form": comment_form,
         "reply_form": reply_form,
-        "is_following_author":is_following_author,
-        "comments":comments,    
+        "is_following_author": is_following_author,
+        "comments": comments,
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
+
 @login_required
-def add_comment(request,pk):
+def add_comment(request, pk):
     """Add a comment to a post"""
-    post = get_object_or_404(Post,id=pk)
+    post = get_object_or_404(Post, id=pk)
     comment_form = PostCommentForm()
     if request.method == "POST":
         comment_form = PostCommentForm(request.POST)
@@ -82,14 +89,15 @@ def add_comment(request,pk):
             comment.post = post
             comment.save()
             messages.success(request, "Comment added!")
-            
-    context={"comment":comment,"post":post}
-    return render(request, "blogpost/snippets/_add_comment.html",context)
-        
-@login_required   
-def edit_comment(request,pk):
+
+    context = {"comment": comment, "post": post}
+    return render(request, "blogpost/snippets/_add_comment.html", context)
+
+
+@login_required
+def edit_comment(request, pk):
     """Edit comment with the given pk."""
-    comment = get_object_or_404(PostComment,id=pk, author=request.user)
+    comment = get_object_or_404(PostComment, id=pk, author=request.user)
     comment_form = PostCommentForm(instance=comment)
     post = comment.post
     if request.method == "POST":
@@ -100,9 +108,9 @@ def edit_comment(request,pk):
             messages.success(request, "Comment updated successfully!")
             comment.save()
             return redirect("blogpost_detail", comment.post.id)
-    context = { "comment_form":comment_form}
-    return render(request,"blogpost/partials/_edit_comment.html",context)
-        
+    context = {"comment_form": comment_form}
+    return render(request, "blogpost/partials/_edit_comment.html", context)
+
 
 @login_required
 def delete_comment(request, pk):
@@ -171,6 +179,7 @@ def post_delete_view(request, pk):
         return redirect("home")
     return render(request, "blogpost/confirm_delete.html", {"obj": post})
 
+
 @login_required
 def add_reply(request, pk):
     """Add reply to a comment with the specified id."""
@@ -189,7 +198,7 @@ def add_reply(request, pk):
 
 
 @login_required
-def edit_reply(request,pk):
+def edit_reply(request, pk):
     reply = get_object_or_404(Reply, id=pk, author=request.user)
     reply_form = ReplyForm(instance=reply)
     if request.method == "POST":
@@ -197,22 +206,23 @@ def edit_reply(request,pk):
         if reply_form.is_valid:
             reply_form.save()
             messages.success(request, "reply updated!")
-            
-            return redirect('blogpost_detail', reply.parent_comment.post.id )
-        
-    context = {"reply_form":reply_form}
-        
+
+            return redirect("blogpost_detail", reply.parent_comment.post.id)
+
+    context = {"reply_form": reply_form}
+
     return render(request, "blogpost/edit_reply.html", context)
 
-def delete_reply(request,pk):
+
+def delete_reply(request, pk):
     reply = get_object_or_404(Reply, id=pk, author=request.user)
     if request.method == "POST":
         reply.delete()
         messages.success(request, "Reply deleted successfully")
-        return redirect('blogpost_detail', reply.parent_comment.post.id)
-    context={"obj":reply}
-    return render(request, 'blogpost/confirm_delete.html')
-        
+        return redirect("blogpost_detail", reply.parent_comment.post.id)
+    context = {"obj": reply}
+    return render(request, "blogpost/confirm_delete.html")
+
 
 # class SearchResultsListView(ListView):
 #     """Implement search functionality"""
@@ -250,7 +260,7 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
 
 
 def like_post_view(request, pk):
-    """Add like to a post, if the request user is not the author of the post. 
+    """Add like to a post, if the request user is not the author of the post.
     Then checks if the user already exits in the likes table, if the user exits
     remove user, else add the user.To implement the like and unlike feature"""
     post = get_object_or_404(Post, id=pk)
