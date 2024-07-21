@@ -78,13 +78,15 @@
         </a>
     </div >
             {% endif %}
-            {% if post.bookmarks.count %}
+            
             <div id="feed-bookmark{{post.id}}" class="bookmark">
-                <span  hx-swap-oob="true" class="bookmark-count" id="bookmark{{post.id}}"> {{ post.bookmarks.count}}</span>
-              {% include 'blogpost/snippets/_bookmark.html' %}
+                {% if post.bookmarks.count %}
+                <span id="bookmark-{{ post.id }}">{{ post.bookmarks.count }}</span>
+                {% endif %}
+              {% include 'blogpost/partials/_bookmark.html' %}
                
         </div>
-            {% endif %}
+            
         </div>
     </div>
     {% endfor %}
