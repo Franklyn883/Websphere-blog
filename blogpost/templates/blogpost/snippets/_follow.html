@@ -2,5 +2,7 @@
         <a href="{% url 'unfollow-user' post.author.username     %}" class="btn__follow"><h3>following</h3></a>
         {% else %}
     <a href="{% url 'follow-user' post.author.username %}" class="btn__follow"><h3>follow</h3></a>
-        {% endif %}  
+        {% endif %} 
+
+        
        

@@ -1,6 +1,6 @@
 {% load static %}
 <article class="blogposts">
-    {% for post in posts %}
+    {% for post, is_following_author in posts_with_follow_status %}
     <div class="post-card">
         {% if post.cover_img %}
         <a href="{% url 'blogpost_detail' pk=post.pk %}">
@@ -30,8 +30,10 @@
                 </div>
             </div>
         </a>
-        {%  if user != post.author %}
-        {% include 'blogpost/snippets/_follow.html' %}
+        {%  if user != post.author and user.is_authenticated%}
+        <div id="follow-button-{{ post.id }}">
+        {% include 'blogpost/snippets/_follow.html'  %}
+    </div>
         {% endif %}
 </div>
 
@@ -79,10 +81,12 @@
     </div >
             {% endif %}
             
-            <div id="feed-bookmark{{post.id}}" class="bookmark">
+            <div  class="bookmark">
+                <div id="feed-bookmark{{post.id}}">
                 {% if post.bookmarks.count %}
                 <span id="bookmark-{{ post.id }}">{{ post.bookmarks.count }}</span>
                 {% endif %}
+                </div>
               {% include 'blogpost/partials/_bookmark.html' %}
                
         </div>

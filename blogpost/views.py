@@ -28,25 +28,29 @@ def home_view(request):
     ).distinct()
     bookmarked_posts = []
     categories = Category.objects.all()
-    is_following_author = {}
+  
+    posts_with_follow_status = []
     if request.user.is_authenticated:
-        is_following_author = {
-            post.id: is_following(request.user, post.author) for post in posts
-        }
+            for post in posts:
+                posts_with_follow_status.append((post, is_following(request.user, post.author)))
+            bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)
+    else:
+            for post in posts:
+                posts_with_follow_status.append((post, False))  # Default to False for non-authenticated users
+
+
+
+       
     
-
-    if request.user.is_authenticated:
-        bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)
-
     for post in posts:
-        is_bookmarked = post.id in bookmarked_posts
-        
+        post.is_bookmarked = post.id in bookmarked_posts
    
+    
     context = {
         "posts": posts,
         "categories": categories,
-        "is_following_author": is_following_author,
-        "is_bookmarked":is_bookmarked
+        "posts_with_follow_status":posts_with_follow_status
+        
     }
     return render(request, "blogpost/index.html", context)
 
@@ -78,15 +82,14 @@ def post_detail_view(request, pk):
     comment_form = PostCommentForm()
     comments = post.post_comments.all()
     is_following_author = is_following(request.user, post.author)
-    is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
+    post.is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
 
     context = {
         "post": post,
         "comment_form": comment_form,
         "reply_form": reply_form,
         "is_following_author": is_following_author,
-        "comments": comments,
-        "is_bookmarked" : is_bookmarked
+        "comments": comments
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
@@ -300,7 +303,7 @@ def bookmark_post_view(request, pk):
     else:
         messages.success(request, "Added to Bookmark")
 
-    is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
-    context = {"post": post, "is_bookmarked": is_bookmarked}
+    post.is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
+    context = {"post": post}
 
     return render(request, "blogpost/snippets/_add_bookmark.html", context)

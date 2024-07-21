@@ -1,8 +1,8 @@
 
 <div class="post-option post-option__bookmark" id="bookmark{{post.id}}">
     <a hx-get="{% url 'bookmark-post' post.id %}" hx-target="#bookmark{{post.id}}" hx-swap="outerHTML" class="svg-container" title="Add Bookmark">
-        {% if is_bookmarked %}
-        <svg
+        {% if post.is_bookmarked %}
+        <svg   svg
             width="1.2rem"
             height="1.2rem"
             viewBox="0 0 24 24"

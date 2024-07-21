@@ -1,2 +1,9 @@
 {% include "blogpost/partials/_bookmark.html" %}
+
+
+<div hx-swap-oob="true" id="feed-bookmark{{post.id}}">
+    {% if post.bookmarks.count %}
+    <span id="bookmark-{{ post.id }}">{{ post.bookmarks.count }}</span>
+    {% endif %}
+    </div>
 <span hx-swap-oob="true" id="bookmark-{{ post.id }}">{{ post.bookmarks.count }}</span>
