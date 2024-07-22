@@ -13,6 +13,7 @@ django-taggit = "*"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 django-ckeditor-5 = "*"
 django-cleanup = "*"
+django-anymail = {extras = ["mailgun"], version = "*"}
 
 [dev-packages]
 

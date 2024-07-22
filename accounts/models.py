@@ -16,8 +16,8 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
     
-    def get_absolute_url(self):
-        return reverse('user_profile', kwargs={'pk': self.user_profile.user.pk})
+    # def get_absolute_url(self):
+    #     return reverse('user_profile', kwargs={'pk': self.user_profile.user.pk})
 
     
 class Profile(models.Model):

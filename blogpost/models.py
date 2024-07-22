@@ -4,8 +4,7 @@ from django.urls import reverse
 import uuid
 from django_ckeditor_5.fields import CKEditor5Field
 from PIL import Image
-from taggit.managers import TaggableManager
-from django.utils.text import slugify
+
 
 # Create your models here.
 

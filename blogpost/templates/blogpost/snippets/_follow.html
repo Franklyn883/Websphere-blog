@@ -1,7 +1,7 @@
 {% if is_following_author %}
-        <a href="{% url 'unfollow-user' post.author.username     %}" class="btn__follow"><h3>following</h3></a>
+        <a hx-get="{% url 'unfollow-user' post.author.username %}" hx-swap="outerHTML"  class="btn__follow"><h3>following</h3></a>
         {% else %}
-    <a href="{% url 'follow-user' post.author.username %}" class="btn__follow"><h3>follow</h3></a>
+    <a hx-get="{% url 'follow-user' post.author.username %}" hx-swap="outerHTML"  class="btn__follow"><h3>follow</h3></a>
         {% endif %} 
 
         

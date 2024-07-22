@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.views import is_following
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -28,16 +29,18 @@ def home_view(request):
     ).distinct()
     bookmarked_posts = []
     categories = Category.objects.all()
-  
     posts_with_follow_status = []
+    paginator =Paginator(posts_with_follow_status, 5 )
+    page = paginator.page(1)
+  
+    
     if request.user.is_authenticated:
             for post in posts:
                 posts_with_follow_status.append((post, is_following(request.user, post.author)))
             bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)
     else:
             for post in posts:
-                posts_with_follow_status.append((post, False))  # Default to False for non-authenticated users
-
+                posts_with_follow_status.append((post, False))  
 
 
        
@@ -49,7 +52,8 @@ def home_view(request):
     context = {
         "posts": posts,
         "categories": categories,
-        "posts_with_follow_status":posts_with_follow_status
+        "posts_with_follow_status":posts_with_follow_status,
+        "page":page
         
     }
     return render(request, "blogpost/index.html", context)
