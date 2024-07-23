@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.env.development
+.env.production
 # C extensions
 *.so
 documentation.txt

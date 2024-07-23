@@ -24,7 +24,7 @@ from django.urls import path, include,re_path
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('websphere-admin/', admin.site.urls),
 
     #local url
     path('profile/', include('accounts.urls')),

@@ -15,6 +15,7 @@ django-ckeditor-5 = "*"
 django-cleanup = "*"
 django-anymail = {extras = ["mailgun"], version = "*"}
 django-debug-toolbar = "*"
+django-compressor = "*"
 
 [dev-packages]
 

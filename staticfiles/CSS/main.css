@@ -89,6 +89,10 @@ img {
     display: none;
 }
 
+.error-404 h1{
+    margin: 1em 0;
+}
+
 /* NAVIGATION */
 .mobile-version{
     display: none;
@@ -318,12 +322,13 @@ color: #ffffff;
     background-color: var(--svg-dark-mode);
     border-radius: 10px;
   }
+
+
+
  @media(max-width:600px){
     html{
         font-size: 12px;
-    }
-   
-    
+    }  
     
 }
 

@@ -5,6 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>{% block title %} WebSphere {% endblock title %}</title>
         <link rel="icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
         <link rel="icon" href="{% static 'assests/images/favicon.png' %}" type="image/png">
         <link
@@ -16,13 +17,9 @@
        
 {% block custom-css %}
 {% endblock custom-css %}
-        <title>{% block title %} WebSphere {% endblock title %}</title>
-    <link
-    rel="preload"
-    as="style"
-    href="{% static 'CSS/main.css' %}"
-    onload="this.rel='stylesheet'"
-/>
+        
+  
+        
 <!-- {% block custom_css %}
 
 {% endblock custom_css %} -->
