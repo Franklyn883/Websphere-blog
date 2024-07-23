@@ -12,38 +12,50 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.views import is_following
 from django.core.paginator import Paginator
+from django.db.models import Prefetch
 
 
 # Create your views here.
 
-
+User = get_user_model()
 def home_view(request):
     """Display the home view and filter displayed post."""
-    q = request.GET.get("q") if request.GET.get("q") != None else ""
    
+    posts = Post.objects.all().select_related('author', 'author__profile').prefetch_related(
+        'categories',
+        Prefetch('author', queryset=User.objects.all().select_related('profile')),
+        Prefetch('likes', queryset=User.objects.all()),
+        Prefetch('post_comments', queryset=PostComment.objects.select_related('author')),
+        Prefetch('bookmarks', queryset=BookMark.objects.select_related('post'))
+    )
+    
+    categories = Category.objects.all()
+   
+    if request.user.is_authenticated:
+        bookmarked_posts = set(request.user.bookmarks.values_list('post__id', flat=True))
+    else:
+        bookmarked_posts = set()
+    
+    for post in posts:
+        post.is_bookmarked = post.id in bookmarked_posts
+
+    categories = Category.objects.all()
+        
+    context = {
+        "posts": posts,
+        "categories": categories,      
+    }
+    return render(request, "blogpost/index.html", context)
+
+def search(request):
+    q = request.GET.get("q") if request.GET.get("q") != None else ""
+    
     posts = Post.objects.filter(
         Q(title__icontains=q)
         | Q(subtitle__icontains=q)
         | Q(author__username__icontains=q)
         | Q(categories__name__icontains=q)
     ).distinct()
-    bookmarked_posts = []
-    categories = Category.objects.all()
-   
-    if request.user.is_authenticated:
-        bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)      
-    
-    for post in posts:
-        post.is_bookmarked = post.id in bookmarked_posts
-   
-    
-    context = {
-        "posts": posts,
-        "categories": categories,
-            
-    }
-    return render(request, "blogpost/index.html", context)
-
 
 @login_required
 def post_create_view(request):
@@ -67,7 +79,16 @@ def post_create_view(request):
 
 def post_detail_view(request, pk):
     """Display all the post details, where the pk = post id."""
-    post = get_object_or_404(Post, id=pk)
+    post = get_object_or_404(
+        Post.objects.select_related('author', 'author__profile')
+        .prefetch_related(
+            'categories',
+            Prefetch('likes', queryset=User.objects.all()),
+            Prefetch('post_comments', queryset=PostComment.objects.select_related('author', 'author__profile')),
+            Prefetch("post_comments__replies", queryset=Reply.objects.select_related('author', "author__profile")),
+        ),
+        id=pk
+    )
     reply_form = ReplyForm()
     comment_form = PostCommentForm()
     comments = post.post_comments.all()

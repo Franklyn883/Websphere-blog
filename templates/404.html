@@ -1,0 +1,8 @@
+{% extends 'layouts/c.html' %} {% load static %}
+{% block content %}
+<div class="error-404">
+    <h1>Page not found</h1>
+    <p ><b>Error 404 - This page doesn't exist or is unavailable</b></p>
+    <a href="{% url 'home' %}">Go Back to Home</a>
+</div>
+{% endblock content %}
