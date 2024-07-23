@@ -23,11 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #settings for environment
 ENVIRONMENT = os.environ.get("ENVIRONMENT", default="development")
 
-# Load the appropriate .env file
-if ENVIRONMENT == 'production':
-    load_dotenv(dotenv_path='.env.production')
-else:
-    load_dotenv(dotenv_path='.env.development')
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -392,5 +388,5 @@ if ENVIRONMENT == "production":
 #setting for dj_database_url
 import dj_database_url
     
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES["default"].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES["default"].update(db_from_env)
