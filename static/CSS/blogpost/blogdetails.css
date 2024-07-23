@@ -38,6 +38,11 @@ body{
 
 
 }
+.author-containter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .author__link{
     text-decoration: none;
     color: inherit;

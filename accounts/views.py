@@ -56,6 +56,7 @@ def profile_update(request):
     context = {"user_form": user_form, "profile_form": profile_form}
     return render(request, "accounts/profile_update.html", context)
 
+@login_required
 def follow_user(request,username):
     """Adds a the request user to the following """
     user_to_follow = get_object_or_404(User,username=username)
@@ -67,12 +68,12 @@ def follow_user(request,username):
     
     return render(request, "blogpost/snippets/_follow.html",context)
 
+@login_required
 def unfollow_user(request,username):
     """Removes the request user from following."""
     user_to_unfollow = get_object_or_404(User,username=username)
     request.user.profile.following.remove(user_to_unfollow.profile)
     messages.success(request, "unfollowed {}".format(user_to_unfollow.profile.name))
-    
     
     context = {"post":user_to_unfollow.post.first(),"is_following_author":False}
     return render(request,"blogpost/snippets/_follow.html",context)

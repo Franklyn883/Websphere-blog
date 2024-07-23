@@ -25,6 +25,7 @@
     {% if post.cover_img %}
     <img src=" {{ post.cover_img.url }}" alt="{{ post.title }}" />
     {% endif %}
+    <div class="author-containter">
     <a class="author__link" href="{% url 'userprofile' post.author.username %}"
         ><div class="author">
             <div class="author__profile-pic profile-pic">
@@ -38,6 +39,12 @@
             </div>
         </div></a
     >
+    <div>
+    </div>
+        {%  if user != post.author and user.is_authenticated %}
+       {% include 'blogpost/snippets/_follow.html' with post_author_username=post.author.username %} 
+        {% endif %} 
+    </div>  
     <h1 class="post-title">{{ post.title}}</h1>
     {% if post.subtitle %}
     <h2 class="post-subtitle">{{ post.subtitle }}</h2>
@@ -200,11 +207,7 @@
                 <p>{{post.author.profile.bio}}</p>
             </div>
         </div>
-        <div>
-            {%  if user != post.author %}
-           {% include 'blogpost/snippets/_follow.html' %} 
-            {% endif %} 
-        </div>
+       
     </div>
    
 </section>

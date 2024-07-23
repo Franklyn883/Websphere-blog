@@ -103,6 +103,8 @@
         </a>
     </div>
     {% if comment.edited %}<small>Edited</small> {% endif %}
+
+    {% if comment.replies.count or  user.is_authenticated %}
     <section class="reply-section">
         <details>
             <summary>Replies</summary>
@@ -205,17 +207,22 @@
                         </svg>
                     </a>
                 </div>
+                {% if request.user == reply.author %}
                 <div>
                     <a href="{% url 'reply-delete' reply.id %}"> delete</a>
                     <a href="{% url 'reply-edit' reply.id %}"> edit</a>
                 </div>
+                {% endif %}
             </article>
 
             {% endfor %}
+            {% if request.user.is_authenticated %}
             <form method="post" action="{% url 'comment-reply' comment.id %}" class="reply-form">
                 {% csrf_token %} {{reply_form}}
                 <button type="submit">submit</button>
             </form>
+            {% endif %}
         </details>
     </section>
+    {% endif %}
 </article>

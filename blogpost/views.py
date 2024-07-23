@@ -29,21 +29,9 @@ def home_view(request):
     ).distinct()
     bookmarked_posts = []
     categories = Category.objects.all()
-    posts_with_follow_status = []
-    paginator =Paginator(posts_with_follow_status, 5 )
-    page = paginator.page(1)
-  
-    
+   
     if request.user.is_authenticated:
-            for post in posts:
-                posts_with_follow_status.append((post, is_following(request.user, post.author)))
-            bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)
-    else:
-            for post in posts:
-                posts_with_follow_status.append((post, False))  
-
-
-       
+        bookmarked_posts = request.user.bookmarks.values_list('post__id', flat=True)      
     
     for post in posts:
         post.is_bookmarked = post.id in bookmarked_posts
@@ -52,9 +40,7 @@ def home_view(request):
     context = {
         "posts": posts,
         "categories": categories,
-        "posts_with_follow_status":posts_with_follow_status,
-        "page":page
-        
+            
     }
     return render(request, "blogpost/index.html", context)
 
@@ -85,7 +71,10 @@ def post_detail_view(request, pk):
     reply_form = ReplyForm()
     comment_form = PostCommentForm()
     comments = post.post_comments.all()
-    is_following_author = is_following(request.user, post.author)
+    is_following_author =""
+    if request.user.is_authenticated:
+        is_following_author = is_following(request.user, post.author)
+        
     post.is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
 
     context = {
@@ -235,7 +224,7 @@ def edit_reply(request, pk):
 
     return render(request, "blogpost/edit_reply.html", context)
 
-
+@login_required
 def delete_reply(request, pk):
     reply = get_object_or_404(Reply, id=pk, author=request.user)
     if request.method == "POST":
@@ -243,7 +232,7 @@ def delete_reply(request, pk):
         messages.success(request, "Reply deleted successfully")
         return redirect("blogpost_detail", reply.parent_comment.post.id)
     context = {"obj": reply}
-    return render(request, "blogpost/confirm_delete.html")
+    return render(request, "blogpost/confirm_delete.html",context)
 
 
 # class SearchResultsListView(ListView):
