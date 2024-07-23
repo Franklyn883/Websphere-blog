@@ -213,3 +213,19 @@
     max-width: 700px;
     margin: 0 auto;
 }
+
+.search.container{
+    width: 40vw;
+}
+
+.search-result{
+    margin-bottom: 2em;
+    text-align: center;
+}
+.search-result h1{
+    padding: 0.5em 0;
+    font-size: 2.125rem;
+}
+.no-result{
+    text-align: center;
+}

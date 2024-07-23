@@ -1,6 +1,4 @@
 {% load static %}
-<article class="blogposts">
-    {% for post in posts %}
     <div class="post-card">
         {% if post.cover_img %}
         <a href="{% url 'blogpost_detail' pk=post.pk %}">
@@ -88,5 +86,4 @@
             
         </div>
     </div>
-    {% endfor %}
-</article>
+

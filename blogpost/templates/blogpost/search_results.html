@@ -1,4 +1,4 @@
-9{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
+{% extends 'layouts/c.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom-css %}
 
 <link
     rel="preload"
@@ -7,19 +7,23 @@
     onload="this.rel='stylesheet'"
 />
 
-{% endblock custom_css %} {% block content %}
+{% endblock custom-css %} {% block content %}
 <section class="search container">
-<h1>Search Results</h1>
-{% for post in post_list %}
-{% if post %}
-<div>
-<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-<p>Author: {{ post.author }}</p>
-<p>{{ post.content|safe|truncatewords:30 }}</p>
+<div class="search-result" ><h1>Search Results</h1>
+    {% if posts %}
+    <h3>results for : "{{query}}"</h3>
+    {% endif %}
 </div>
-{% endif %}
-{% endfor %}
 
-<p>No results</p>
+
+{% if posts %}
+{% for post in posts %}
+<article class="blogposts">
+{% include "blogpost/partials/_feed.html"  %}
+</article>
+{% endfor %}
+{% else %}
+<h3 class="no-result">No results</h3>
+{% endif %}
 </section>
 {% endblock content %}

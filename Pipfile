@@ -16,6 +16,9 @@ django-cleanup = "*"
 django-anymail = {extras = ["mailgun"], version = "*"}
 django-debug-toolbar = "*"
 django-compressor = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

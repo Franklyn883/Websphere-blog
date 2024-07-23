@@ -47,16 +47,26 @@ def home_view(request):
     }
     return render(request, "blogpost/index.html", context)
 
-def search(request):
-    q = request.GET.get("q") if request.GET.get("q") != None else ""
+def search_view(request):
     
-    posts = Post.objects.filter(
-        Q(title__icontains=q)
-        | Q(subtitle__icontains=q)
-        | Q(author__username__icontains=q)
-        | Q(categories__name__icontains=q)
-    ).distinct()
-
+    """Handle search queries and return search results."""
+    query = request.GET.get('q', '')
+    
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query)
+            | Q(subtitle__icontains=query)
+            | Q(author__username__icontains=query)
+            | Q(categories__name__icontains=query)
+        ).distinct()
+    else:
+        posts = Post.objects.none()
+        
+    context ={
+        "posts":posts,
+        "query":query
+    }
+    return render(request,"blogpost/search_results.html",context)
 @login_required
 def post_create_view(request):
     """Creates a new post."""
