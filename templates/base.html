@@ -34,14 +34,15 @@
 
     </head>
     <body>
-        {% include 'partials/_messages.html' %}
+      
         {% include "partials/_header.html" %}
+        {% include 'partials/_messages.html' %}
         
-        <main class="container main">
+     
             {% block layout %}
 
             {% endblock %}
-           </main>
+       
        
             {% include "partials/_footer.html" %}
     </body>

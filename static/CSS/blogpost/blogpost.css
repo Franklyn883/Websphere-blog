@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;1,400&family=Roboto&display=swap");
 
-body {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    padding-top: 2rem;
-}
+
 header{
 box-shadow: none;
 }
