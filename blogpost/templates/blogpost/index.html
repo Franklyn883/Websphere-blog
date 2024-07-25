@@ -16,11 +16,15 @@
 
 {% block content %}
 <section class="container-grid">
+    {% include "blogpost/partials/_aside.html" %}
     <article class="blogposts">
         {% for post in posts %}
 {% include "blogpost/partials/_feed.html" %}
 {% endfor %}
 </article>
-{% include "blogpost/partials/_aside.html" %}
+<article class="recent-activites">
+<h1> Recent Activities </h1>
+</article>
+
 </section>
 {% endblock content %}

@@ -13,45 +13,61 @@ from django.contrib import messages
 from accounts.views import is_following
 from django.core.paginator import Paginator
 from django.db.models import Prefetch
-
+from django.http import HttpResponse
+from django.urls import reverse
 
 # Create your views here.
 
 User = get_user_model()
+
+
 def home_view(request):
     """Display the home view and filter displayed post."""
-   
-    posts = Post.objects.all().select_related('author', 'author__profile').prefetch_related(
-        'categories',
-        Prefetch('author', queryset=User.objects.all().select_related('profile')),
-        Prefetch('likes', queryset=User.objects.all()),
-        Prefetch('post_comments', queryset=PostComment.objects.select_related('author')),
-        Prefetch('bookmarks', queryset=BookMark.objects.select_related('post'))
+
+    posts = (
+        Post.objects.all()
+        .select_related("author", "author__profile")
+        .prefetch_related(
+            "categories",
+            Prefetch(
+                "author", queryset=User.objects.all().select_related("profile")
+            ),
+            Prefetch("likes", queryset=User.objects.all()),
+            Prefetch(
+                "post_comments",
+                queryset=PostComment.objects.select_related("author"),
+            ),
+            Prefetch(
+                "bookmarks", queryset=BookMark.objects.select_related("post")
+            ),
+        )
     )
-    
+
     categories = Category.objects.all()
-   
+
     if request.user.is_authenticated:
-        bookmarked_posts = set(request.user.bookmarks.values_list('post__id', flat=True))
+        bookmarked_posts = set(
+            request.user.bookmarks.values_list("post__id", flat=True)
+        )
     else:
         bookmarked_posts = set()
-    
+
     for post in posts:
         post.is_bookmarked = post.id in bookmarked_posts
 
     categories = Category.objects.all()
-        
+
     context = {
         "posts": posts,
-        "categories": categories,      
+        "categories": categories,
     }
     return render(request, "blogpost/index.html", context)
 
+
 def search_view(request):
-    
     """Handle search queries and return search results."""
-    query = request.GET.get('q', '')
-    
+    query = request.GET.get("q", "")
+
     if query:
         posts = Post.objects.filter(
             Q(title__icontains=query)
@@ -61,12 +77,11 @@ def search_view(request):
         ).distinct()
     else:
         posts = Post.objects.none()
-        
-    context ={
-        "posts":posts,
-        "query":query
-    }
-    return render(request,"blogpost/search_results.html",context)
+
+    context = {"posts": posts, "query": query}
+    return render(request, "blogpost/search_results.html", context)
+
+
 @login_required
 def post_create_view(request):
     """Creates a new post."""
@@ -90,30 +105,44 @@ def post_create_view(request):
 def post_detail_view(request, pk):
     """Display all the post details, where the pk = post id."""
     post = get_object_or_404(
-        Post.objects.select_related('author', 'author__profile')
-        .prefetch_related(
-            'categories',
-            Prefetch('likes', queryset=User.objects.all()),
-            Prefetch('post_comments', queryset=PostComment.objects.select_related('author', 'author__profile')),
-            Prefetch("post_comments__replies", queryset=Reply.objects.select_related('author', "author__profile")),
+        Post.objects.select_related(
+            "author", "author__profile"
+        ).prefetch_related(
+            "categories",
+            Prefetch("likes", queryset=User.objects.all()),
+            Prefetch(
+                "post_comments",
+                queryset=PostComment.objects.select_related(
+                    "author", "author__profile"
+                ),
+            ),
+            Prefetch(
+                "post_comments__replies",
+                queryset=Reply.objects.select_related(
+                    "author", "author__profile"
+                ),
+            ),
         ),
-        id=pk
+        id=pk,
     )
     reply_form = ReplyForm()
     comment_form = PostCommentForm()
     comments = post.post_comments.all()
-    is_following_author =""
+    is_following_author = ""
     if request.user.is_authenticated:
         is_following_author = is_following(request.user, post.author)
-        
-    post.is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
+
+    post.is_bookmarked = (
+        request.user.is_authenticated
+        and post.id in request.user.bookmarks.values_list("post__id", flat=True)
+    )
 
     context = {
         "post": post,
         "comment_form": comment_form,
         "reply_form": reply_form,
         "is_following_author": is_following_author,
-        "comments": comments
+        "comments": comments,
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
@@ -255,6 +284,7 @@ def edit_reply(request, pk):
 
     return render(request, "blogpost/edit_reply.html", context)
 
+
 @login_required
 def delete_reply(request, pk):
     reply = get_object_or_404(Reply, id=pk, author=request.user)
@@ -263,7 +293,7 @@ def delete_reply(request, pk):
         messages.success(request, "Reply deleted successfully")
         return redirect("blogpost_detail", reply.parent_comment.post.id)
     context = {"obj": reply}
-    return render(request, "blogpost/confirm_delete.html",context)
+    return render(request, "blogpost/confirm_delete.html", context)
 
 
 # class SearchResultsListView(ListView):
@@ -301,10 +331,18 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
         return Post.objects.filter(author=user)
 
 
+login_required
 def like_post_view(request, pk):
     """Add like to a post, if the request user is not the author of the post.
     Then checks if the user already exits in the likes table, if the user exits
     remove user, else add the user.To implement the like and unlike feature"""
+    if not request.user.is_authenticated:
+        login_url = request.build_absolute_uri(reverse('account_login'))
+        if 'HX-Request' in request.headers:
+            response = HttpResponse(status=401)
+            response['HX-Redirect'] = login_url
+            return response
+      
     post = get_object_or_404(Post, id=pk)
     user_exit = post.likes.filter(username=request.user.username).exists()
     if request.user != post.author:
@@ -313,10 +351,20 @@ def like_post_view(request, pk):
         else:
             post.likes.add(request.user)
 
+
     return render(request, "blogpost/snippets/_likes.html", {"post": post})
 
 
+
 def bookmark_post_view(request, pk):
+    """Bookmark post"""
+    if not request.user.is_authenticated:
+        login_url = request.build_absolute_uri(reverse('account_login'))
+        if 'HX-Request' in request.headers:
+            response = HttpResponse(status=401)
+            response['HX-Redirect'] = login_url
+            return response
+        
     post = get_object_or_404(Post, id=pk)
     bookmark, created = BookMark.objects.get_or_create(
         user=request.user, post=post
@@ -327,7 +375,10 @@ def bookmark_post_view(request, pk):
     else:
         messages.success(request, "Added to Bookmark")
 
-    post.is_bookmarked = request.user.is_authenticated and post.id in request.user.bookmarks.values_list('post__id', flat=True)
+    post.is_bookmarked = (
+        request.user.is_authenticated
+        and post.id in request.user.bookmarks.values_list("post__id", flat=True)
+    )
     context = {"post": post}
 
     return render(request, "blogpost/snippets/_add_bookmark.html", context)

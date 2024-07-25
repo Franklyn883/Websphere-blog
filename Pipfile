@@ -19,6 +19,7 @@ django-compressor = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
+django-sslserver = "*"
 
 [dev-packages]
 

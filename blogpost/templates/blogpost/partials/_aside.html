@@ -4,9 +4,9 @@
         <ul class=" category-list">
             {% for category in categories|slice:":5"  %}
             <li class="category-list__item">
-                <a href="{% url 'home'%}?q={{category}}"
+                <a href="{% url 'category_filter' pk=category.pk %}"
                     class="category-list__link"><h1 class="category-list__title">{{ category.name }}</h1>
-                <p class="category-list__description">{{ category.description|truncatewords:5 | safe }} </p>
+                
             </a>
             </li>
             {% endfor %}

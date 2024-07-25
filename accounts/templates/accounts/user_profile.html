@@ -26,11 +26,11 @@
         <p class="user__bio">{{profile.bio}}</p>
         {% endif %}
     </div>
-    {% if request.user == profile.user %}
+    {% if request.user == profile.user  %}
     <div class="user__edit">
     <a class="link--edit" href="{% url 'profile_update' %}" alt="update {{profile.name }}'s profile">Edit Profile</a>
 </div>
-{% else %}   
+{% elif request.user.is_authenticated %}   
 <div>
     
     {% if is_following_user %}

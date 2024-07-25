@@ -1,10 +1,11 @@
 .container-grid {
     display: grid;
-    grid-template-columns: 2.5fr 1fr;
-    gap: 2em;
+    grid-template-columns: 1fr 4fr 1fr;
+    gap: 5em;
 }
 .container {
     max-width: 1150px;
+    width: 100%;
 }
 
 /* Post style */
@@ -152,10 +153,10 @@
 }
 
 .category-section {
-    border: var(--border);
+   
     padding: 1em;
-    border-radius: 0.425em;
-    background-color: var(--background-color);
+
+  
 }
 .category-list .category-list__item {
     list-style: none;

@@ -14,14 +14,16 @@ User = get_user_model()
 def is_following(user, target_user):
     return target_user.profile in user.profile.following.all()
 
-@login_required
+
 def profile_view(request, username=None):
     """Returns the profile of the request user, or the profile of the user, with the username in the url param."""
+    
     is_following_user = None
     if username:
         profile = get_object_or_404(User, username=username).profile
         user = get_object_or_404(User,username=username)
-        is_following_user = is_following(request.user,user)
+        if request.user.is_authenticated:
+            is_following_user = is_following(request.user,user)
         
     else:
         try:
