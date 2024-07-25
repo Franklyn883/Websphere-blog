@@ -36,7 +36,7 @@ urlpatterns = [
     #thirdparty
   path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),        
     #media files
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+]
 
 if settings.DEBUG:
     import debug_toolbar
@@ -46,3 +46,11 @@ if settings.DEBUG:
 
     urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+else:
+    from django.views.static import serve
+    from django.urls import re_path
+
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
