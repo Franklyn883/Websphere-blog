@@ -20,7 +20,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#settings for environment
+# settings for environment
 ENVIRONMENT = os.environ.get("ENVIRONMENT", default="development")
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +30,7 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT", default="development")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG',default=0))
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "FranklynOse.pythonanywhere.com"]
 
@@ -60,13 +60,12 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_cleanup.apps.CleanupConfig",
     "debug_toolbar",
-    
- 
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware", 
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -74,13 +73,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-#django-debug-tool
+# django-debug-tool
 
-INTERNAL_IPS = ["127.0.0.1",]
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 ROOT_URLCONF = "webspehere.urls"
@@ -96,7 +95,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-               
                 "social_django.context_processors.backends",
                 "social_django.context_processors.login_redirect",
             ],
@@ -124,7 +122,7 @@ if ENVIRONMENT == "development":
         },
     }
 elif ENVIRONMENT == "production":
-       DATABASES = {
+    DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": os.environ.get("PROD_NAME"),
@@ -191,7 +189,10 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 # Whitenoise settings
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE ="whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+
 
 # media files
 MEDIA_URL = "/media/"
@@ -207,7 +208,6 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-
 # django-allauth config
 SITE_ID = 1
 
@@ -218,11 +218,10 @@ AUTHENTICATION_BACKENDS = (
 )
 SOCIALACCOUNT_PROVIDERS = {
     "google": {"SCOPE": ["email"], "AUTH_PARAMS": {"access_type": "online"}}
-
 }
-ACCOUNT_USERNAME_REQUIRED = False  
-ACCOUNT_AUTHENTICATION_METHOD = "email"  
-ACCOUNT_EMAIL_REQUIRED = True  
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SESSION_REMEMBER = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -396,9 +395,22 @@ if ENVIRONMENT == "production":
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-
-    
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES["default"].update(db_from_env)
-print(ENVIRONMENT)
-print(DEBUG)
+# Error logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "django_error.log"),
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    },
+}
