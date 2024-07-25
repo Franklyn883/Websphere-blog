@@ -61,17 +61,24 @@ class Profile(models.Model):
         except:
             profile_img = static('assets/images/default.jpg')
             
-        return profile_img
-    
+        return profile_img  
+   
+   
     def save(self, *args, **kwargs):
-        super().save()
+       
+        if self.photo and self.photo.file:
+            super().save(*args, **kwargs)  
 
-        img = Image.open(self.photo.path)
+            img = Image.open(self.photo.path)
 
-        if img.height > 500 or img.width > 500:
-            new_img = (500, 500)
-            img.thumbnail(new_img)
-            img.save(self.photo.path)
+           
+            if img.height > 500 or img.width > 500:
+                new_img = (500, 500)
+                img.thumbnail(new_img)
+                img.save(self.photo.path)
+
+        else:
+            super().save(*args, **kwargs)  
             
     
             
