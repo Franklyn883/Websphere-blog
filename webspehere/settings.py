@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_cleanup.apps.CleanupConfig",
     "debug_toolbar",
-     'sslserver',
     
  
 ]
