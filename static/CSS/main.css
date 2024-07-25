@@ -186,6 +186,7 @@ color: #ffffff;
 }
 .nav__item-user img{
     border-radius: 50%;
+    max-height: 42px;
 }
 
 .user-detail{

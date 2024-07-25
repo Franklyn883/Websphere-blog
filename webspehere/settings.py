@@ -23,9 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #settings for environment
 ENVIRONMENT = os.environ.get("ENVIRONMENT", default="development")
 
-
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -35,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG',default=0))
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "FranklynOse.pythonanywhere.com"]
 
 
 # Application definition
@@ -113,20 +110,34 @@ WSGI_APPLICATION = "webspehere.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("NAME"),
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
-        "HOST": os.environ.get("HOST"),
-        "PORT": os.environ.get("PORT"),
-        "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
-        "CHARSET": "utf8mb4",
-        "COLLATION": "utf8mb4_general_ci",
-    },
-}
-
+if ENVIRONMENT == "development":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": os.environ.get("DEV_NAME"),
+            "USER": os.environ.get("DEV_USER"),
+            "PASSWORD": os.environ.get("DEV_PASSWORD"),
+            "HOST": os.environ.get("DEV_HOST"),
+            "PORT": os.environ.get("DEV_PORT"),
+            "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
+            "CHARSET": "utf8mb4",
+            "COLLATION": "utf8mb4_general_ci",
+        },
+    }
+elif ENVIRONMENT == "production":
+       DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": os.environ.get("PROD_NAME"),
+            "USER": os.environ.get("PROD_USER"),
+            "PASSWORD": os.environ.get("PROD_PASSWORD"),
+            "HOST": os.environ.get("PROD_HOST"),
+            "PORT": os.environ.get("PROD_PORT"),
+            "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
+            "CHARSET": "utf8mb4",
+            "COLLATION": "utf8mb4_general_ci",
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -386,8 +397,7 @@ if ENVIRONMENT == "production":
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-#setting for dj_database_url
-import dj_database_url
+
     
 # db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES["default"].update(db_from_env)
