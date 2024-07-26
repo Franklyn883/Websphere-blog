@@ -19,22 +19,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include,re_path
 
-
-    
-
-
 urlpatterns = [
         path('websphere-admin/', admin.site.urls),
-
     #local url
     path('profile/', include('accounts.urls')),
     path('', include("blogpost.urls")),
-    
     #user management
     path("accounts/", include("allauth.urls")), 
-
     #thirdparty
-  path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),        
+    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),        
     #media files
 ]
 

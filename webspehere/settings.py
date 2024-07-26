@@ -191,11 +191,8 @@ STATICFILES_FINDERS = [
 # Whitenoise settings
 # STATICFILES_STORAGE ="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
-
-
 # media files
-MEDIA_URL = "/media/"
+MEDIA_URL = "/media/"   
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 # Default primary key field type
@@ -207,10 +204,8 @@ DEFAULT_FROM_EMAIL = "admin@websphere.com"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-
 # django-allauth config
 SITE_ID = 1
-
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",

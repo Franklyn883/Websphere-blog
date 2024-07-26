@@ -3,9 +3,11 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
-from django.urls import reverse
 from PIL import Image 
 from django.templatetags.static import static
+import logging
+
+logger = logging.getLogger(__name__)
 #creating current user
 
 class CustomUser(AbstractUser):
@@ -58,28 +60,25 @@ class Profile(models.Model):
         try:
             profile_img = self.photo.url
             
-        except:
+        except ValueError:
             profile_img = static('assets/images/default.jpg')
             
         return profile_img  
    
    
-    # def save(self, *args, **kwargs):
-        
-    #     if self.photo:
-    #         super().save()
-    #         try:
-    #             img = Image.open(self.photo.path)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
-            
-    #             if img.height > 500 or img.width > 500:
-    #                 new_img = (500, 500)
-    #                 img.thumbnail(new_img)
-    #                 img.save(self.photo.path)
-    #         except FileNotFoundError:
-    #             pass
-    #     else:
-    #         super().save()  
+        if self.photo:
+            try:
+                img = Image.open(self.photo.path)
+
+                if img.height > 500 or img.width > 500:
+                    new_img = (500, 500)
+                    img.thumbnail(new_img)
+                    img.save(self.photo.path)
+            except FileNotFoundError:
+                pass 
             
     
             
