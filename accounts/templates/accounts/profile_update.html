@@ -15,10 +15,11 @@
     {% csrf_token %}
   
     <div class="alert alert-danger">
-        {% for field, errors in form.errors.items %} {% for error in errors %}
+        {% for field, errors in profile_form.errors.items %} {% for error in errors %}
        <p> {{ field }}: {{ error }}</p> {% endfor %} {% endfor %}
     </div>
     <section class="user-update container">
+        {{ form.non_field_errors }}
         <section class="user__personal-info section--border">
             <h3 class="section__header">User</h3>
             <div class="form-class">
@@ -47,6 +48,7 @@
             </div>
             <div class="form-class">
                 <label for="id_">Profile Image</label>
+                {% for error in profile_form.photo.errors %}
                 <p>{{ profile_form.photo}}</p>
             </div>
             <div class="form-class change_password">
