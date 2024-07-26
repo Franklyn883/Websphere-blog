@@ -49,6 +49,8 @@
             <div class="form-class">
                 <label for="id_">Profile Image</label>
                 {% for error in profile_form.photo.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
                 <p>{{ profile_form.photo}}</p>
             </div>
             <div class="form-class change_password">
