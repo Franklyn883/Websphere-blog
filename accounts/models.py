@@ -66,7 +66,7 @@ class Profile(models.Model):
    
     def save(self, *args, **kwargs):
        
-        if self.photo and self.photo.file:
+        if self.photo:
             super().save(*args, **kwargs)  
 
             img = Image.open(self.photo.path)
