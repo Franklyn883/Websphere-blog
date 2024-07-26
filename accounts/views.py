@@ -4,9 +4,8 @@ from django.http import Http404
 from django.contrib.auth import get_user_model
 from .forms import CustomUserChangeForm, UserProfileUpdateForm
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+
 from django.contrib import messages
-from blogpost.models import Post
 
 User = get_user_model()
 
@@ -47,12 +46,15 @@ def profile_update(request):
     if request.method == "POST":
         user_form = CustomUserChangeForm(request.POST, instance=request.user)
         profile_form = UserProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile
+            request.POST, instance=request.user.profile
         )
 
         if user_form.is_valid() and profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            if "photo" in request.FILES:
+                request.user.profile.photo = request.FILES.get("photo")
             user_form.save()
-            profile_form.save()
+            profile.save()
             messages.success(request, "Your profile is updated successfully")
             return redirect("profile")
     context = {"user_form": user_form, "profile_form": profile_form}
