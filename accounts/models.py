@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile',null=True)
-    photo = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    photo = models.ImageField(upload_to='images/', null=True, blank=True)
     phone_number = PhoneNumberField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     bio = models.TextField(max_length=255,null=True,blank=True)
