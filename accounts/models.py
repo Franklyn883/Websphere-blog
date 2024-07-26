@@ -64,22 +64,22 @@ class Profile(models.Model):
         return profile_img  
    
    
-    def save(self, *args, **kwargs):
+    # def save(self, *args, **kwargs):
         
-        if self.photo:
-            super().save()
-            try:
-                img = Image.open(self.photo.path)
+    #     if self.photo:
+    #         super().save()
+    #         try:
+    #             img = Image.open(self.photo.path)
 
             
-                if img.height > 500 or img.width > 500:
-                    new_img = (500, 500)
-                    img.thumbnail(new_img)
-                    img.save(self.photo.path)
-            except FileNotFoundError:
-                pass
-        else:
-            super().save()  
+    #             if img.height > 500 or img.width > 500:
+    #                 new_img = (500, 500)
+    #                 img.thumbnail(new_img)
+    #                 img.save(self.photo.path)
+    #         except FileNotFoundError:
+    #             pass
+    #     else:
+    #         super().save()  
             
     
             
