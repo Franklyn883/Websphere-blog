@@ -42,8 +42,10 @@ def home_view(request):
             ),
         )
     )
-
+    recent_posts = posts[:5]
     categories = Category.objects.all()
+    comments = PostComment.objects.all()
+    comments = comments[:5]
 
     if request.user.is_authenticated:
         bookmarked_posts = set(
@@ -60,6 +62,8 @@ def home_view(request):
     context = {
         "posts": posts,
         "categories": categories,
+        "recent_posts": recent_posts,
+        "comments":comments
     }
     return render(request, "blogpost/index.html", context)
 

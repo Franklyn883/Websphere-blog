@@ -1,18 +1,24 @@
 .container-grid {
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    display: flex;
+    justify-content: space-evenly;
+   
     gap: 5em;
+    
+    
 }
 .container {
-    max-width: 1150px;
-    width: 100%;
+    max-width: 1400px;
+    width: 100vw;
+
 }
 
 /* Post style */
+.blogposts{
+    max-width: 650px;
+}
 .post-card {
     border: var(--border);
     border-radius: 0.45em;
-  
     gap: 0.5em;
     background-color: var(--background-color);
 }
@@ -92,7 +98,10 @@
     justify-self: start;
 }
 .blogposts .post-card {
+    
     margin-bottom: 3em;
+  
+    
 }
 
 .post-engagements {
@@ -105,12 +114,13 @@
 .bookmark {
     margin-left: auto;
     display: flex;
-    align-items: center;
     gap: 0.25em;
+    cursor: pointer;
 }
 .bookmark-count {
     font-size: 1.2rem;
     margin-bottom: 0.12em;
+
 }
 .category {
     padding: 0.75rem;
@@ -229,4 +239,47 @@
 }
 .no-result{
     text-align: center;
+}
+.recent-activities .recent-post{
+    border-radius: 0.25em;
+}
+.recent-activities h1{
+  font-size: 2rem;
+  text-align: center;
+  
+}
+
+.recent-activities a:hover,
+.recent-activities a:active{
+    color: rgba(255, 255, 255, 0.633);
+}
+.card.recent-post{
+   padding: 1em;
+   background-color: var(--background-color);
+   margin: 1em;
+
+}
+.recent-post .activity{
+    display: flex;
+    justify-content: space-around;
+    padding-top:0.75em;
+
+}
+.recent-post .title{
+    font-weight: 600;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+.recent-post .activity p{
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 0.5em;
+}
+.recent-post .activity p:hover,
+.recent-post .activity p:active{
+    background-color: var(--category-background-hover);
+}
+.recent-activities a{
+    text-decoration: none;
+    color: inherit;
 }
