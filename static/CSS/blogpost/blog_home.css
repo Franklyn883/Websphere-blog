@@ -1,8 +1,8 @@
 .container-grid {
     display: flex;
     justify-content: space-evenly;
+    gap: 4em;
    
-    gap: 5em;
     
     
 }
@@ -14,7 +14,7 @@
 
 /* Post style */
 .blogposts{
-    max-width: 650px;
+    max-width: 700px;
 }
 .post-card {
     border: var(--border);
@@ -180,7 +180,7 @@
 }
 .category-list__title {
     padding-bottom: 0.425em;
-    color: var(--tertiary-color);
+
     font-weight: 900;
     text-align: center;
 }
@@ -198,7 +198,7 @@
 }
 
 @media (max-width: 900px) {
-    .sidebar {
+    aside {
         display: none;
     }
     .container-grid {
@@ -240,28 +240,35 @@
 .no-result{
     text-align: center;
 }
-.recent-activities .recent-post{
-    border-radius: 0.25em;
+/* Recent Activities */
+
+.recent-activities{
+    margin-right: 1em;
 }
 .recent-activities h1{
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
-  
+ padding:0.5em 0;
 }
 
 .recent-activities a:hover,
 .recent-activities a:active{
-    color: rgba(255, 255, 255, 0.633);
+    color: var(--tertiary-opacity);
 }
 .card.recent-post{
    padding: 1em;
    background-color: var(--background-color);
-   margin: 1em;
+    border-top: 2px solid black;
 
 }
+.recent-activities section{
+    padding-top: 1em;
+    border-radius: 0.25em;
+    background-color: var(--background-color);
+}
+
 .recent-post .activity{
-    display: flex;
-    justify-content: space-around;
+  
     padding-top:0.75em;
 
 }
@@ -269,6 +276,7 @@
     font-weight: 600;
     font-size: 1.125rem;
     cursor: pointer;
+    
 }
 .recent-post .activity p{
     padding: 0.5em;
@@ -277,7 +285,7 @@
 }
 .recent-post .activity p:hover,
 .recent-post .activity p:active{
-    background-color: var(--category-background-hover);
+    color: var(--tertiary-opacity);
 }
 .recent-activities a{
     text-decoration: none;

@@ -23,26 +23,19 @@
 {% endfor %}
 </article>
 <aside class="recent-activities">
-<h1> Recent Activities </h1>
+    <section>
+<h1> Recent Post </h1>
 {% for post in recent_posts %}
 
 <div class="card recent-post">
     <p class="title"><a href="{% url 'blogpost_detail' pk=post.pk  %}">{{ post.title|truncatewords:10}} </a></p>
     <div class="activity">
         <p>{{ post.post_comments.count }} comments</p>
-        <p>{{ post.likes.count }} likes</p>
     </div>
 </div>
 {% endfor %}
+</section>
 
-<div class="recent-discussion">
-    <h1> Top Discussions</h1>
-    {% for comment in comments %}
-    <div>
-        <p>{{ comment }}</p>
-    </div>
-    {% endfor %}
-</div>
 </aside>
 
 </section>
