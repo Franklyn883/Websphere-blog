@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% load humanize %} {% block title %} Home {% endblock %} {% block custom_css %}
+{% extends 'layouts/c.html' %} {% load static %} {% load humanize %} {% block title %} {{ user }} post {% endblock %} {% block custom-css %}
 
 <link
     rel="preload"
@@ -7,9 +7,11 @@
     onload="this.rel='stylesheet'"
 />
 
-{% endblock custom_css %} {% block content %}
-<div class="card">
+{% endblock custom-css %} {% block content %}
+<article class="blogposts card">
+    {% for post in posts %}
     {% include "blogpost/partials/_feed.html" %}
-</div>
+    {% endfor %}
+</article>
 
     {% endblock content %}

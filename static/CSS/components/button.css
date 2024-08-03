@@ -1,10 +1,12 @@
 
 /* follow button */
-.btn__follow h3{
-    padding: 0.75em 1.5em;
+.btn__follow p{
+    padding: var(--primary-btn-padding);
     background-color: var(--darker-primary-color);
-    border-radius: 0.125em;
+    border-radius:var(--primary-btn-border-radius);
     cursor: pointer ;
+    font-size: 1.4rem;
+    font-weight: 600;
 }   
 .btn__follow{
     color: inherit;

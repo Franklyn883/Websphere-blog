@@ -300,27 +300,6 @@ def delete_reply(request, pk):
     return render(request, "blogpost/confirm_delete.html", context)
 
 
-# class SearchResultsListView(ListView):
-#     """Implement search functionality"""
-
-#     model = Post
-#     context_object_name = "post_list"
-#     template_name = "blogpost/search_results.html"
-
-#     def get_queryset(self):  # new
-#         query = self.request.GET.get("q")
-#         if query:
-#             return Post.objects.filter(
-#                 Q(title__icontains=query)
-#                 | Q(subtitle__icontains=query)
-#                 | Q(author__username__icontains=query)
-#                 | Q(categories__name__icontains=query)
-#             )
-
-#         else:
-#             return Post.objects.all()
-
-
 class AuthorBlogpostList(LoginRequiredMixin, ListView):
     """Render all blogpost related to a user."""
 
@@ -330,7 +309,7 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(
-            get_user_model(), username=self.kwargs.get("username")
+           User, username=self.kwargs.get("username")
         )
         return Post.objects.filter(author=user)
 

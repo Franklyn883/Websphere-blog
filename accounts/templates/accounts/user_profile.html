@@ -13,7 +13,7 @@
     onload="this.rel='stylesheet'"
 />
 {% endblock custom-css %} {% block content %}
-<section class="userprofile container">
+<section class="userprofile ">
     <div class="user">
         <div class="user__profile-pic">
             <img src="{{ profile.profile_img }}" alt="{{profile.name}}'s photo" />
@@ -34,13 +34,17 @@
 <div>
     
     {% if is_following_user %}
-    <a href="{% url 'unfollow-user' profile.user %}" class="btn__follow"><h3>following</h3></a>
+    <a href="{% url 'unfollow-user' profile.user %}" class="btn__follow"><p>following</p></a>
     {% else %}
-<a href="{% url 'follow-user' profile.user %}" class="btn__follow"><h3>follow</h3></a>
+<a href="{% url 'follow-user' profile.user %}" class="btn__follow"><p>follow</p></a>
     {% endif %}  
  
 </div> 
 {% endif%}
+</div>
+<div class="followers">
+<p>Followers {{ followers.count }}</p>        
+<p>Following {{ followings.count }}</p>  
 </div>
     <div class="user-details">
         {% if profile.location %}
@@ -96,23 +100,10 @@
     <div class="user-post-and-comment__item">
         <h3 class="user-post-and-comment__title"> Posts and Comments</h3>
         <p class="user-post__published"> <a href="{% url 'user-posts' profile.user.username  %}">{{ profile.user.post.count}} posts published</a> </p>
-        <p class="user-post__comments"> <a href="">{{profile.user.comment.count}} comments written</a></p>
+        <p class="user-post__comments"> {{profile.user.comment.count}} comments written</p>
     </div>
-    <div>
-        <h3>Followers:</h3>
-        {% for follower in followers %}
-        
-        <p>{{ follower.name }}</p>
+    
 
-        {% endfor %}
-    </div>
-    <div>
-        <h3>Following</h3>
-        {% for following in followings %}
-       
-<p>{{ following.name }}</p>
-        {% endfor %}
-    </div>
 
 
    

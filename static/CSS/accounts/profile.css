@@ -2,7 +2,9 @@
 main{
     margin-top: 8em;
 }
-
+.container{
+    max-width: 800px;
+}
 .explore{
     display: none;
 }
@@ -15,6 +17,7 @@ main{
     padding: 2em;
     border-radius: 1em;
    background-color: var(--background-color);
+   max-width: 800px;
 
 }
 
@@ -152,6 +155,16 @@ main{
 
 .user-post__published a:hover{
     color:var( --tertiary-opacity);
+}
+
+.followers{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 0.75em 0;
+}
+.followers p{
+    cursor: pointer;
 }
 @media(max-width:800px){
     .user  .user__profile-pic{

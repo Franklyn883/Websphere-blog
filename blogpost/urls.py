@@ -32,7 +32,7 @@ urlpatterns = [
     path("update/<uuid:pk>/", post_update_view, name="update_blogpost"),
     path("post/delete/<uuid:pk>/", post_delete_view, name="delete_blogpost"),
     path(
-        "userposts/<str:username>",
+        "posts/<str:username>",
         AuthorBlogpostList.as_view(),
         name="user-posts",
     ),

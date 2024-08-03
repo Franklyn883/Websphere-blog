@@ -135,6 +135,7 @@
                 </svg>
             </div>
         </div>
+        {% if request.user == post.author %}
         <div class="post-option post-option__more more-option-btn">
             <div class="svg-container" title="more options">
                 <svg
@@ -161,6 +162,7 @@
                 </svg>
             </div>
         </div>
+        {% endif %}
     </div>
     <div class="post-option-more-content hidden">
         {% if post.author == request.user %}
@@ -175,9 +177,6 @@
             >
         </div>
         {% endif %}
-        <div class="post-option-more__report post-option">
-            <p>Report</p>
-        </div>
     </div>
 </div>
 
@@ -214,11 +213,15 @@
 <section class="blog-post-comment">
     {% if user.is_authenticated %}
     <div class="blog-post-comment__user-comment">
-        <div class="comment__comment-input">
-        {% include "blogpost/snippets/_commentform.html" %}
-            
-           </div>
-           
+        <form  hx-post="{% url 'comment-add' post.id %}" hx-target="#comment-contents" hx-swap="afterbegin" id="comment-form" _="on htmx:afterRequest reset() me">
+            {% csrf_token %}
+            <div class="content">{{ comment_form.comment }}</div>
+            <div>
+            <button type="submit" class="comment__add-comment-btn">
+                Add comment
+            </button>
+        </div>
+        </form>
     </div>
     {% endif %}
     <h1>Comments <span id="commentscount-{{post.id}}">{{ post.post_comments.count }} </span></h1>
