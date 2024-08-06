@@ -54,12 +54,12 @@
             <div class="comment-action-option__edit-comment">
                 <a
                     href="{% url 'comment-edit' comment.id %}#comment-form"
-                    >Edit comment</a
+                    >Edit</a
                 >
             </div>
             <div class="comment-action-option__delete-comment">
                 <a href="{% url 'comment-delete' comment.id %}"
-                    >Delete comment</a
+                    >Delete</a
                 >
             </div>
         </div>
@@ -69,7 +69,7 @@
 
     <div class="blog-post__comment-details">{{ comment.comment }}</div>
     <div class="comment-like">
-        <a class="svg-container" title="like this comment">
+        <a class="svg-container" title="like this comment" href="{% url 'comment-like' pk=comment.id %}">
             <svg
                 width="24px"
                 height="24px"
@@ -92,8 +92,8 @@
                     <desc></desc>
                     <path
                         d="M28.343,17.48L16,29 L3.657,17.48C1.962,15.898,1,13.684,1,11.365v0C1,6.745,4.745,3,9.365,3h0.17c2.219,0,4.346,0.881,5.915,2.45L16,6l0.55-0.55 C18.119,3.881,20.246,3,22.465,3h0.17C27.255,3,31,6.745,31,11.365v0C31,13.684,30.038,15.898,28.343,17.48z"
-                        fill="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}none{% endif %}"
-                        stroke="{% if user in post.likes.all and request.user != post.author %}#f34f4f{% else %}var(--svg-dark-mode){% endif %}"
+                       fill="{% if comment.id in liked_comments and request.user != comment.author %}#f34f4f{% else %}none{% endif %}"
+                        stroke="{%  if comment.id in liked_comments  and request.user != comment.author %}  #f34f4f{% else %}var(--svg-dark-mode){% endif %}"
                         stroke-linejoin="round"
                         stroke-miterlimit="10"
                         stroke-width="2"
@@ -101,6 +101,8 @@
                 </g>
             </svg>
         </a>
+        <span> {{ comment.likes.count }} </span>
+       
     </div>
     {% if comment.edited %}<small>Edited</small> {% endif %}
 

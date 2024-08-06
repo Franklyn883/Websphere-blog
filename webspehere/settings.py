@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "accounts.apps.AccountsConfig",
     "blogpost.apps.BlogpostConfig",
+    'blogpost.templatetags',
     # third party
     "allauth",
     "allauth.account",

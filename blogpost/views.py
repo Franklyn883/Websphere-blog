@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from .models import Post, Category, PostComment, BookMark, Reply
+from .models import Post, Category, PostComment, BookMark, Reply, LikedComment
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth import get_user_model
@@ -22,8 +22,7 @@ User = get_user_model()
 
 
 def home_view(request):
-    """Display the home view and filter displayed post."""
-
+    """Display the home view."""
     posts = (
         Post.objects.all()
         .select_related("author", "author__profile")
@@ -63,7 +62,7 @@ def home_view(request):
         "posts": posts,
         "categories": categories,
         "recent_posts": recent_posts,
-        "comments":comments
+        "comments": comments,
     }
     return render(request, "blogpost/index.html", context)
 
@@ -118,12 +117,17 @@ def post_detail_view(request, pk):
                 "post_comments",
                 queryset=PostComment.objects.select_related(
                     "author", "author__profile"
-                ),
-            ),
-            Prefetch(
-                "post_comments__replies",
-                queryset=Reply.objects.select_related(
-                    "author", "author__profile"
+                ).prefetch_related(
+                    Prefetch(
+                        "replies",
+                        queryset=Reply.objects.select_related(
+                            "author", "author__profile"
+                        ),
+                    ),
+                    Prefetch(
+                        "likes",
+                        queryset=LikedComment.objects.select_related("user"),
+                    ),
                 ),
             ),
         ),
@@ -132,6 +136,12 @@ def post_detail_view(request, pk):
     reply_form = ReplyForm()
     comment_form = PostCommentForm()
     comments = post.post_comments.all()
+    # Get a list of comment IDs that the user has liked
+    liked_comments = set(
+        post.post_comments.filter(likes__user=request.user).values_list(
+            "id", flat=True
+        )
+    )
     is_following_author = ""
     if request.user.is_authenticated:
         is_following_author = is_following(request.user, post.author)
@@ -147,6 +157,7 @@ def post_detail_view(request, pk):
         "reply_form": reply_form,
         "is_following_author": is_following_author,
         "comments": comments,
+        "liked_comments": liked_comments,   
     }
     return render(request, "blogpost/blogpost_detail.html", context)
 
@@ -308,24 +319,24 @@ class AuthorBlogpostList(LoginRequiredMixin, ListView):
     context_object_name = "posts"
 
     def get_queryset(self):
-        user = get_object_or_404(
-           User, username=self.kwargs.get("username")
-        )
+        user = get_object_or_404(User, username=self.kwargs.get("username"))
         return Post.objects.filter(author=user)
 
 
 login_required
+
+
 def like_post_view(request, pk):
     """Add like to a post, if the request user is not the author of the post.
     Then checks if the user already exits in the likes table, if the user exits
     remove user, else add the user.To implement the like and unlike feature"""
     if not request.user.is_authenticated:
-        login_url = request.build_absolute_uri(reverse('account_login'))
-        if 'HX-Request' in request.headers:
+        login_url = request.build_absolute_uri(reverse("account_login"))
+        if "HX-Request" in request.headers:
             response = HttpResponse(status=401)
-            response['HX-Redirect'] = login_url
+            response["HX-Redirect"] = login_url
             return response
-      
+
     post = get_object_or_404(Post, id=pk)
     user_exit = post.likes.filter(username=request.user.username).exists()
     if request.user != post.author:
@@ -334,20 +345,34 @@ def like_post_view(request, pk):
         else:
             post.likes.add(request.user)
 
-
     return render(request, "blogpost/snippets/_likes.html", {"post": post})
 
+
+@login_required
+def like_comment_view(request, pk):
+    """Add like to a comment, if the request user is not the author of the comment.
+    Then checks if the user already exits in the likes table, if the user exits
+    remove user, else add the user, to implement the like and unlike feature"""
+    comment = get_object_or_404(PostComment, id=pk)
+  
+    if request.user != comment.author:
+        like = LikedComment.objects.filter(user=request.user, comment=comment).first()
+        if like:
+            like.delete()
+        else:
+            LikedComment.objects.create(user=request.user, comment=comment)
+    return redirect("blogpost_detail", pk=comment.post.id)
 
 
 def bookmark_post_view(request, pk):
     """Bookmark post"""
     if not request.user.is_authenticated:
-        login_url = request.build_absolute_uri(reverse('account_login'))
-        if 'HX-Request' in request.headers:
+        login_url = request.build_absolute_uri(reverse("account_login"))
+        if "HX-Request" in request.headers:
             response = HttpResponse(status=401)
-            response['HX-Redirect'] = login_url
+            response["HX-Redirect"] = login_url
             return response
-        
+
     post = get_object_or_404(Post, id=pk)
     bookmark, created = BookMark.objects.get_or_create(
         user=request.user, post=post

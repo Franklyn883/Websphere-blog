@@ -118,3 +118,15 @@ class LikedPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.user.username}: {self.post.title}"
+    
+class LikedComment(models.Model):
+    """Likes for comment"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(PostComment, on_delete=models.CASCADE, related_name="likes")
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user','comment')
+        
+    def __str__(self):
+        return self.user.username
