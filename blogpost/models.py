@@ -130,3 +130,16 @@ class LikedComment(models.Model):
         
     def __str__(self):
         return self.user.username
+    
+class LikedReply(models.Model):
+    """Likes for reply"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE, related_name="likes")
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user','reply')
+        
+    def __str__(self):
+        return self.user.username
+    
