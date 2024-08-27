@@ -208,8 +208,12 @@
     }
 }
 @media (max-width: 600px) {
+    .blogposts {
+        display: flex;
+        justify-content: center;
+    }
     .post-card {
-        max-width: 425px;
+        max-width: 90%;
     }
     
     .post-author__profile-pic {

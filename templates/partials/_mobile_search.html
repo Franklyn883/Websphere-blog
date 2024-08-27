@@ -1,6 +1,6 @@
 <div class="nav__item nav__search search-mobile mobile-version hidden">
     <form
-        action="{% url 'home' %}"
+        action="{% url 'search' %}"
         method="get"
         class="container--search-bar"
     >
@@ -11,6 +11,7 @@
             name="q"
             aria-\
             label="Search"
+            value="{{ request.GET.q }}"
         />
         <button type="submit" value="search" class="btn--search">search</button>
     </form>

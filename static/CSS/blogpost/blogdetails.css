@@ -11,9 +11,7 @@ body{
     align-items: center;
     
 }
-.nav__search-bar{
-    width:50vw;
-}
+
 .profile-pic{
     height: 3rem;
     width:3rem;
