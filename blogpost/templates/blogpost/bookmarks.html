@@ -1,0 +1,17 @@
+{% extends 'layouts/c.html' %} {% load static %} {% load humanize %} {% block title %} {{ user }} Bookmarks {% endblock %} {% block custom-css %}
+
+<link
+    rel="preload"
+    as="style"
+    href="{% static 'CSS/blogpost/blog_home.css' %}"
+    onload="this.rel='stylesheet'"
+/>
+
+{% endblock custom-css %} {% block content %}
+<article class="blogposts card">
+    {% for post in posts %}
+    {% include "blogpost/partials/_feed.html" %}
+    {% endfor %}
+</article>
+
+    {% endblock content %}

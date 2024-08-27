@@ -209,11 +209,9 @@
 }
 @media (max-width: 600px) {
     .post-card {
-        max-width: 450px;
+        max-width: 425px;
     }
-    .post-image {
-        width: 200px;
-    }
+    
     .post-author__profile-pic {
         width: 32px;
         height: 32px;

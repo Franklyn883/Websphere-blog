@@ -18,6 +18,7 @@ from .views import (
     search_view,
     like_comment_view,
     like_reply_view,
+    bookmark_view,
 )
 
 urlpatterns = [
@@ -44,7 +45,9 @@ urlpatterns = [
     path("post/<pk>/bookmark/", bookmark_post_view, name="bookmark-post"),
     path("post/comment/reply/edit/<pk>/", edit_reply, name="reply-edit"),
     path("post/comment/reply/delete/<pk>/", delete_reply, name="reply-delete"),
-    path("search-result/",search_view, name="search"),
+    path("search-result/", search_view, name="search"),
     path("comment/<pk>/like/", like_comment_view, name="comment-like"),
     path("reply/<pk>/like/", like_reply_view, name="reply-like"),
+    path("bookmark", bookmark_view, name="bookmarks"),
+    
 ]

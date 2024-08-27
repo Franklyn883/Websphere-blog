@@ -323,6 +323,7 @@ align-items: center;
     margin: 0.75em 0.5em;
 }
 .reply-form{
+    margin: 1em 0;
     margin-left: 3em;
 }
 .reply-form textarea{
@@ -341,5 +342,6 @@ border-radius: 0.25em;
     color:#ffffff;
     outline: none;
     border: none;
+    margin-top: 0.5em;
 }
 
