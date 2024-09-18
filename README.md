@@ -78,7 +78,7 @@ Contributions are what make the open source community such an amazing place to b
 - Open a Pull Request
 
 ## Live site
-The project is still underdevelopment.
+https://franklynose.pythonanywhere.com/
 
 ## Contact
 Email: Frankalimimian@gmail.com
